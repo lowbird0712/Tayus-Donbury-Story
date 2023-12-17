@@ -7,7 +7,7 @@ using UniRx;
 using UniRx.Triggers;
 using TMPro;
 
-public class CardGameMngScript : MonoBehaviour {
+public class CardGameMngScript : MonoBehaviour {   
     public static CardGameMngScript Inst { get; private set; }
     void Awake() => Inst = this;
 
