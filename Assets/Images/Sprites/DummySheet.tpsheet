@@ -1,0 +1,38 @@
+#
+# Sprite sheet data for Unity.
+#
+# To import these sprites into your Unity project, download "TexturePackerImporter":
+# https://www.codeandweb.com/texturepacker/unity
+#
+# $TexturePacker:SmartUpdate:0370b437c01da93b40ba73e6603a7e7a:1bf4b098db89d4af50243724f0ed2103:790787211bed64774473f9e031a77302$
+#
+:format=40300
+:texture=DummySheet.png
+:size=128x256
+:pivotpoints=enabled
+:borders=disabled
+:alphahandling=ClearTransparentPixels
+
+fff&text=2;60;126;10;10; 0.5;0.5; 0;0;0;0
+fff&text=3;70;126;10;10; 0.5;0.5; 0;0;0;0
+fff&text=4;80;126;10;10; 0.5;0.5; 0;0;0;0
+fff&text=5;90;126;10;10; 0.5;0.5; 0;0;0;0
+fff&text=BeefBelly;0;226;30;30; 0.5;0.5; 0;0;0;0
+fff&text=DotoriBeefBelly;30;226;30;30; 0.5;0.5; 0;0;0;0
+fff&text=DotoriFire;60;226;30;30; 0.5;0.5; 0;0;0;0
+fff&text=DotoriOnion;90;226;30;30; 0.5;0.5; 0;0;0;0
+fff&text=DotoriPot;0;196;30;30; 0.5;0.5; 0;0;0;0
+fff&text=DotoriSoupPot;30;196;30;30; 0.5;0.5; 0;0;0;0
+fff&text=DotoriSpice;60;196;30;30; 0.5;0.5; 0;0;0;0
+fff&text=Fire;90;196;30;30; 0.5;0.5; 0;0;0;0
+fff&text=Ginger;0;166;30;30; 0.5;0.5; 0;0;0;0
+fff&text=Onion;30;166;30;30; 0.5;0.5; 0;0;0;0
+fff&text=Pot;60;166;30;30; 0.5;0.5; 0;0;0;0
+fff&text=Rice;90;166;30;30; 0.5;0.5; 0;0;0;0
+fff&text=SeaDotori;0;136;30;30; 0.5;0.5; 0;0;0;0
+fff&text=SoupPot;30;136;30;30; 0.5;0.5; 0;0;0;0
+fff&text=SoySauce;60;136;30;30; 0.5;0.5; 0;0;0;0
+fff&text=Spice;90;136;30;30; 0.5;0.5; 0;0;0;0
+fff&text=Sugar;0;106;30;30; 0.5;0.5; 0;0;0;0
+fff&text=YDL;30;106;30;30; 0.5;0.5; 0;0;0;0
+fff;100;126;10;10; 0.5;0.5; 0;0;0;0

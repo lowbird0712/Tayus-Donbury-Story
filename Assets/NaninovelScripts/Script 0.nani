@@ -1,0 +1,88 @@
+@set localizedJP=false
+@back ForestDay
+@bgm Campfire
+(어느 날 저녁, 미니모리 마을의 한 들판.)
+(주위에는 풀이 바람에 흔들리는 소리, 약간의 불 지피는 소리만이 들린다.)
+@char Tayu pos:35,0
+Tayu: 흥흥~
+@char Bear.Default pos:65,0
+Bear: ...
+@hideChars
+(가끔씩 들리는 소녀의 노랫소리와 함께 고요한 시간이 계속되고 있다.)
+@show Tayu,Bear
+Bear: ...
+(탁)
+Bear: ...!
+Tayu.Smile: 시간이 다 되었나 보네!
+Bear: 불 지피는 시간은 항상 빠르게 지나간단 말이야..
+Bear: 도토리 타는 소리를 더 듣고 싶었는데 아쉽군.
+Tayu.Default: 에이 곰씨~ 도토리 타는 소리는 거의 매일같이 들으면서.
+Bear: 도토리 소리는 언제 들어도 듣기 좋아..
+Bear: ...
+@hideChars wait:false
+@hide Dialogue
+@back ForestNight time:3
+@char Tayu.NightSerious pos:35,0 wait:false
+@char Bear.NightDefault pos:65,0
+Bear: ..이제 어떻게 하면 되는 거더라?
+Tayu: 예열이 전부 된 다음에는..
+@hide Bear
+@back Tutorial1 id:Explain pos:62,65
+Tayu: 먼저 오른쪽 위에 붙어 있는 표지판를 보면 이번 스테이지에서 만들어야 할 <color=red>요리의 개수</color>와 <color=red>남은 턴</color>을 볼 수 있어.
+Tayu: 주어진 턴 수가 모두 지나버리면 상자 안에 넣은 도토리가 다 타버려서 더 이상 요리를 진행할 수 없게 되어버려..
+Bear: 음.. 너무 여유부리다가는 모처럼의 식사 시간이 엉망이 되어 버리겠군..
+Tayu.NightDefault: 뭐, 그렇기는 하지만 도토리는 충분히 넣어 놓았으니까 어느 정도는 천천히 요리해도 큰 문제 없을 거야.
+Tayu.NightSerious: 그러면 이제 본격적으로 밥 짓기를 시작할텐데..
+Tayu: 밥을 짓기 위해서는 우선 패에 있는 <color=red>밥솥</color> 카드를 <color=red>상자의 오른쪽에 드래그</color>해서 가져다 놓아야 해.
+Tayu: 오른쪽에 눕혀진 나무판 UI 옆에 한 턴에 몇 장의 카드까지 가져나 놓을 수 있는지가 나와 있는데..
+Tayu: 매 턴이 지날 때마다 하나씩 늘어나서 최대 5장의 카드까지 배치할 수 있어.
+Bear: 요리 초반에는 필요한 카드들만 잘 골라서 쓸 필요가 있겠구나.
+Tayu.NightDefault: 그렇지.
+Tayu.NightSerious: 카드의 배치가 모두 끝난 다음에는 <color=red>턴 종료</color> 버튼을 눌러.
+@back Tutorial2 id:Explain pos:62,65
+Tayu: 그러면 16칸의 격자로 이루어진 <color=red>그리드</color>의 가장 왼쪽 위에 밥솥이 하나 배치될거야.
+Tayu: 이렇게 그리드 위에 배치되는 것들을 <color=red>오브젝트</color>라고 불러.
+Tayu.NightDefault: 그리드에 오브젝트를 배치할 때에는 <color=red>윈쪽 위</color>부터 차례대로 놓여지게 돼!
+Bear: 아아.. 그런 식이었지..
+Tayu.NightSerious: 그 다음에는..
+@back Tutorial3 id:Explain pos:62,65
+Tayu: 그리드 위의 <color=red>오브젝트를 누르면</color> 어떤 재료가 필요한지 볼 수 있는데..
+Tayu: 지금 필요한 재료가 <color=red>쌀</color>이라는 것을 알 수 있어.
+Bear: 맞아. 덕분에 바로바로 어떤 것이 필요한 지 알 수 있어 편리했었지.
+Tayu.NightDefault: 응, 그랬어.
+Tayu.NightSerious: 이제 패에 있는 쌀 카드를 마찬가지로 상자에 드래그한 뒤 턴 종료 버튼을 누르면 돼.
+@back Tutorial4 id:Explain pos:62,65
+Tayu: 그러면 밥솥이 배치된 바로 오른쪽 칸에 쌀이 배치되고..
+Tayu.NightDefault: 밥솥에 필요한 재료가 <color=red>인접한 칸에 위치</color>했기 때문에 쌀이 밥솥 안으로 들어가게 돼!
+Tayu.NightSerious: 다만, 하나의 재료 주변에 해당 재료를 필요로 하는 도구들이 여러 개 인접해 있을 때에는 <color=red>좌상우하 순서</color>대로 먼저 들어가니까 이 부분은 주의할 필요가 있어.
+Tayu: 기본적으로 조리 도구에 재료를 넣는 방식은 이런 식이야. 
+Bear: 흠.. 그렇군..
+Tayu: 이제 다시 쌀이 들어간 밥솥 오브젝트를 눌러 보면..
+@back Tutorial5 id:Explain pos:62,65
+Tayu: 모든 필요한 재료가 들어가서 <color=red>불지피기</color> 카드를 통해 밥 짓기를 시작할 수 있다는 것을 알 수 있어.
+Tayu: 불지피기의 경우에는 그리드에 오브젝트를 배치하지 않는데 이런 카드들은 <color=red>스펠 카드</color>라고 불려.
+Tayu: 그리고 이런 식으로 어떤 카드들은 조건이 만족되어야만 사용이 가능하지.
+Bear: 음..
+Bear: 너무 오랜만에 떠나는 여행길이라 여러 가지 헷갈리는 부분이 많군.
+Tayu.NightDefault: 그렇게 어려운 거는 아니니까 금방 적응할거야.
+@back Tutorial6 id:Explain pos:62,65
+Tayu.NightSerious: 자, 이렇게 조리가 시작되면 배치된 밥솥의 오른쪽 밑에 <color=red>카운트다운</color>이라고 불리는 숫자가 보이는데..
+Tayu: 매 턴이 지날수록 하나씩 줄어들고..
+Tayu.NightDefault: 0이 되면 조리 과정이 완료돼.
+Bear: 카운트다운이 줄어드는 사이에 다른 조리를 진행할 수도 있겠구나.
+Tayu: 맞아.
+Tayu.NightSmile: 거봐 곰씨, 금방 응용도 할 줄 알게 되잖아!
+Bear: …
+@hideChars wait:false
+@hide Explain
+@char Tayu.NightDefault pos:35,0 wait:false
+@char Bear.NightDefault pos:65,0
+Bear: ..벌써 내일이면 출발하는 날이어서 걱정했는데, 금방 익혀서 다행이야.
+Bear: 덕분에 폐는 안 끼칠 수 있게 됐어. 고마워 타유.
+Tayu: 아니야. 나야말로 곰씨한테는 언제나 신세만 지고 있는걸!
+Bear: 그랬던가?
+Tayu.NightSerious: …
+Tayu.NightDefault: ..이번에는 시범 보여준 대로 곰씨가 한 번 해 봐.
+Bear: 알겠어.
+@cardgame
+@stop

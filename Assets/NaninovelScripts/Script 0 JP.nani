@@ -1,0 +1,88 @@
+@set localizedJP=true
+@back ForestDay
+@bgm Campfire
+(ある日の夕方, ミニモリの森村のとある平野.)
+(周りには草が風に揺れる音, 少しの焚き火音しか聞こえません.)
+@char Tayu pos:35,0
+Tayu: ルンルン~
+@char Bear.Default pos:65,0
+Bear: ...
+@hideChars
+(たまに聞こえる彼女の歌声と一緒に静かな時間が続いている.)
+@show Tayu,Bear
+Bear: ...
+(とっ...!)
+Bear: ...!
+Tayu.Smile: もう時間だね!
+Bear: 火を焚く時間はいつも早く過ぎるんだよな...
+Bear: とんぐりが燃える音をもっと聞きたかったのに...残念だな.
+Tayu.Default: ええ, くまさん~どんぐり燃える音はほぼ毎日のように聞いているじゃないですか.
+Bear: どんぐりの音はいつ聞いても気持ちがいい...
+Bear: ...
+@hideChars wait:false
+@hide Dialogue
+@back ForestNight time:3
+@char Tayu.NightSerious pos:35,0 wait:false
+@char Bear.NightDefault pos:65,0
+Bear: ...これからどうすればいいんだっけ?
+Tayu: 予熱が全部できてからは...
+@hide Bear
+@back TutorialJP1 pos:62,65 id:Explain
+Tayu: まず, 右上に貼っているパンネルをみると, 今回のステージで作る<color=red>料理の個数</color>と<color=red>残りターン</color>を見れるよ.
+Tayu: 与えられたターン数が全て過ぎちゃうと, 箱内に入れてたどんぐりが燃えきってしまって, もうこれ以上料理が進められなくなっちゃうよ...
+Bear: うん... あまり余裕見せたらせっかくの食事時間が台無しになってしまうだろうな...
+Tayu.NightDefault: まあ, そうではあるけど, どんぐりは十分入れといたからある程度はゆっくり料理しても大問題はないはずよ.
+Tayu.NightSerious: では, これからは本格的に飯炊きを始めるけど...
+Tayu: ご飯を炊くためにはまず, 手札にある<color=red>めし釜</color>カードを<color=red>箱の右にドラグ</color>して持っていく必要があるよ.
+Tayu: 右側に置かれてるパンネルUIの隣に1ターンに何枚のカードまで置けるのかが出ていますが...
+Tayu: 毎ターンが過ぎる度に一つづつ増えて最大5枚まで配置することができるよ.
+Bear: 料理の序盤には必要なカードだけをよく選んで使う必要があるでしょうかね.
+Tayu.NightDefault: そうだよ.
+Tayu.NightSerious: カードの配置が全て終わったら<color=red>ターン終了</color>ボタンを押して.
+@back TutorialJP2 pos:62,65 id:Explain
+Tayu: そうすれば16個の格子でできている<color=red>グリッド</color>の最左上にめし釜が一つ配置されるよ.
+Tayu: こうやってグリッド上に配置されるものたちを<color=red>オブジェクト</color>だと呼ぶよ.
+Tayu.NightDefault: グリッドにオブジェクトを配置する時には<color=red>左上</color>から順番に置かれるよ!
+Bear: ああ...そういうふうだったな...
+Tayu.NightSerious: その次には...
+@back TutorialJP3 pos:62,65 id:Explain
+Tayu: グリッド上の<color=red>オブジェクトを押す</color>とどんな食材が必要なのか見れるけど...
+Tayu: 今, 必要な食材が<color=red>米</color>だ, ていうのを知ることができるよ.
+Bear: そう.お陰ですぐどんなもんが必要なのかが分かって便利だったよね.
+Tayu.NightDefault: うん, そうだったよ.
+Tayu.NightSerious: これからは, 手札にある米カードを同じ感じで箱にドラーグしてから, ターン終了ボタンを押せばいいんだよ.
+@back TutorialJP4 pos:62,65 id:Explain
+Tayu: こうすれば, めし釜が配置されたすぐ右の空間に米が配置され...
+Tayu.NightDefault: めし釜に必要な食材が<color=red>接している空間に位置</color>したので米がめし釜の中に入ることになるよ!
+Tayu.NightSerious: ただ, 一つの食材の周りにその食材を必要とする道具が複数個, 接している場合には<color=red>左上右下順番</color>で先に入るからこの点は注意する必要があるよ.
+Tayu: 基本的に調理道具に食材を入れる方式はこんなふうだよ.
+Bear: ふむ...なるほど...
+Tayu: もう1回, 米が入っためし釜オブジェクトを押してみると...
+@back TutorialJP5 pos:62,65 id:Explain
+Tayu: 全ての必要な食材が入って<color=red>火づける</color>カードで飯炊きを始められることが分かるよ.
+Tayu: 火づけるの場合はグリッドにオブジェクトを配置しないけど, こんなカードたちは<color=red>スペルカード</color>だと呼ぶよ.
+Tayu: そして, こんな感じであるカードは条件が果たされてから使用することができる.
+Bear: うん...
+Bear: 久しぶりすぎの旅で色々迷うところが多いな.
+Tayu.NightDefault: そんなにむづかしいことではないからすぐ慣れるはずだよ.
+@back TutorialJP6 pos:62,65 id:Explain
+Tayu.NightSerious: さあ, こうやって調理が始まれば配置されためし釜の右下に<color=red>カウントダウン</color>だと呼ばれる数字が見えるけど...
+Tayu: 毎ターンが過ぎるごとに一つづつ進んで...
+Tayu.NightDefault: 0になると調理工程が完了になるよ.
+Bear: カウントダウンが進んでるうちに別の調理を進行することもできそうだね.
+Tayu: そうだよ.
+Tayu.NightSmile: ほら, くまさん, すぐ応用も聞くようになったんじゃない!
+Bear: ....
+@hideChars wait:false
+@hide Explain
+@char Tayu.NightDefault pos:35,0 wait:false
+@char Bear.NightDefault pos:65,0
+Bear: ...もう明日で出発日だから心配だったけど, すぐ習うことができてよかったね.
+Bear: お陰で迷惑はかけないようになったよ.ありがとう, たゆちゃん.
+Tayu: いえいえ.私こそくまさんにはお世話ばっかりなっていたもん!
+Bear: そうだったけ?
+Tayu.NightSerious: ....
+Tayu.NightDefault: ...今回はお見せしたとうり, くまさんが1回やってみて.
+Bear: 分かった.
+@cardgame
+@stop
