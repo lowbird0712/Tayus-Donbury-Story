@@ -35,8 +35,9 @@ public class LocalizeManager : MonoBehaviour
         Inst = this;
         GetLocalizingSheet();
         InitLanguage();
-        LocalizeRefresh();
     }
+
+    private void Start() => LocalizeRefresh();
 
     [ContextMenu("Pull Localizing Sheet")]
     void GetLocalizingSheet() => StartCoroutine(GetLocalizingSheetCo());
@@ -84,8 +85,12 @@ public class LocalizeManager : MonoBehaviour
         int languageIndex = PlayerPrefs.GetInt("LanguageIndex", -1);
         int systemIndex = languageDatas.FindIndex(x => x.language.ToLower() == Application.systemLanguage.ToString().ToLower());
         if (systemIndex == -1)
-            systemIndex = 0;
-        SetLanguageIndex(languageIndex == -1 ? systemIndex : languageIndex);
+            systemIndex = 1;
+        Inst.currentLanguageIndex = languageIndex == -1 ? systemIndex : languageIndex;
+        PlayerPrefs.SetInt("LanguageIndex", Inst.currentLanguageIndex);
+        Inst.LocalizeSettingChanged();
+        Inst.LocalizeChanged();
+        //SetLanguageIndex(languageIndex == -1 ? systemIndex : languageIndex);
     }
 
     static public string Localize(string _textKey) {

@@ -18,14 +18,7 @@ public class CampMngScript : MonoBehaviour {
 
     private void Awake() => Inst = this;
 
-    private void Start() => BGM_defaultName = "Default BGM"; //// 추후에 제목 고칠 것
-
-    static void ResetParts() {
-        Inst.backGround.sprite = Inst.defaultBackGroundSprite;
-        Inst.backGroundName = "Default Background";
-        //// 기본 BGM으로 변경
-        Inst.BGM_Name = "Default BGM";
-    }
+    private void Start() => BGM_defaultName = "Default BGM";
 
     static public bool UseItem(Item _item) {
         if (_item.name == Inst.backGroundName) {
@@ -34,8 +27,7 @@ public class CampMngScript : MonoBehaviour {
             return false;
         }
         else if (_item.name == Inst.BGM_Name) {
-            //// 기본 BGM으로 변경
-            Inst.BGM_Name = "Default BGM";
+            Inst.BGM_Name = Inst.BGM_defaultName;
             return false;
         }
         else if (_item.background) {
@@ -44,7 +36,6 @@ public class CampMngScript : MonoBehaviour {
             return true;
         }
         else if (_item.bgmName != null) {
-            //// BGM 변경
             Inst.BGM_Name = _item.bgmName;
             return true;
         }
