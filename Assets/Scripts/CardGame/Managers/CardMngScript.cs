@@ -205,6 +205,7 @@ public class CardMngScript : MonoBehaviour {
 
     #region Card & Mouse
     public static void CardMouseDown(CardScript _card) {
+        Inst.DetectCardArea();
         if (Inst.cardState == ECardState.Nothing)
             return;
         else if (Inst.cardState == ECardState.CardPutUp && (Inst.onCardArea || Inst.onCardPutArea))
