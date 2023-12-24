@@ -30,7 +30,7 @@ MonoBehaviour:
         Culture=neutral, PublicKeyToken=null
     guid: af8379bd-6109-435e-87d4-dac4f72164d8
     customData:
-      id: 0
+      rid: -2
     Pivot: {x: 0.5, y: 0.5}
     PixelsPerUnit: 100
     EnableDepthPass: 1
@@ -63,7 +63,7 @@ MonoBehaviour:
           Culture=neutral, PublicKeyToken=null
       guid: 85fd8bc5-1815-4dfb-aee3-3c03a33cf9e9
       customData:
-        id: 0
+        rid: -2
       Pivot: {x: 0.5, y: 0.5}
       PixelsPerUnit: 100
       EnableDepthPass: 1
@@ -77,7 +77,7 @@ MonoBehaviour:
         y: 0
         width: 1
         height: 1
-      MatchMode: 0
+      MatchMode: 1
       CustomMatchRatio: 0
       Poses: []
     - Implementation: Naninovel.SpriteBackground, Elringus.Naninovel.Runtime, Version=0.0.0.0,
@@ -91,7 +91,7 @@ MonoBehaviour:
           Culture=neutral, PublicKeyToken=null
       guid: e0ca4dde-a358-40e6-8449-a7173e19fca7
       customData:
-        id: 0
+        rid: -2
       Pivot: {x: 0.5, y: 0.5}
       PixelsPerUnit: 50
       EnableDepthPass: 1
@@ -110,6 +110,7 @@ MonoBehaviour:
       Poses: []
   SharedPoses: []
   references:
-    version: 1
-    00000000:
+    version: 2
+    RefIds:
+    - rid: -2
       type: {class: , ns: , asm: }
