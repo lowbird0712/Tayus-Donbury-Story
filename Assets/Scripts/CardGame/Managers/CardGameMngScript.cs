@@ -813,8 +813,9 @@ public class CardGameMngScript : MonoBehaviour {
     }
 
     IEnumerator EndTurnCo() {
+        if (CardMngScript.CardDragging || CardMngScript.CardState != ECardState.CanMouseDrag)
+            yield break;
         isLoading = true;
-
         myTurn = false;
         isCoroutine.Add(true);
         isCoroutine.Add(true);

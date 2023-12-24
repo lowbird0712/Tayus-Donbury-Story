@@ -8,6 +8,9 @@ using IEnumerator = System.Collections.IEnumerator;
 using UniRx;
 using UniRx.Triggers;
 
+public enum ECardState { Nothing, OnlyMouseClick, CanMouseDrag, CardPutUp }
+public enum ECardMode  { DEFAULT, MYCARDS, PUTCARDS }
+
 public class CardMngScript : MonoBehaviour {
     public static CardMngScript         Inst { get; private set; }
     void Awake() => Inst = this;
@@ -29,8 +32,6 @@ public class CardMngScript : MonoBehaviour {
     [SerializeField] Text               spiceNumText;
     [SerializeField] Text               cardPutCountText;
 
-    enum ECardState                     { Nothing, OnlyMouseClick, CanMouseDrag, CardPutUp }
-    enum ECardMode                      { DEFAULT, MYCARDS, PUTCARDS }
     ECardState                          cardState;
 
     string                              deckName;
@@ -55,9 +56,12 @@ public class CardMngScript : MonoBehaviour {
 
     public static SO_CardItemScript     CardItemSO => Inst.SO_cardItem;
     public static CardScript            EmptyCard => Inst.emptyCard;
+    public static ECardState            CardState => Inst.cardState;
     public static string                DeckName { get => Inst.deckName; set => Inst.deckName = value; }
     public static List<string>          CardBuffer => Inst.cardBuffer;
     public static List<CardScript>      PutCards => Inst.putCards;
+    public static CardScript            DraggingCard => Inst.draggingCard;
+    public static bool                  CardDragging => Inst.cardDragging;
     public static bool                  OnCardArea { set => Inst.onCardArea = value; }
     public static float                 OneCardPutWidth => Inst.oneCardPutWidth;
     public static float                 OneCardPutX => Inst.oneCardPutX;
