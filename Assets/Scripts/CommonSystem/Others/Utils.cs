@@ -73,6 +73,8 @@ public class Utils : MonoBehaviour {
         SceneManager.sceneLoaded += SceneLoadingCompleted;
         while (!sceneLoadingCompleted)
             yield return null;
+        if (_sceneName == "MainScene")
+            MainGameMngScript.MainSceneCanvas.SetActive(true);
         sceneLoadingCompleted = false;
         Inst.sceneCurtain.DOFade(0, sceneCurtainDotweenTime);
         yield return new WaitForSeconds(sceneCurtainDotweenTime);

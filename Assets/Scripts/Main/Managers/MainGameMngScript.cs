@@ -26,7 +26,11 @@ public class MainGameMngScript : MonoBehaviour {
     static public bool                      IsPractice { get => Inst.isPractice; set { Inst.isPractice = value; } }
     static public int                       StageNum { get => Inst.stageNum; set { Inst.stageNum = value; } }
 
-    private void Awake() => Inst = this;
+    private void Awake()
+    {
+        Inst = this;
+        Application.targetFrameRate = 60;
+    }
     private void Start() {
         dotoriNum.Subscribe(_dotoriNum => dotoriNumText.text = _dotoriNum.ToString());
         dotoriNum.Value = SaveLoadMngScript.SaveData.dotoriNum;

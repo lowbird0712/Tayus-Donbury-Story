@@ -49,7 +49,7 @@ public class SaveLoadMngScript : MonoBehaviour {
         Load();
     }
 
-    private void OnDestroy() => Save();
+    private void OnApplicationQuit() => Save();
 
     static public SaveData          SaveData => Inst.saveData;
 
@@ -79,7 +79,7 @@ public class SaveLoadMngScript : MonoBehaviour {
 
     static public void Load() {
         if (!File.Exists(Inst.filePath))
-            Save(true); ////
+            Save(true);
         //string byteString = File.ReadAllText(Inst.filePath);
         //byte[] bytes = Convert.FromBase64String(byteString);
         //string jsonData = System.Text.Encoding.UTF8.GetString(bytes);
@@ -87,4 +87,6 @@ public class SaveLoadMngScript : MonoBehaviour {
         string jsonData = File.ReadAllText(Inst.filePath);
         Inst.saveData = JsonUtility.FromJson<SaveData>(jsonData);
     }
+
+    public void TestSave() => Save();
 }
