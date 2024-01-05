@@ -1,2 +1,44 @@
-
-@stop
+@set localizedJP=true
+@back ForestNight
+@bgm Campfire
+(ミニモリの森村のとある平野, 夕方.)
+@char Tayu.NightDefault pos:35,0 wait:false
+@char Bear.NightDefault pos:65,0
+Tayu: よくやったねくまさん, そんなふうにすればいいよ.
+Bear: 思ったより簡単だな.
+Tayu.NightSmile: だよね!
+Tayu.NightDefault: これからこんな感じで何個かもっと作っておくよ.
+Bear.NightSerious: …?
+Bear: たゆちゃんも元々たくさん食べるタイプだったけ..?
+Tayu.NightSerious: うん..?
+Tayu.NightDefault: 美味しいものはすきだけど, 流石にくまさんぐらいは食べれないよ..
+Tayu: 予め何個か作っておくだけ.
+Bear: ふぅん..
+Tayu: 何色分を作ってから分けて箱の中で凍らせておくよ.
+Tayu: そうしておくと後でご飯を解凍するだけで済むから便利だよ.
+Tayu.NightSmile: ご飯に載せる料理だけ作ればいいから時短もなっていいよ!
+Bear.NightDefault: そうだな.
+@cardgame
+# EndCardGame
+@set localizedJP=true
+@back ForestNight
+@bgm Campfire
+@char Tayu.NightDefault pos:35,0 wait:false
+@char Bear.NightDefault pos:65,0
+Tayu.NightDefault: ところでくまさん, 複数個を一気に作る冴には注意すべきことがあるよ.
+Bear.NightDefault: …?
+@hide Bear wait:false
+@back Tutorial1 id:Explain pos:62,65
+Tayu: 右上を見ると残りのターン数と私たちが作るべきのものの個数が見えるよね?
+Tayu: 残りのターン数の中で目標値の料理を完成させなければならない!
+Bear: ..前, どんぐりが全部燃え切って体と言ってたよね?
+Tayu.NightSerious: そう, 焚き物用のどんぐりが一気に入る空間があまり広くないからだよ.
+Tayu: 実はどんぶりスペースが広い箱を使いたかったけど, そうすればかさも多く, 重すぎることになるから持ち運べられなくなるからさ.
+Bear: そうだね..
+@hideChars wait:false
+@hide Explain
+@char Tayu.NightDefault pos:35,0 wait:false
+@char Bear.NightDefault pos:65,0
+Bear: 分かった. カウントダウンをよく活用してターン数を節約すればいいよね?
+Tayu.NightSmile: うん, くまさんならきっとうまくできる!
+@main
