@@ -867,6 +867,9 @@ public class CardGameMngScript : MonoBehaviour {
         else if (!StageMngScript.StageButtonList[stageNum].IsCleared && !MainGameMngScript.IsPractice)
             StageMngScript.StageClear(stageNum);
         MainGameMngScript.IsPractice = false;
-        Utils.LoadScene("MainScene");
+        if (MainGameMngScript.BackToScript)
+            Utils.LoadScene("NaninovelScene");
+        else
+            Utils.LoadScene("MainScene");
     }
 }

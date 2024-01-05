@@ -14,7 +14,12 @@ public class SettingMngScript : MonoBehaviour {
 
     private void Awake() => Inst = this;
 
-    static public void GotoMainButton() => Utils.LoadScene("MainScene");
+    static public void GotoMainButton()
+    {
+        MainGameMngScript.BackToScript = false;
+        MainGameMngScript.ScriptLabelNameTemp = "";
+        Utils.LoadScene("MainScene");
+    }
 
     static public void SettingButton() {
         Inst.nonUIBlocker.SetActive(!Inst.nonUIBlocker.activeSelf);

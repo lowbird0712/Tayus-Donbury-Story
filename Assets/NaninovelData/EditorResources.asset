@@ -175,6 +175,12 @@ MonoBehaviour:
     - name: Script 0 JP
       pathPrefix: Scripts
       guid: 64ed45b389d701c4d9ec8c10445781b4
+    - name: Script 1
+      pathPrefix: Scripts
+      guid: 36dd9777d9bf9458d9d449f5af7857c9
+    - name: Script 1 JP
+      pathPrefix: Scripts
+      guid: 9c98ec95fb2b74974895550ceead47a8
   - Id: Characters/e7a3a3d1-159d-4570-b79a-74ab527a6716
     Resources:
     - name: Tayu

@@ -1,0 +1,44 @@
+@set localizedJP=false
+@back ForestNight
+@bgm Campfire
+(미니모리 마을의 들판, 저녁.)
+@char Tayu.NightDefault pos:35,0 wait:false
+@char Bear.NightDefault pos:65,0
+Tayu: 잘했어 곰씨, 그렇게 하면 돼.
+Bear: 생각보다 간단하네.
+Tayu.NightSmile: 그치!
+Tayu.NightDefault: 이제 이런 식으로 몇 개를 더 만들어 놓을 거야.
+Bear.NightSerious: …?
+Bear: 타유도 원래 많이 먹는 체질이었나..?
+Tayu.NightSerious: 응..?
+Tayu.NightDefault: 맛있는 거 먹는 거는 좋아하지만 아무리 그래도 곰씨만큼 먹지는 못해..
+Tayu: 미리 여러 개 만들어 놓으려고 할 뿐이야.
+Bear: 흐음..
+Tayu: 몇 끼 분량을 만든 다음에 나눠서 상자 안에 얼려 놓을 거야.
+Tayu: 그렇게 하면 나중에 밥을 녹이기만 하면 바로 식사가 가능해져서 간편해.
+Tayu.NightSmile: 밥에 올릴 요리만 만들면 되니까 시간도 단축되서 좋아!
+Bear.NightDefault: 그렇군.
+@cardgame
+# EndCardGame
+@set localizedJP=false
+@back ForestNight
+@bgm Campfire
+@char Tayu.NightDefault pos:35,0 wait:false
+@char Bear.NightDefault pos:65,0
+Tayu.NightDefault: 그런데 곰씨, 여러 개를 한번에 요리할 떄에는 주의할 점이 있어.
+Bear.NightDefault: …?
+@hide Bear wait:false
+@back Tutorial1 id:Explain pos:62,65
+Tayu: 오른쪽 위를 보면 남은 턴 수와 우리가 만들어야 할 것들의 개수가 보이지?
+Tayu: 남은 턴 수 안에 목표만큼의 요리를 완성 시켜야 돼!
+Bear: ..저번에 도토리가 다 타버려서 그렇다고 했었지?
+Tayu.NightSerious: 맞아, 땔감으로 쓸 도토리가 한 번에 들어갈 공간이 그렇게 넓지 않아서 그래.
+Tayu: 마음 같아서는 도토리 칸이 넓은 상자를 쓰고 싶은데 그러면 부피도 크고 너무 무거워져서 메고 돌아다닐 수 없으니까.
+Bear: 그렇군..
+@hideChars wait:false
+@hide Explain
+@char Tayu.NightDefault pos:35,0 wait:false
+@char Bear.NightDefault pos:65,0
+Bear: 알겠어. 카운트다운을 잘 활용해서 턴 수를 절약하면 되는 거지?
+Tayu.NightSmile: 응, 곰씨라면 잘 할 수 있을 거야!
+@main

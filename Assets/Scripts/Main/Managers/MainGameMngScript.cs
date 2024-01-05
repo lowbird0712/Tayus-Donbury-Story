@@ -19,12 +19,16 @@ public class MainGameMngScript : MonoBehaviour {
     bool                                    isPractice = false;
     ReactiveProperty<int>                   dotoriNum = new ReactiveProperty<int>();
     int                                     stageNum = -1;
+    string                                  scriptLabelNameTemp;
+    bool                                    backToScript = false;
 
     static public GameObject                MainSceneCanvas => Inst.mainSceneCanvas;
     static public PanelScript               MessagePanel => Inst.messagePanel;
     static public ReactiveProperty<int>     DotoriNum => Inst.dotoriNum;
     static public bool                      IsPractice { get => Inst.isPractice; set { Inst.isPractice = value; } }
     static public int                       StageNum { get => Inst.stageNum; set { Inst.stageNum = value; } }
+    static public string                    ScriptLabelNameTemp { get => Inst.scriptLabelNameTemp; set => Inst.scriptLabelNameTemp = value; }
+    static public bool                      BackToScript { get => Inst.backToScript; set => Inst.backToScript = value; }
 
     private void Awake()
     {
