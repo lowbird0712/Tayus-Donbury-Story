@@ -28,7 +28,7 @@ Bear.NightDefault: そうだな.
 Tayu.NightDefault: ところでくまさん, 複数個を一気に作る冴には注意すべきことがあるよ.
 Bear.NightDefault: …?
 @hide Bear wait:false
-@back Tutorial1 id:Explain pos:62,65
+@back TutorialJP1 id:Explain pos:62,65
 Tayu: 右上を見ると残りのターン数と私たちが作るべきのものの個数が見えるよね?
 Tayu: 残りのターン数の中で目標値の料理を完成させなければならない!
 Bear: ..前, どんぐりが全部燃え切って体と言ってたよね?
