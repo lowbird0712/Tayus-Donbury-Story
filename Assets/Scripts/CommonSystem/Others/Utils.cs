@@ -65,6 +65,7 @@ public class Utils : MonoBehaviour {
     }
 
     static public IEnumerator LoadSceneCo(string _sceneName) {
+        Inst.SetSceneCurtain(_sceneName);
         Inst.sceneCurtain.enabled = true;
         Inst.sceneCurtain.DOFade(1, sceneCurtainDotweenTime);
         yield return new WaitForSeconds(sceneCurtainDotweenTime);
@@ -79,5 +80,13 @@ public class Utils : MonoBehaviour {
         Inst.sceneCurtain.DOFade(0, sceneCurtainDotweenTime);
         yield return new WaitForSeconds(sceneCurtainDotweenTime);
         Inst.sceneCurtain.enabled = false;
+    }
+
+    void SetSceneCurtain(string _sceneName)
+    {
+        if (_sceneName == "CardGameScene")
+            SceneCurtainMngScript.SetSceneCurtain(CurtainIndex.CardGame);
+        else
+            SceneCurtainMngScript.SetSceneCurtain(CurtainIndex.Normal);
     }
 }

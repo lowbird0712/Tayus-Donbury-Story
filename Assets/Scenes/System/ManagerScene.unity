@@ -4421,6 +4421,13 @@ MonoBehaviour:
     - Turn End
     - Turn Start!
     - Go to main
+    - Needed Spices
+    - Needed Ingredients
+    - Usable Spell Cards
+    - Remaining Countdowns
+    - Stage Clear!
+    - No Acorn!
+    - Save
   - language: Korean
     languageLocalized: "\uD55C\uAD6D\uC5B4"
     value:
@@ -4449,10 +4456,17 @@ MonoBehaviour:
     - "\uD134 \uC885\uB8CC"
     - "\uD134 \uC2DC\uC791!"
     - "\uBA54\uC778\uC73C\uB85C \uB3CC\uC544\uAC00\uAE30"
+    - "\uD544\uC694\uD55C \uC870\uBBF8\uB8CC"
+    - "\uD544\uC694\uD55C \uC7AC\uB8CC"
+    - "\uC0AC\uC6A9 \uAC00\uB2A5\uD55C \uC2A4\uD3A0 \uCE74\uB4DC"
+    - "\uB0A8\uC740 \uCE74\uC6B4\uD2B8\uB2E4\uC6B4"
+    - "\uC2A4\uD14C\uC774\uC9C0 \uD074\uB9AC\uC5B4!"
+    - "\uB3C4\uD1A0\uB9AC\uAC00 \uBD80\uC871\uD569\uB2C8\uB2E4!"
+    - "\uC800\uC7A5"
   - language: "Japanese\r"
     languageLocalized: "\u65E5\u672C\u8A9E\r"
     value:
-    - "\u30AD\u30E3\u30F3\u30D7\u30C1\u30E7\u30C3\u30D7\r"
+    - "\u30AD\u30E3\u30F3\u30D7\u30B7\u30E7\u30C3\u30D7\r"
     - "\u30A4\u30F3\u30D9\u30F3\u30C8\u30EA\u30FC\r"
     - "\u305F\u3086\u306E\u7BB1\r"
     - "\u30EC\u30B7\u30D4\u30D7\u30C3\u30AF\r"
@@ -4461,18 +4475,25 @@ MonoBehaviour:
     - "\u3069\u3093\u3050\u308A\u53D7\u3051\u53D6\u308A\r"
     - "UI\u30CF\u30A4\u30C9\r"
     - "\u3069\u3093\u3050\u308A\r"
-    - "\u304F\u307E\u3055\u3093\u306E\u30E1\u30CB\u30E5\u30FC\u60A9\u307F\uFF01\r"
+    - "\u304F\u307E\u3055\u3093\u306E\u30E1\u30CB\u30E5\u30FC\u60A9\u307F!\r"
     - "\u30ED\u30C3\u30AF\r"
     - "\u5B8C\r"
-    - "\u307E\u3060\u30DA\u30FC\u30B8\u3092\u89E3\u7981\u3059\u308B\u3053\u3068\u304C\u3067\u304D\u307E\u305B\u3093\uFF01\u6D41\u6D6A\u65E5\u8A8C\u306E\u4EE5\u524D\u306E\u30DA\u30FC\u30B8\u3092\u5148\u306B\u89E3\u7981\u3057\u3066\u304F\u3060\u3055\u3044\uFF01\r"
-    - "\u3069\u3093\u3050\u308A10\u500B\u3067\u89E3\u7981\u3059\u308B\u3053\u3068\u304C\u3067\u304D\u307E\u3059\uFF01\u30DA\u30FC\u30B8\u4E0B\u306E\u30DC\u30BF\u30F3\u3092\u62BC\u3059\u3068\u89E3\u7981\u304C\u884C\u308F\u308C\u307E\u3059\uFF01\r"
-    - "\u6700\u5F8C\u306E\u30DA\u30FC\u30B8\u3067\u3059\u3002\r"
-    - "\u30AF\u30A8\u30B9\u30C8\u306A\u3057\uFF01\r"
-    - "\u30ED\u30C3\u30AF\u30C9\u30EC\u30B7\u30D4\u3067\u3059\u3002\r"
+    - "\u307E\u3060\u30DA\u30FC\u30B8\u3092\u89E3\u7981\u3059\u308B\u3053\u3068\u304C\u3067\u304D\u307E\u305B\u3093\uFF01\u6D41\u6D6A\u65E5\u8A8C\u306E\u4EE5\u524D\u306E\u30DA\u30FC\u30B8\u3092\u5148\u306B\u89E3\u7981\u3057\u3066\u304F\u3060\u3055\u3044!\r"
+    - "\u3069\u3093\u3050\u308A10\u500B\u3067\u89E3\u7981\u3059\u308B\u3053\u3068\u304C\u3067\u304D\u307E\u3059\uFF01\u30DA\u30FC\u30B8\u4E0B\u306E\u30DC\u30BF\u30F3\u3092\u62BC\u3059\u3068\u89E3\u7981\u304C\u884C\u308F\u308C\u307E\u3059!\r"
+    - "\u6700\u5F8C\u306E\u30DA\u30FC\u30B8\u3067\u3059.\r"
+    - "\u30AF\u30A8\u30B9\u30C8\u306A\u3057!\r"
+    - "\u30ED\u30C3\u30AF\u30C9\u30EC\u30B7\u30D4\u3067\u3059.\r"
     - "\u30EC\u30B7\u30D4\r"
     - "\u30BF\u30FC\u30F3\u7D42\u4E86\r"
-    - "\u30BF\u30FC\u30F3\u958B\u59CB\uFF01\r"
-    - "\u30E1\u30A4\u30F3\u306B\u623B\u308B"
+    - "\u30BF\u30FC\u30F3\u958B\u59CB!\r"
+    - "\u30E1\u30A4\u30F3\u306B\u623B\u308B\r"
+    - "\u5FC5\u8981\u306A\u8ABF\u5473\u6599\r"
+    - "\u5FC5\u8981\u306A\u98DF\u6750\r"
+    - "\u4F7F\u3048\u308B\u30B9\u30DA\u30EB\u30AB\u30FC\u30C9\r"
+    - "\u6B8B\u308A\u30AB\u30A6\u30F3\u30C8\u30C0\u30A6\u30F3\r"
+    - "\u30B9\u30C6\u30FC\u30B8\u30AF\u30EA\u30A2!\r"
+    - "\u3069\u3093\u3050\u308A\u304C\u8DB3\u308A\u307E\u305B\u3093!\r"
+    - "\u30BB\u30FC\u30D6"
   currentLanguageIndex: 0
 --- !u!1 &347915603
 GameObject:
@@ -10449,6 +10470,54 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 727824803}
   m_CullTransparentMesh: 1
+--- !u!1 &739732076
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 739732077}
+  - component: {fileID: 739732078}
+  m_Layer: 0
+  m_Name: Scene Curtain Manager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &739732077
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 739732076}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1060200068}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &739732078
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 739732076}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ab41bae100c054067956a994a41c6eed, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sceneCurtain: {fileID: 1156822478}
+  curtainList:
+  - {fileID: 21300000, guid: fbc715cad8c4d496cb4ca67fd28eeef2, type: 3}
+  - {fileID: 21300000, guid: fafaad43f10d34e11bcd2a80ab36f766, type: 3}
 --- !u!1 &743717934
 GameObject:
   m_ObjectHideFlags: 0
@@ -15118,6 +15187,7 @@ Transform:
   - {fileID: 1485063718}
   - {fileID: 1484448423}
   - {fileID: 336963350}
+  - {fileID: 739732077}
   m_Father: {fileID: 51989567}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1064524111
