@@ -30,6 +30,8 @@ public class StageButtonScript : SFXButtonScript {
     public void UnBlock() => unBlockImage.enabled = false;
 
     public void StageButton() {
+        if (stageNum > StageMngScript.UsableMaxStageIndex)
+            return;
         if (MainGameMngScript.DotoriNum.Value < neededDotoriNum) {
             Clicked(2);
             MainGameMngScript.MessagePanel.Show(LocalizeManager.Localize("No Acorn!"));

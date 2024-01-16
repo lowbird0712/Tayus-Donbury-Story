@@ -7,10 +7,14 @@ public class StageMngScript : MonoBehaviour {
 
     [SerializeField] StageButtonScript[]    stageButtons;
 
+    [Header("Test SerializeField")]
+    [SerializeField] int                    usableMaxStageIndex;
+
     List<StageButtonScript>                 stageButtonList;
     int                                     maxUnlockIndex = 5;
     int                                     nextUnblockIndex = 1;
 
+    static public int                       UsableMaxStageIndex => Inst.usableMaxStageIndex;
     static public List<StageButtonScript>   StageButtonList => Inst.stageButtonList;
     static public int                       MaxUnlockIndex { get => Inst.maxUnlockIndex; set { Inst.maxUnlockIndex = value; } }
     static public int                       NextUnblockIndex => Inst.nextUnblockIndex;
