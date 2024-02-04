@@ -1,4 +1,4 @@
-// Copyright 2022 ReWaffle LLC. All rights reserved.
+// Copyright 2023 ReWaffle LLC. All rights reserved.
 
 using UnityEngine;
 
@@ -37,7 +37,7 @@ namespace Naninovel.UI
             await stateManager.SaveGlobalAsync();
 
             if (Application.platform == RuntimePlatform.WebGLPlayer)
-                Application.OpenURL("about:blank");
+                WebUtils.OpenURL("about:blank");
             else Application.Quit();
         }
     }

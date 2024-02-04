@@ -1,8 +1,7 @@
-// Copyright 2022 ReWaffle LLC. All rights reserved.
+// Copyright 2023 ReWaffle LLC. All rights reserved.
 
 using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
 
 namespace Naninovel
 {
@@ -33,7 +32,7 @@ namespace Naninovel
             pool.Push(logger);
         }
 
-        public void Add (ScriptParseError item) => Debug.LogError(item.ToString(scriptName));
+        public void Add (ScriptParseError item) => Engine.Err(item.ToString(scriptName));
         public bool Remove (ScriptParseError item) => true;
         public void Clear () { }
         public bool Contains (ScriptParseError item) => false;

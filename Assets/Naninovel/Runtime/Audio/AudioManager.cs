@@ -1,4 +1,4 @@
-// Copyright 2022 ReWaffle LLC. All rights reserved.
+// Copyright 2023 ReWaffle LLC. All rights reserved.
 
 using System;
 using System.Collections.Generic;
@@ -226,7 +226,7 @@ namespace Naninovel
             asyncToken.ThrowIfCanceled();
             if (!clipResource.Valid)
             {
-                Debug.LogWarning($"Failed to play BGM `{path}`: resource not found.");
+                Engine.Warn($"Failed to play BGM `{path}`: resource not found.");
                 return;
             }
 
@@ -238,7 +238,7 @@ namespace Naninovel
                 var introClipResource = await audioLoader.LoadAndHoldAsync(introPath, this);
                 asyncToken.ThrowIfCanceled();
                 if (!introClipResource.Valid)
-                    Debug.LogWarning($"Failed to load intro BGM `{path}`: resource not found.");
+                    Engine.Warn($"Failed to load intro BGM `{path}`: resource not found.");
                 else introClip = introClipResource.Object;
             }
 
@@ -272,7 +272,7 @@ namespace Naninovel
             asyncToken.ThrowIfCanceled();
             if (!clipResource.Valid)
             {
-                Debug.LogWarning($"Failed to play SFX `{path}`: resource not found.");
+                Engine.Warn($"Failed to play SFX `{path}`: resource not found.");
                 return;
             }
 

@@ -1,4 +1,4 @@
-// Copyright 2022 ReWaffle LLC. All rights reserved.
+// Copyright 2023 ReWaffle LLC. All rights reserved.
 
 using System;
 using UnityEngine;
@@ -46,7 +46,7 @@ namespace Naninovel
                 : Engine.GetConfiguration<BackgroundsConfiguration>().GetMetadataOrDefault(actorId).RenderTexture;
             if (renderTexture == null)
             {
-                Debug.LogError($"Failed to retrieve `{actorId}` {actorType} actor render texture: either the actor doesn't exist or the render texture is not assigned in the configuration.");
+                Engine.Err($"Failed to retrieve `{actorId}` {actorType} actor render texture: either the actor doesn't exist or the render texture is not assigned in the configuration.");
                 return;
             }
             

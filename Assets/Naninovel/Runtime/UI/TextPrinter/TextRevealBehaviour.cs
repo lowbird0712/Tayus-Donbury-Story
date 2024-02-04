@@ -1,4 +1,4 @@
-// Copyright 2022 ReWaffle LLC. All rights reserved.
+// Copyright 2023 ReWaffle LLC. All rights reserved.
 
 using System.Collections.Generic;
 using UnityEngine;
@@ -123,46 +123,6 @@ namespace Naninovel.UI
             else SetMaterialProperties(curLineClipRect, curCharClipRect, curCharFadeWidth, curCharSlantAngle);
         }
 
-        public void UpdateClipRects ()
-        {
-            if (LastRevealedCharIndex >= GetCharacterCount()) return;
-
-            var fullClipRect = GetTextCornersInCanvasSpace();
-
-            if (LastRevealedCharIndex < 0) // Hide all.
-            {
-                curLineClipRect = curCharClipRect = fullClipRect;
-                ScaleClipRects();
-                return;
-            }
-
-            var currentChar = GetCharacterAt(LastRevealedCharIndex);
-            var currentLine = GetLineAt(currentChar.LineIndex);
-            var lineFirstChar = GetCharacterAt(currentLine.FirstCharIndex);
-            var lineLastChar = GetCharacterAt(currentLine.LastCharIndex);
-
-            var rectSize = GetTextRectSize();
-            var clipPosY = currentLine.Ascender + (graphic.rectTransform.pivot.y - 1f) * rectSize.y;
-            var clipPosX = currentChar.RightX + graphic.rectTransform.pivot.x * rectSize.x;
-
-            curLineClipRect = fullClipRect + new Vector4(0, 0, 0, (clipPosY - currentLine.Height) * scale.y);
-            curCharClipRect = rightToLeft
-                ? fullClipRect + new Vector4(0, 0, (clipPosX - lineFirstChar.RightX) * scale.x, clipPosY * scale.y)
-                : fullClipRect + new Vector4(clipPosX * scale.x, 0, 0, clipPosY * scale.y);
-            curCharClipRect.y = curLineClipRect.w;
-            ScaleClipRects();
-
-            var startPos = currentChar.LineIndex == revealStartChar.LineIndex
-                ? revealStartChar.LeftX
-                : rightToLeft ? float.PositiveInfinity : float.NegativeInfinity;
-            var startLimit = rightToLeft ? startPos - currentChar.LeftX : currentChar.LeftX - startPos;
-            var endLimit = rightToLeft ? currentChar.RightX - lineLastChar.RightX : lineLastChar.RightX - currentChar.RightX;
-            var widthLimit = Mathf.Max(0, Mathf.Min(startLimit, endLimit));
-            curCharFadeWidth = Mathf.Clamp(fadeWidth, 0f, widthLimit) * scale.x;
-
-            curCharSlantAngle = currentChar.SlantAngle;
-        }
-
         public void DrawClipRects ()
         {
             if (Camera.current != Engine.GetService<ICameraManager>().UICamera) return;
@@ -191,11 +151,46 @@ namespace Naninovel.UI
         protected abstract Vector4 GetClipRectScale ();
         protected virtual float GetScaleModifier () => 1;
 
-        private void ScaleClipRects ()
+        private void UpdateClipRects ()
         {
-            var clipScale = GetClipRectScale();
-            curCharClipRect.Scale(clipScale);
-            curLineClipRect.Scale(clipScale);
+            if (LastRevealedCharIndex >= GetCharacterCount()) return;
+
+            var fullClipRect = GetTextCornersInCanvasSpace();
+
+            if (LastRevealedCharIndex < 0) // Hide all.
+            {
+                curLineClipRect = curCharClipRect = fullClipRect;
+                ScaleClipRects();
+                return;
+            }
+
+            var currentChar = GetCharacterAt(LastRevealedCharIndex);
+            var currentLine = GetLineAt(currentChar.LineIndex);
+            var lineFirstChar = GetCharacterAt(currentLine.FirstCharIndex);
+            var lineLastChar = GetCharacterAt(currentLine.LastCharIndex);
+
+            var rectSize = GetTextRectSize();
+            var clipPosY = currentLine.Ascender + (graphic.rectTransform.pivot.y - 1f) * rectSize.y;
+            var clipPosX = rightToLeft
+                ? currentChar.LeftX - graphic.rectTransform.pivot.x * rectSize.x
+                : currentChar.RightX + graphic.rectTransform.pivot.x * rectSize.x;
+
+            curLineClipRect = fullClipRect + new Vector4(0, 0, 0, (clipPosY - currentLine.Height) * scale.y);
+            curCharClipRect = rightToLeft
+                ? fullClipRect + new Vector4(0, 0, (clipPosX - lineFirstChar.RightX) * scale.x, clipPosY * scale.y)
+                : fullClipRect + new Vector4(clipPosX * scale.x, 0, 0, clipPosY * scale.y);
+            curCharClipRect.y = curLineClipRect.w;
+            ScaleClipRects();
+
+            var startPos = currentChar.LineIndex == revealStartChar.LineIndex
+                ? revealStartChar.LeftX
+                : rightToLeft ? float.PositiveInfinity : float.NegativeInfinity;
+            var startLimit = rightToLeft ? startPos - currentChar.LeftX : currentChar.LeftX - startPos;
+            var endLimit = rightToLeft ? currentChar.RightX - lineLastChar.RightX : lineLastChar.RightX - currentChar.RightX;
+            var widthLimit = Mathf.Max(0, Mathf.Min(startLimit, endLimit));
+            curCharFadeWidth = Mathf.Clamp(fadeWidth, 0f, widthLimit) * scale.x;
+
+            curCharSlantAngle = currentChar.SlantAngle;
         }
 
         private void UpdateRevealState ()
@@ -243,6 +238,13 @@ namespace Naninovel.UI
             revealStartChar = RevealableCharacter.Invalid; // Invalidate the reveal start position.
             Render(); // Otherwise the unrevealed yet text could be visible for a moment.
             revealState.Reset();
+        }
+
+        private void ScaleClipRects ()
+        {
+            var clipScale = GetClipRectScale();
+            curCharClipRect.Scale(clipScale);
+            curLineClipRect.Scale(clipScale);
         }
 
         private void SetMaterialProperties (Vector4 lineClipRect, Vector4 charClipRect, float charFadeWidth, float charSlantAngle)

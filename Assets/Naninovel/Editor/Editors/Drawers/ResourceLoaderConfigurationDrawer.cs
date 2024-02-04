@@ -1,4 +1,4 @@
-// Copyright 2022 ReWaffle LLC. All rights reserved.
+// Copyright 2023 ReWaffle LLC. All rights reserved.
 
 using System.Collections.Generic;
 using System.Linq;
@@ -153,7 +153,7 @@ namespace Naninovel
         {
             if (providerListProperty.hasMultipleDifferentValues)
             {
-                Debug.LogWarning("Loader property doesn't support mixed values; state of the affected objects might be undefined.");
+                Engine.Warn("Loader property doesn't support mixed values; state of the affected objects might be undefined.");
 
                 // When increasing a multi-selection array using Serialized Property data can be overwritten if there is mixed values.
                 // The Serialization system applies the Serialized data of one object, to all other objects in the selection.

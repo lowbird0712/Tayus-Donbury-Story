@@ -1,7 +1,6 @@
-// Copyright 2022 ReWaffle LLC. All rights reserved.
+// Copyright 2023 ReWaffle LLC. All rights reserved.
 
 using System.Collections.Generic;
-using UnityEngine;
 
 namespace Naninovel
 {
@@ -16,7 +15,7 @@ namespace Naninovel
         public static void Log (this IEnumerable<ScriptParseError> errors, string scriptName)
         {
             foreach (var error in errors)
-                Debug.LogError(error.ToString(scriptName));
+                Engine.Err(error.ToString(scriptName));
         }
 
         /// <summary>

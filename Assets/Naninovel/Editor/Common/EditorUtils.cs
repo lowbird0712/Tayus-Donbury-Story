@@ -1,4 +1,4 @@
-// Copyright 2022 ReWaffle LLC. All rights reserved.
+// Copyright 2023 ReWaffle LLC. All rights reserved.
 
 using System;
 using System.Collections.Generic;
@@ -383,6 +383,17 @@ namespace Naninovel
                     AssetDatabase.CreateFolder(Path.GetDirectoryName(targetFolder), Path.GetFileName(targetFolder));
                 }
             }
+        }
+
+        /// <summary>
+        /// Returns specified asset path formatted as hyperlink.
+        /// </summary>
+        public static string BuildAssetLink (Object asset, int? line = null)
+        {
+            var path = AssetDatabase.GetAssetPath(asset);
+            var lineRef = line.HasValue ? $" line=\"{line.Value}\"" : "";
+            var name = path + (line.HasValue ? $":{line.Value}" : "");
+            return $"<a href=\"{path}\"{lineRef}>{name}</a>";
         }
     }
 }

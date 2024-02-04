@@ -1,4 +1,4 @@
-// Copyright 2022 ReWaffle LLC. All rights reserved.
+// Copyright 2023 ReWaffle LLC. All rights reserved.
 
 using UnityEngine;
 
@@ -40,6 +40,7 @@ namespace Naninovel
         private static readonly int depthCutoffId = Shader.PropertyToID("_DepthAlphaCutoff");
         private static readonly int opacityId = Shader.PropertyToID("_Opacity");
 
+        private ICameraManager cameraManager;
         private TransitionalMatcher matcher;
         private float referencePPU;
         private TransitionalSpriteBuilder spriteBuilder;
@@ -52,15 +53,17 @@ namespace Naninovel
         /// <param name="pivot">Pivot (anchors) of the sprite.</param>
         /// <param name="pixelsPerUnit">How many texture pixels correspond to one unit of the sprite geometry.</param>
         public virtual void Initialize (Vector2 pivot, float pixelsPerUnit, bool premultipliedAlpha, AspectMatchMode matchMode,
-            Shader customShader = default, Shader customSpriteShader = default)
+            float matchRatio, Shader customShader = default, Shader customSpriteShader = default)
         {
             base.Initialize(premultipliedAlpha, customShader);
 
             this.pivot = pivot;
             this.pixelsPerUnit = referencePPU = pixelsPerUnit;
 
-            matcher = new TransitionalMatcher(Engine.GetService<ICameraManager>(), this);
+            cameraManager = Engine.GetService<ICameraManager>();
+            matcher = new TransitionalMatcher(cameraManager, this);
             matcher.MatchMode = matchMode;
+            matcher.CustomMatchRatio = matchRatio;
 
             spriteMesh = gameObject.AddComponent<MeshFilter>().sharedMesh = new Mesh();
             spriteMesh.hideFlags = HideFlags.DontSaveInBuild | HideFlags.DontSaveInEditor;
@@ -104,7 +107,7 @@ namespace Naninovel
 
         protected override (Vector2 offset, Vector2 scale) GetTransitionUVModifiers (Vector2 renderSize, Vector2 textureSize)
         {
-            if (matcher.MatchMode == AspectMatchMode.Disable)
+            if (!cameraManager.Orthographic || matcher.MatchMode == AspectMatchMode.Disable)
                 return base.GetTransitionUVModifiers(renderSize, textureSize);
             var currentSize = renderSize / PixelsPerUnit;
             var sizeAfterTransition = textureSize / (referencePPU / matcher.GetScaleFactor(textureSize / referencePPU));

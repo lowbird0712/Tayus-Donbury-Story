@@ -1,4 +1,4 @@
-// Copyright 2022 ReWaffle LLC. All rights reserved.
+// Copyright 2023 ReWaffle LLC. All rights reserved.
 
 using System;
 using System.Collections.Generic;
@@ -195,11 +195,11 @@ namespace Naninovel
 
             if (!ShouldDrawMenu())
             {
-                EditorGUI.PropertyField(rect, property, new GUIContent(property.displayName), true);
+                EditorGUI.PropertyField(rect, property, new GUIContent(property.displayName, property.tooltip), true);
                 return;
             }
 
-            var label = EditorGUI.BeginProperty(Rect.zero, new GUIContent(property.displayName), property);
+            var label = EditorGUI.BeginProperty(Rect.zero, new GUIContent(property.displayName, property.tooltip), property);
             rect = EditorGUI.PrefixLabel(rect, label);
             if (EditorGUI.DropdownButton(rect, GetSelectedLabel(), default))
                 menu.DropDown(rect);

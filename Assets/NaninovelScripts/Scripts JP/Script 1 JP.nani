@@ -18,11 +18,7 @@ Tayu: 何色分を作ってから分けて箱の中で凍らせておくよ.
 Tayu: そうしておくと後でご飯を解凍するだけで済むから便利だよ.
 Tayu.NightSmile: ご飯に載せる料理だけ作ればいいから時短もなっていいよ!
 Bear.NightDefault: そうだな.
-@cardgame
-# EndCardGame
-@set localizedJP=true
-@back ForestNight
-@bgm Campfire
+@hideChars
 @char Tayu.NightDefault pos:35,0 wait:false
 @char Bear.NightDefault pos:65,0
 Tayu.NightDefault: ところでくまさん, 複数個を一気に作る冴には注意すべきことがあるよ.
@@ -41,4 +37,4 @@ Bear: そうだね..
 @char Bear.NightDefault pos:65,0
 Bear: 分かった. カウントダウンをよく活用してターン数を節約すればいいよね?
 Tayu.NightSmile: うん, くまさんならきっとうまくできる!
-@main
+@cardgame

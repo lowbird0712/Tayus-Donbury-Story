@@ -1,4 +1,4 @@
-// Copyright 2022 ReWaffle LLC. All rights reserved.
+// Copyright 2023 ReWaffle LLC. All rights reserved.
 
 using System;
 using System.Collections.Generic;
@@ -44,6 +44,7 @@ namespace Naninovel
 
         public virtual ScriptPlayerConfiguration Configuration { get; }
         public virtual bool Playing => playRoutineCTS != null;
+        public virtual bool Synchronizing => synchronizeTCS != null;
         public virtual bool SkipActive { get; private set; }
         public virtual bool AutoPlayActive { get; private set; }
         public virtual bool WaitingForInput { get; private set; }
@@ -230,21 +231,15 @@ namespace Naninovel
 
             async UniTask LoadPlayingStateAsync (PlaybackSpot spot)
             {
-                if (PlayedScript is null || !stateMap.PlaybackSpot.ScriptName.EqualsFast(PlayedScript.Name))
+                if (Playlist == null || !PlayedScript || !stateMap.PlaybackSpot.ScriptName.EqualsFast(PlayedScript.Name))
                 {
                     PlayedScript = await scriptManager.LoadScriptAsync(stateMap.PlaybackSpot.ScriptName);
                     Playlist = new ScriptPlaylist(PlayedScript, scriptManager);
-                    PlayedIndex = FindPlayableIndex(stateMap.PlaybackSpot);
-                    Debug.Assert(PlayedIndex >= 0, $"Failed to load script player state: `{stateMap.PlaybackSpot}` doesn't exist in the current playlist.");
                 }
-                else PlayedIndex = Playlist.IndexOf(stateMap.PlaybackSpot);
-
-                if (Playlist != null)
-                {
-                    var endIndex = providerConfig.ResourcePolicy == ResourcePolicy.Static ? Playlist.Count - 1 :
-                        Mathf.Min(PlayedIndex + providerConfig.DynamicPolicySteps, Playlist.Count - 1);
-                    await Playlist.PreloadResourcesAsync(PlayedIndex, endIndex, OnPreloadProgress.SafeInvoke);
-                }
+                PlayedIndex = FindPlayableIndex(stateMap.PlaybackSpot);
+                var endIndex = providerConfig.ResourcePolicy == ResourcePolicy.Static ? Playlist.Count - 1 :
+                    Mathf.Min(PlayedIndex + providerConfig.DynamicPolicySteps, Playlist.Count - 1);
+                await Playlist.PreloadResourcesAsync(PlayedIndex, endIndex, OnPreloadProgress.SafeInvoke);
             }
 
             void PlayAfterRollback ()
@@ -489,14 +484,14 @@ namespace Naninovel
         protected virtual int FindPlayableIndex (PlaybackSpot spot)
         {
             var index = Playlist.IndexOf(spot);
-            if (index >= 0 || spot.InlineIndex <= 0) return index;
-            Debug.LogWarning($"Failed to play `{spot}`. Will attempt to find nearest playable index; expect undefined behaviour.");
-            while (index < 0 && spot.InlineIndex > 0)
+            if (index >= 0) return index;
+            if (Playlist.GetCommandAfterLine(spot.LineIndex, -1) is Command nextCommand)
             {
-                spot = new PlaybackSpot(spot.ScriptName, spot.LineIndex, spot.InlineIndex - 1);
-                index = Playlist.IndexOf(spot);
+                Engine.Warn($"Failed to play `{spot}`: the script has probably changed after the save was made." +
+                            " Will play next command instead; expect undefined behaviour.");
+                return Playlist.IndexOf(nextCommand.PlaybackSpot);
             }
-            return index;
+            throw new Error($"Failed to play `{spot}`: neither the spot, nor playable commands after it were found.");
         }
 
         private void EnableSkip () => SetSkipEnabled(true);
@@ -512,7 +507,7 @@ namespace Naninovel
         {
             if (SkipMode == PlayerSkipMode.Everything) return true;
             if (PlayedScript is null) return false;
-            return HasPlayed(PlayedScript.Name, PlayedIndex);
+            return HasPlayed(PlayedScript.Name, PlayedIndex + 1);
         }
 
         private async UniTask WaitForWaitForInputDisabledAsync ()
@@ -672,7 +667,7 @@ namespace Naninovel
             }
 
             // No commands left in the played script.
-            Debug.Log($"Script '{PlayedScript.Name}' has finished playing, and there wasn't a follow-up goto command. " +
+            Engine.Log($"Script '{PlayedScript.Name}' has finished playing, and there wasn't a follow-up goto command. " +
                         "Consider using stop command in case you wish to gracefully stop script execution.");
             Stop();
             return false;

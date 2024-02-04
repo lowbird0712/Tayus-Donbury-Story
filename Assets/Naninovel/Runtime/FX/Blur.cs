@@ -1,4 +1,4 @@
-// Copyright 2022 ReWaffle LLC. All rights reserved.
+// Copyright 2023 ReWaffle LLC. All rights reserved.
 
 using System.Collections.Generic;
 using System.Linq;
@@ -61,13 +61,13 @@ namespace Naninovel.FX
             var manager = Engine.FindAllServices<IActorManager>(c => c.ActorExists(actorId)).FirstOrDefault();
             if (manager is null)
             {
-                if (logError) Debug.LogError($"Failed to apply blur effect: Can't find `{actorId}` actor");
+                if (logError) Engine.Err($"Failed to apply blur effect: Can't find `{actorId}` actor");
                 return null;
             }
             var blurable = manager.GetActor(actorId) as IBlurable;
             if (blurable is null)
             {
-                if (logError) Debug.LogError($"Failed to apply blur effect: `{actorId}` actor doesn't support blur effect.");
+                if (logError) Engine.Err($"Failed to apply blur effect: `{actorId}` actor doesn't support blur effect.");
                 return null;
             }
             return blurable;

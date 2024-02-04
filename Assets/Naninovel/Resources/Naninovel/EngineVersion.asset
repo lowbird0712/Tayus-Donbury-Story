@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: EngineVersion
   m_EditorClassIdentifier: 
   engineVersion: 1.18
-  patchVersion: 1
-  buildDate: 2022-11-06
+  patchVersion: 3
+  buildDate: 2023-10-16

@@ -1,4 +1,4 @@
-// Copyright 2022 ReWaffle LLC. All rights reserved.
+// Copyright 2023 ReWaffle LLC. All rights reserved.
 
 using System;
 using System.Collections.Generic;
@@ -104,15 +104,19 @@ namespace Naninovel
                 ObjectUtils.DestroyOrImmediate(initializationUI.gameObject);
             }
 
+            Engine.GetService<IInputManager>().ProcessInput = true;
+
             var movieConfig = Engine.GetConfiguration<MoviesConfiguration>();
             if (movieConfig.PlayIntroMovie)
+                // Keep duration = 0 to prevent user from activating input (eg, showing pause UI) while movie UI is fading-out.
                 await new PlayMovie { MovieName = movieConfig.IntroMovieName, Duration = 0 }.ExecuteAsync(Engine.DestroyToken);
 
             var scriptPlayer = Engine.GetService<IScriptPlayer>();
             var scriptManager = Engine.GetService<IScriptManager>();
             if (!string.IsNullOrEmpty(scriptManager.Configuration.InitializationScript))
             {
-                await scriptPlayer.PreloadAndPlayAsync(scriptManager.Configuration.InitializationScript);
+                using (var _ = new InteractionBlocker())
+                    await scriptPlayer.PreloadAndPlayAsync(scriptManager.Configuration.InitializationScript);
                 while (scriptPlayer.Playing) await AsyncUtils.WaitEndOfFrameAsync(Engine.DestroyToken);
             }
 

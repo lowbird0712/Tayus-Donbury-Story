@@ -1,4 +1,4 @@
-// Copyright 2022 ReWaffle LLC. All rights reserved.
+// Copyright 2023 ReWaffle LLC. All rights reserved.
 
 using UnityEngine;
 
@@ -21,12 +21,13 @@ namespace Naninovel.UI
         public override async UniTask ChangeVisibilityAsync (bool visible, float? duration = null, AsyncToken asyncToken = default)
         {
             if (visible && !string.IsNullOrEmpty(titleScriptName))
-            {
-                await scriptPlayer.PreloadAndPlayAsync(titleScriptName);
-                asyncToken.ThrowIfCanceled();
-                await UniTask.WaitWhile(() => scriptPlayer.Playing);
-                asyncToken.ThrowIfCanceled();
-            }
+                using (var _ = new InteractionBlocker())
+                {
+                    await scriptPlayer.PreloadAndPlayAsync(titleScriptName);
+                    asyncToken.ThrowIfCanceled();
+                    await UniTask.WaitWhile(() => scriptPlayer.Playing);
+                    asyncToken.ThrowIfCanceled();
+                }
 
             await base.ChangeVisibilityAsync(visible, duration, asyncToken);
         }

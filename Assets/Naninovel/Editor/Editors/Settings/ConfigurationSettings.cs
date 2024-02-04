@@ -1,4 +1,4 @@
-// Copyright 2022 ReWaffle LLC. All rights reserved.
+// Copyright 2023 ReWaffle LLC. All rights reserved.
 
 using System;
 using System.Collections.Generic;
@@ -128,9 +128,9 @@ namespace Naninovel
                 enterChildren = false;
 
                 if (property.propertyPath == "m_Script") continue;
-                if (overrideDrawers != null && overrideDrawers.ContainsKey(property.propertyPath))
+                if (overrideDrawers != null && overrideDrawers.TryGetValue(property.propertyPath, out var drawer))
                 {
-                    overrideDrawers[property.propertyPath]?.Invoke(property);
+                    drawer?.Invoke(property);
                     continue;
                 }
 
@@ -236,11 +236,11 @@ namespace Naninovel
                 else // Multiple specialized editors for the config are found.
                 {
                     if (compatibleEditors.Count > 2)
-                        Debug.LogWarning($"Multiple editors for `{configType}` configuration are found. That is not supported. First overridden one will be used.");
+                        Engine.Warn($"Multiple editors for `{configType}` configuration are found. That is not supported. First overridden one will be used.");
                     var overriddenEditor = compatibleEditors.Find(t => t.IsDefined(typeof(OverrideSettingsAttribute)));
                     if (overriddenEditor is null)
                     {
-                        Debug.LogWarning($"Multiple editors for `{configType}` configuration are found, while none has `{nameof(OverrideSettingsAttribute)}` applied. First found one will be used.");
+                        Engine.Warn($"Multiple editors for `{configType}` configuration are found, while none has `{nameof(OverrideSettingsAttribute)}` applied. First found one will be used.");
                         typeMap.Add(configType, compatibleEditors.First());
                     }
                     else typeMap.Add(configType, overriddenEditor);

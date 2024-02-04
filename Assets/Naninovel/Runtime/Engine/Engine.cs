@@ -1,4 +1,4 @@
-// Copyright 2022 ReWaffle LLC. All rights reserved.
+// Copyright 2023 ReWaffle LLC. All rights reserved.
 
 using System;
 using System.Collections.Generic;
@@ -74,6 +74,7 @@ namespace Naninovel
         private static UniTaskCompletionSource initializeTCS;
         private static CancellationTokenSource destroyCTS;
         private static IReadOnlyCollection<Type> typesCache;
+        private static ILogger logger = new UnityLogger();
 
         /// <summary>
         /// Adds an async function delegate to invoke before the engine initialization.
@@ -304,7 +305,7 @@ namespace Naninovel
         {
             if (Behaviour is null)
                 throw new Error($"Failed to instantiate `{name ?? prototype.name}`: engine is not ready. " +
-                                    $"Make sure you're not attempting to instantiate and object inside an engine service constructor (use `{nameof(IEngineService.InitializeServiceAsync)}` method instead).");
+                                $"Make sure you're not attempting to instantiate and object inside an engine service constructor (use `{nameof(IEngineService.InitializeServiceAsync)}` method instead).");
 
             var newObj = parent ? UnityEngine.Object.Instantiate(prototype, parent) : UnityEngine.Object.Instantiate(prototype);
             var gameObj = newObj is GameObject newGObj ? newGObj : (newObj as Component)?.gameObject;
@@ -331,7 +332,7 @@ namespace Naninovel
         {
             if (Behaviour is null)
                 throw new Error($"Failed to create `{name ?? string.Empty}` object: engine is not ready. " +
-                                    $"Make sure you're not attempting to create and object inside an engine service constructor (use `{nameof(IEngineService.InitializeServiceAsync)}` method instead).");
+                                $"Make sure you're not attempting to create and object inside an engine service constructor (use `{nameof(IEngineService.InitializeServiceAsync)}` method instead).");
 
             var objName = name ?? "NaninovelObject";
             GameObject newObj;
@@ -359,7 +360,7 @@ namespace Naninovel
         {
             if (Behaviour is null)
                 throw new Error($"Failed to create `{name ?? string.Empty}` object of type `{typeof(T).Name}`: engine is not ready. " +
-                                    $"Make sure you're not attempting to create and object inside an engine service constructor (use `{nameof(IEngineService.InitializeServiceAsync)}` method instead).");
+                                $"Make sure you're not attempting to create and object inside an engine service constructor (use `{nameof(IEngineService.InitializeServiceAsync)}` method instead).");
 
             var newObj = new GameObject(name ?? typeof(T).Name);
 
@@ -400,6 +401,29 @@ namespace Naninovel
             return asset;
         }
 
+        /// <summary>
+        /// Injects custom logging handler.
+        /// </summary>
+        public static void UseLogger (ILogger logger)
+        {
+            Engine.logger = logger;
+        }
+
+        /// <summary>
+        /// Logs an information message with the current logger.
+        /// </summary>
+        public static void Log (string message) => logger.Log(message);
+
+        /// <summary>
+        /// Logs a warning with the current logger.
+        /// </summary>
+        public static void Warn (string message) => logger.Warn(message);
+
+        /// <summary>
+        /// Logs an error message with the current logger.
+        /// </summary>
+        public static void Err (string message) => logger.Err(message);
+
         private static IReadOnlyCollection<Type> GetEngineTypes ()
         {
             var engineTypes = new List<Type>(1000);
@@ -425,7 +449,7 @@ namespace Naninovel
                 !ParseUtils.TryInvariantInt(new string(version.GetAfter(".").TakeWhile(char.IsDigit).ToArray()), out var patch))
                 throw new Error($"Failed to parse `{version}` Unity version.");
 
-            if (major < 2019) Debug.LogError("Minimum supported Unity version is 2019.4.22.");
+            if (major < 2019) Err("Minimum supported Unity version is 2019.4.22.");
             // https://issuetracker.unity3d.com/product/unity/issues/guid/1301378
             if (major == 2019) CheckMinorAndPatch(4, 22);
             if (major == 2020) CheckMinorAndPatch(2, 7);
@@ -433,7 +457,7 @@ namespace Naninovel
             void CheckMinorAndPatch (int minMinor, int minPatch)
             {
                 if (minor < minMinor || minor == minMinor && patch < minPatch)
-                    Debug.LogError($"Minimum supported Unity release in {major} stream is {major}.{minMinor}.{minPatch}.");
+                    Err($"Minimum supported Unity release in {major} stream is {major}.{minMinor}.{minPatch}.");
             }
         }
     }

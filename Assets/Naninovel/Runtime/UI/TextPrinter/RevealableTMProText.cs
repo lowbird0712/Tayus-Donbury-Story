@@ -1,4 +1,4 @@
-// Copyright 2022 ReWaffle LLC. All rights reserved.
+// Copyright 2023 ReWaffle LLC. All rights reserved.
 
 using System.Collections.Generic;
 using TMPro;
@@ -83,6 +83,7 @@ namespace Naninovel.UI
         protected override void Awake ()
         {
             base.Awake();
+            cachedFontMaterials = fontMaterials;
             revealBehaviour = new TMProRevealBehaviour(this);
         }
 

@@ -1,4 +1,4 @@
-// Copyright 2022 ReWaffle LLC. All rights reserved.
+// Copyright 2023 ReWaffle LLC. All rights reserved.
 
 #ifndef NANINOVEL_TRANSITION_EFFECTS_INCLUDED
 #define NANINOVEL_TRANSITION_EFFECTS_INCLUDED

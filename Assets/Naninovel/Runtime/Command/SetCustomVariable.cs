@@ -1,4 +1,4 @@
-// Copyright 2022 ReWaffle LLC. All rights reserved.
+// Copyright 2023 ReWaffle LLC. All rights reserved.
 
 using System;
 
@@ -80,7 +80,7 @@ namespace Naninovel.Commands
             if (!variableName.EndsWithFast(addLiteral) && !variableName.EndsWithFast(subtractLiteral) &&
                 !variableName.EndsWithFast(multiplyLiteral) && !variableName.EndsWithFast(divideLiteral)) return;
             expressionBody = variableName + expressionBody;
-            variableName = variableName.Substring(0, variableName.Length - 1);
+            variableName = variableName.Substring(0, variableName.Length - 1).TrimFull();
         }
 
         protected virtual void LogErrorMessage (string desc = null)

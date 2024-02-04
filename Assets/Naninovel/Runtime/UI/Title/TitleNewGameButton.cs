@@ -1,4 +1,4 @@
-// Copyright 2022 ReWaffle LLC. All rights reserved.
+// Copyright 2023 ReWaffle LLC. All rights reserved.
 
 using System;
 using UnityEngine;
@@ -44,7 +44,7 @@ namespace Naninovel.UI
         {
             if (string.IsNullOrEmpty(startScriptName))
             {
-                Debug.LogError("Can't start new game: specify start script name in the settings.");
+                Engine.Err("Can't start new game: specify start script name in the settings.");
                 return;
             }
 

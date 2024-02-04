@@ -1,4 +1,4 @@
-// Copyright 2022 ReWaffle LLC. All rights reserved.
+// Copyright 2023 ReWaffle LLC. All rights reserved.
 
 using System;
 using System.Collections.Generic;
@@ -390,13 +390,13 @@ namespace Naninovel
                     var guid = editorResources.GetGuidByPath(resourcePath);
                     if (string.IsNullOrEmpty(guid))
                     {
-                        Debug.LogWarning($"Failed to open `{scriptPath}`: script is not found in project resources. Make sure to add it via the script resources menu.");
+                        Engine.Warn($"Failed to open `{scriptPath}`: script is not found in project resources. Make sure to add it via the script resources menu.");
                         return;
                     }
                     var assetPath = AssetDatabase.GUIDToAssetPath(guid);
                     if (string.IsNullOrEmpty(assetPath))
                     {
-                        Debug.LogWarning($"Failed to open `{scriptPath}`: GUID is not valid. Make sure the record points to a valid asset in the script resources menu.");
+                        Engine.Warn($"Failed to open `{scriptPath}`: GUID is not valid. Make sure the record points to a valid asset in the script resources menu.");
                         return;
                     }
                     Selection.activeObject = AssetDatabase.LoadAssetAtPath<Script>(assetPath);

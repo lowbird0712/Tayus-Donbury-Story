@@ -1,4 +1,4 @@
-// Copyright 2022 ReWaffle LLC. All rights reserved.
+// Copyright 2023 ReWaffle LLC. All rights reserved.
 
 using System;
 using System.Collections.Generic;
@@ -179,7 +179,7 @@ namespace Naninovel
             }
             catch (Exception e)
             {
-                Debug.LogError($"Failed to generate localization resources: {e.Message}");
+                Engine.Err($"Failed to generate localization resources: {e.Message}");
             }
 
             EditorUtility.ClearProgressBar();
@@ -326,7 +326,7 @@ namespace Naninovel
                     appended = true;
                 }
                 if (!appended && warnUntranslated)
-                    Debug.LogWarning($"`{AssetDatabase.GetAssetPath(existingScript)}` localization script is missing translation at line #{hashIndex + 1}.");
+                    Engine.Warn($"`{AssetDatabase.GetAssetPath(existingScript)}` localization script is missing translation at line #{hashIndex + 1}.");
             }
         }
 

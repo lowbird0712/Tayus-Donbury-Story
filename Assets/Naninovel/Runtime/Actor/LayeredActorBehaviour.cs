@@ -1,4 +1,4 @@
-// Copyright 2022 ReWaffle LLC. All rights reserved.
+// Copyright 2023 ReWaffle LLC. All rights reserved.
 
 using System;
 using System.Collections.Generic;
@@ -110,7 +110,7 @@ namespace Naninovel
                         ForEachLayer(l => l.Group.StartsWithFast(group), l => l.Enabled = false, group);
                     else ForLayer(group, name, l => l.Enabled = false);
                 }
-                else Debug.LogWarning($"Unrecognized `{gameObject.name}` layered actor composition expression: `{expression}`.");
+                else Engine.Warn($"Unrecognized `{gameObject.name}` layered actor composition expression: `{expression}`.");
             }
 
             bool ParseExpression (string expression, string operationLiteral, out string group, out string name)
@@ -128,7 +128,7 @@ namespace Naninovel
             void ForEachLayer (Func<LayeredActorLayer, bool> selector, Action<LayeredActorLayer> action, string group)
             {
                 var layers = Drawer.Layers.Where(selector).ToArray();
-                if (!layers.Any()) Debug.LogWarning($"`{gameObject.name}` layered actor composition group `{group}` not found.");
+                if (!layers.Any()) Engine.Warn($"`{gameObject.name}` layered actor composition group `{group}` not found.");
                 else
                     foreach (var layer in layers)
                         action.Invoke(layer);
@@ -137,7 +137,7 @@ namespace Naninovel
             void ForLayer (string group, string name, Action<LayeredActorLayer> action)
             {
                 var layer = Drawer.Layers.FirstOrDefault(l => l.Group.EqualsFast(group) && l.Name.EqualsFast(name));
-                if (layer is null) Debug.LogWarning($"`{gameObject.name}` layered actor layer `{name}` inside composition group `{group}` not found.");
+                if (layer is null) Engine.Warn($"`{gameObject.name}` layered actor layer `{name}` inside composition group `{group}` not found.");
                 else action.Invoke(layer);
             }
         }

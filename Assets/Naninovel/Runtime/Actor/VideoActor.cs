@@ -1,4 +1,4 @@
-// Copyright 2022 ReWaffle LLC. All rights reserved.
+// Copyright 2023 ReWaffle LLC. All rights reserved.
 
 using System;
 using System.Collections.Generic;
@@ -160,7 +160,7 @@ namespace Naninovel
 
         protected virtual async UniTask<VideoAppearance> GetAppearanceAsync (string videoName, AsyncToken asyncToken = default)
         {
-            if (Appearances.ContainsKey(videoName)) return Appearances[videoName];
+            if (Appearances.TryGetValue(videoName, out var cached)) return cached;
 
             var videoPlayer = Engine.CreateObject<VideoPlayer>(videoName, parent: Transform);
             videoPlayer.playOnAwake = false;

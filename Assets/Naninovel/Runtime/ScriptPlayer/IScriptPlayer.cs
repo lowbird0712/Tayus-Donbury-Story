@@ -1,4 +1,4 @@
-// Copyright 2022 ReWaffle LLC. All rights reserved.
+// Copyright 2023 ReWaffle LLC. All rights reserved.
 
 using System;
 using System.Collections.Generic;
@@ -48,6 +48,10 @@ namespace Naninovel
         /// Whether script playback routine is currently running.
         /// </summary>
         bool Playing { get; }
+        /// <summary>
+        /// Whether player is currently waiting executing async commands to finish.
+        /// </summary>
+        bool Synchronizing { get; }
         /// <summary>
         /// Whether skip mode is currently active.
         /// </summary>

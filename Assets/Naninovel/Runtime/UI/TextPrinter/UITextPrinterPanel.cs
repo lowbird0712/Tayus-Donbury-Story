@@ -1,4 +1,4 @@
-// Copyright 2022 ReWaffle LLC. All rights reserved.
+// Copyright 2023 ReWaffle LLC. All rights reserved.
 
 using System.Collections.Generic;
 using UnityEngine;
@@ -66,7 +66,7 @@ namespace Naninovel.UI
 
         UniTask IManagedUI.ChangeVisibilityAsync (bool visible, float? duration, AsyncToken asyncToken)
         {
-            Debug.LogError("@showUI and @hideUI commands can't be used with text printers; use @show/hide or @show/hidePrinter commands instead");
+            Engine.Err("@showUI and @hideUI commands can't be used with text printers; use @show/hide or @show/hidePrinter commands instead");
             return UniTask.CompletedTask;
         }
 

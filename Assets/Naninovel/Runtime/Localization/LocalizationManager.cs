@@ -1,9 +1,8 @@
-// Copyright 2022 ReWaffle LLC. All rights reserved.
+// Copyright 2023 ReWaffle LLC. All rights reserved.
 
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using UnityEngine;
 
 namespace Naninovel
 {
@@ -67,7 +66,7 @@ namespace Naninovel
         {
             if (!LocaleAvailable(locale))
             {
-                Debug.LogWarning($"Failed to select locale: Locale `{locale}` is not available.");
+                Engine.Warn($"Failed to select locale: Locale `{locale}` is not available.");
                 return;
             }
 

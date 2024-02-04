@@ -1,8 +1,7 @@
-// Copyright 2022 ReWaffle LLC. All rights reserved.
+// Copyright 2023 ReWaffle LLC. All rights reserved.
 
 using System.Linq;
 using UnityEditor;
-using UnityEngine;
 
 namespace Naninovel
 {
@@ -24,7 +23,7 @@ namespace Naninovel
         {
             if (player?.Playlist is null || player.Playlist.Count == 0 || !player.PlayedScript)
             {
-                Debug.LogError("Failed to perform hot reload: script player is not available or no script is currently played.");
+                Engine.Err("Failed to perform hot reload: script player is not available or no script is currently played.");
                 return;
             }
 
@@ -63,20 +62,25 @@ namespace Naninovel
             }
 
             if (rollbackIndex > -1) // Script has changed before the played line.
+            {
+                // Resetting will make playlist to update (re-load) on play.
+                player.ResetService();
                 // Rollback to the line before the first modified one.
                 await stateManager.RollbackAsync(s => s.PlaybackSpot.LineIndex == rollbackIndex);
+                UpdateLineHashes(player.PlayedScript);
+            }
+            else // Script has changed after the played line.
+            {
+                // Update the playlist and continue playing from the last played line.
+                var playlist = new ScriptPlaylist(player.PlayedScript, scriptManager);
+                var playlistIndex = player.Playlist.FindIndex(c => c.PlaybackSpot.LineIndex == lastPlayedLineIndex);
+                if (playlistIndex < 0) playlistIndex = 0;
+                await playlist.PreloadResourcesAsync(playlistIndex, playlist.Count - 1);
+                player.Play(playlist, playlistIndex);
 
-            // Update the playlist and play.
-            var resumeLineIndex = rollbackIndex > -1 ? rollbackIndex : lastPlayedLineIndex;
-            var playlist = new ScriptPlaylist(player.PlayedScript, scriptManager);
-            var playlistIndex = player.Playlist.FindIndex(c => c.PlaybackSpot.LineIndex == resumeLineIndex);
-            if (playlistIndex < 0)
-                playlistIndex = 0;
-            await playlist.PreloadResourcesAsync(playlistIndex, playlist.Count - 1);
-            player.Play(playlist, playlistIndex);
-
-            if (player.WaitingForInput)
-                player.SetWaitingForInputEnabled(false);
+                if (player.WaitingForInput)
+                    player.SetWaitingForInputEnabled(false);
+            }
         }
 
         [InitializeOnLoadMethod]
@@ -95,11 +99,11 @@ namespace Naninovel
                 scriptManager = Engine.GetService<IScriptManager>();
                 player = Engine.GetService<IScriptPlayer>();
                 stateManager = Engine.GetService<IStateManager>();
-                player.OnPlay += HandleStartPlaying;
+                player.OnPlay += UpdateLineHashes;
             }
         }
 
-        private static void HandleStartPlaying (Script script)
+        private static void UpdateLineHashes (Script script)
         {
             playedLineHashes = script.Lines.Select(l => l.LineHash).ToArray();
         }

@@ -6,6 +6,7 @@ public class MainGameMngScript : MonoBehaviour {
     static public MainGameMngScript         Inst { get; set; } = null;
 
     [SerializeField] GameObject             mainSceneCanvas;
+    [SerializeField] GameObject             eventSystem;
     [SerializeField] PanelScript            messagePanel;
     [SerializeField] TextMeshProUGUI        dotoriNumText; 
     [SerializeField] GameObject             calander;
@@ -23,6 +24,7 @@ public class MainGameMngScript : MonoBehaviour {
     bool                                    backToScript = false;
 
     static public GameObject                MainSceneCanvas => Inst.mainSceneCanvas;
+    static public GameObject                EventSystem => Inst.eventSystem;
     static public PanelScript               MessagePanel => Inst.messagePanel;
     static public ReactiveProperty<int>     DotoriNum => Inst.dotoriNum;
     static public bool                      IsPractice { get => Inst.isPractice; set { Inst.isPractice = value; } }

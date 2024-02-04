@@ -1,4 +1,4 @@
-// Copyright 2022 ReWaffle LLC. All rights reserved.
+// Copyright 2023 ReWaffle LLC. All rights reserved.
 
 using System;
 using System.Collections.Generic;
@@ -43,7 +43,7 @@ namespace Naninovel.UI
             var appearanceId = appearanceName ?? defaultAppearance.name;
             if (!appearances.TryGetValue(appearanceId, out selectedAppearance))
             {
-                Debug.LogError($"Failed to show toast with `{appearanceId}` appearance: the appearance game object is not found under the toast prefab.");
+                Engine.Err($"Failed to show toast with `{appearanceId}` appearance: the appearance game object is not found under the toast prefab.");
                 selectedAppearance = null;
                 return false;
             }

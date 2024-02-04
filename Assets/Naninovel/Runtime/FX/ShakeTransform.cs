@@ -1,4 +1,4 @@
-// Copyright 2022 ReWaffle LLC. All rights reserved.
+// Copyright 2023 ReWaffle LLC. All rights reserved.
 
 using System.Collections.Generic;
 using Naninovel.Commands;
@@ -13,21 +13,31 @@ namespace Naninovel.FX
     /// </summary>
     public abstract class ShakeTransform : MonoBehaviour, Spawn.IParameterized, Spawn.IAwaitable
     {
-        public string SpawnedPath { get; private set; }
-        public string ObjectName { get; private set; }
-        public int ShakesCount { get; private set; }
-        public float ShakeDuration { get; private set; }
-        public float DurationVariation { get; private set; }
-        public float ShakeAmplitude { get; private set; }
-        public float AmplitudeVariation { get; private set; }
-        public bool ShakeHorizontally { get; private set; }
-        public bool ShakeVertically { get; private set; }
+        public virtual string SpawnedPath { get; private set; }
+        public virtual string ObjectName { get; private set; }
+        public virtual int ShakesCount { get; private set; }
+        public virtual float ShakeDuration { get; private set; }
+        public virtual float DurationVariation { get; private set; }
+        public virtual float ShakeAmplitude { get; private set; }
+        public virtual float AmplitudeVariation { get; private set; }
+        public virtual bool ShakeHorizontally { get; private set; }
+        public virtual bool ShakeVertically { get; private set; }
 
-        protected ISpawnManager SpawnManager => Engine.GetService<ISpawnManager>();
-        protected Vector3 DeltaPos { get; private set; }
-        protected Vector3 InitialPos { get; private set; }
-        protected Transform ShakenTransform { get; private set; }
-        protected bool Loop { get; private set; }
+        protected virtual int DefaultShakesCount => defaultShakesCount;
+        protected virtual float DefaultShakeDuration => defaultShakeDuration;
+        protected virtual float DefaultDurationVariation => defaultDurationVariation;
+        protected virtual float DefaultShakeAmplitude => defaultShakeAmplitude;
+        protected virtual float DefaultAmplitudeVariation => defaultAmplitudeVariation;
+        protected virtual bool DefaultShakeHorizontally => defaultShakeHorizontally;
+        protected virtual bool DefaultShakeVertically => defaultShakeVertically;
+
+        protected virtual ISpawnManager SpawnManager => Engine.GetService<ISpawnManager>();
+        protected virtual Vector3 DeltaPos { get; private set; }
+        protected virtual Vector3 InitialPos { get; private set; }
+        protected virtual Transform ShakenTransform { get; private set; }
+        protected virtual bool Loop { get; private set; }
+        protected virtual Tweener<VectorTween> PositionTweener { get; } = new Tweener<VectorTween>();
+        protected virtual CancellationTokenSource CTS { get; private set; }
 
         [SerializeField] private int defaultShakesCount = 3;
         [SerializeField] private float defaultShakeDuration = .15f;
@@ -37,25 +47,22 @@ namespace Naninovel.FX
         [SerializeField] private bool defaultShakeHorizontally;
         [SerializeField] private bool defaultShakeVertically = true;
 
-        private readonly Tweener<VectorTween> positionTweener = new Tweener<VectorTween>();
-        private CancellationTokenSource loopCTS;
-
         public virtual void SetSpawnParameters (IReadOnlyList<string> parameters, bool asap)
         {
-            if (positionTweener.Running)
-                positionTweener.CompleteInstantly();
+            if (PositionTweener.Running)
+                PositionTweener.CompleteInstantly();
             if (ShakenTransform != null)
                 ShakenTransform.position = InitialPos;
 
             SpawnedPath = gameObject.name;
             ObjectName = parameters?.ElementAtOrDefault(0);
-            ShakesCount = Mathf.Abs(parameters?.ElementAtOrDefault(1)?.AsInvariantInt() ?? defaultShakesCount);
-            ShakeDuration = Mathf.Abs(parameters?.ElementAtOrDefault(2)?.AsInvariantFloat() ?? defaultShakeDuration);
-            DurationVariation = Mathf.Clamp01(parameters?.ElementAtOrDefault(3)?.AsInvariantFloat() ?? defaultDurationVariation);
-            ShakeAmplitude = Mathf.Abs(parameters?.ElementAtOrDefault(4)?.AsInvariantFloat() ?? defaultShakeAmplitude);
-            AmplitudeVariation = Mathf.Clamp01(parameters?.ElementAtOrDefault(5)?.AsInvariantFloat() ?? defaultAmplitudeVariation);
-            ShakeHorizontally = bool.Parse(parameters?.ElementAtOrDefault(6) ?? defaultShakeHorizontally.ToString());
-            ShakeVertically = bool.Parse(parameters?.ElementAtOrDefault(7) ?? defaultShakeVertically.ToString());
+            ShakesCount = Mathf.Abs(parameters?.ElementAtOrDefault(1)?.AsInvariantInt() ?? DefaultShakesCount);
+            ShakeDuration = Mathf.Abs(parameters?.ElementAtOrDefault(2)?.AsInvariantFloat() ?? DefaultShakeDuration);
+            DurationVariation = Mathf.Clamp01(parameters?.ElementAtOrDefault(3)?.AsInvariantFloat() ?? DefaultDurationVariation);
+            ShakeAmplitude = Mathf.Abs(parameters?.ElementAtOrDefault(4)?.AsInvariantFloat() ?? DefaultShakeAmplitude);
+            AmplitudeVariation = Mathf.Clamp01(parameters?.ElementAtOrDefault(5)?.AsInvariantFloat() ?? DefaultAmplitudeVariation);
+            ShakeHorizontally = bool.Parse(parameters?.ElementAtOrDefault(6) ?? DefaultShakeHorizontally.ToString());
+            ShakeVertically = bool.Parse(parameters?.ElementAtOrDefault(7) ?? DefaultShakeVertically.ToString());
             Loop = ShakesCount <= 0;
         }
 
@@ -65,10 +72,11 @@ namespace Naninovel.FX
             if (!ShakenTransform)
             {
                 SpawnManager.DestroySpawned(SpawnedPath);
-                Debug.LogWarning($"Failed to apply `{GetType().Name}` FX to `{ObjectName}`: transform to shake not found.");
+                Engine.Warn($"Failed to apply `{GetType().Name}` FX to `{ObjectName}`: transform to shake not found.");
                 return;
             }
 
+            asyncToken = InitializeCTS(asyncToken);
             InitialPos = ShakenTransform.position;
             DeltaPos = new Vector3(ShakeHorizontally ? ShakeAmplitude : 0, ShakeVertically ? ShakeAmplitude : 0, 0);
 
@@ -81,7 +89,7 @@ namespace Naninovel.FX
                     SpawnManager.DestroySpawned(SpawnedPath);
             }
 
-            await AsyncUtils.WaitEndOfFrameAsync(asyncToken); // Otherwise a consequent shake won't work.
+            await AsyncUtils.WaitEndOfFrameAsync(asyncToken); // Otherwise consequent shake won't work.
         }
 
         protected abstract Transform GetShakenTransform ();
@@ -98,14 +106,14 @@ namespace Naninovel.FX
         protected virtual async UniTask MoveAsync (Vector3 position, float duration, AsyncToken asyncToken)
         {
             var tween = new VectorTween(ShakenTransform.position, position, duration, pos => ShakenTransform.position = pos, false, EasingType.SmoothStep);
-            await positionTweener.RunAsync(tween, asyncToken, ShakenTransform);
+            await PositionTweener.RunAsync(tween, asyncToken, ShakenTransform);
         }
 
         protected virtual void OnDestroy ()
         {
             Loop = false;
-            loopCTS?.Cancel();
-            loopCTS?.Dispose();
+            CTS?.Cancel();
+            CTS?.Dispose();
 
             if (ShakenTransform != null)
                 ShakenTransform.position = InitialPos;
@@ -114,18 +122,18 @@ namespace Naninovel.FX
                 SpawnManager.DestroySpawned(SpawnedPath);
         }
 
-        private async UniTaskVoid LoopRoutine (AsyncToken asyncToken)
+        protected virtual async UniTaskVoid LoopRoutine (AsyncToken asyncToken)
         {
-            loopCTS?.Cancel();
-            loopCTS?.Dispose();
-            loopCTS = new CancellationTokenSource();
-            var combinedCTS = CancellationTokenSource.CreateLinkedTokenSource(asyncToken.CancellationToken, loopCTS.Token);
-            var combinedCTSToken = combinedCTS.Token;
+            while (Loop && Application.isPlaying && asyncToken.EnsureNotCanceledOrCompleted())
+                await ShakeSequenceAsync(asyncToken);
+        }
 
-            while (Loop && Application.isPlaying && !combinedCTSToken.IsCancellationRequested)
-                await ShakeSequenceAsync(combinedCTSToken);
-
-            combinedCTS.Dispose();
+        protected virtual AsyncToken InitializeCTS (AsyncToken token)
+        {
+            CTS?.Cancel();
+            CTS?.Dispose();
+            CTS = CancellationTokenSource.CreateLinkedTokenSource(token.CancellationToken);
+            return new AsyncToken(CTS.Token, token.CompletionToken);
         }
     }
 }

@@ -1,4 +1,4 @@
-// Copyright 2022 ReWaffle LLC. All rights reserved.
+// Copyright 2023 ReWaffle LLC. All rights reserved.
 
 using System;
 using UnityEngine;
@@ -61,6 +61,10 @@ namespace Naninovel
         /// </summary>
         public virtual bool Interactable { get => !CanvasGroup || CanvasGroup.interactable; set => SetInteractable(value); }
         /// <summary>
+        /// Whether interaction with the object is permanently disabled, no matter the visibility.
+        /// </summary>
+        public virtual bool DisableInteraction => disableInteraction;
+        /// <summary>
         /// Transform used by the UI element.
         /// </summary>
         public virtual RectTransform RectTransform => GetRectTransform();
@@ -90,7 +94,9 @@ namespace Naninovel
         /// Canvas group component attached to the host game object, if any.
         /// </summary>
         protected virtual CanvasGroup CanvasGroup { get; private set; }
-        /// <inheritdoc cref="controlOpacity"/>
+        /// <summary>
+        /// Whether to change opacity (alpha) of Canvas Group in correspondence to visibility of the UI element.
+        /// </summary>
         protected virtual bool ControlOpacity => controlOpacity;
 
         [Tooltip("Whether to permanently disable interaction with the object, no matter the visibility. Requires `Canvas Group` component on the same game object.")]
@@ -131,13 +137,13 @@ namespace Naninovel
 
             if (!CanvasGroup) return;
 
-            if (!disableInteraction)
+            if (!DisableInteraction)
             {
                 CanvasGroup.interactable = visible;
                 CanvasGroup.blocksRaycasts = visible;
             }
 
-            if (!controlOpacity) return;
+            if (!ControlOpacity) return;
 
             var fadeDuration = duration ?? FadeTime;
             var targetOpacity = visible ? 1f : 0f;
@@ -166,13 +172,13 @@ namespace Naninovel
 
             if (!CanvasGroup) return;
 
-            if (!disableInteraction)
+            if (!DisableInteraction)
             {
                 CanvasGroup.interactable = visible;
                 CanvasGroup.blocksRaycasts = visible;
             }
 
-            if (controlOpacity)
+            if (ControlOpacity)
                 CanvasGroup.alpha = visible ? 1f : 0f;
         }
 
@@ -248,7 +254,7 @@ namespace Naninovel
 
             CanvasGroup = GetComponent<CanvasGroup>();
 
-            if (CanvasGroup && disableInteraction)
+            if (CanvasGroup && DisableInteraction)
             {
                 CanvasGroup.interactable = false;
                 CanvasGroup.blocksRaycasts = false;
@@ -273,22 +279,22 @@ namespace Naninovel
             if (visible) onShow?.Invoke();
             else onHide?.Invoke();
 
-            if (focusObject && visible && EventSystem.current)
-                switch (focusMode)
+            if (FocusObject && visible && EventSystem.current)
+                switch (FocusModeType)
                 {
                     case FocusMode.Visibility:
-                        EventSystem.current.SetSelectedGameObject(focusObject);
+                        EventSystem.current.SetSelectedGameObject(FocusObject);
                         FocusOnNavigation = null;
                         break;
                     case FocusMode.Navigation:
-                        FocusOnNavigation = focusObject;
+                        FocusOnNavigation = FocusObject;
                         break;
                 }
         }
 
         protected virtual void HandleNavigationFocus ()
         {
-            if (focusMode != FocusMode.Navigation || !FocusOnNavigation || !Visible || !EventSystem.current) return;
+            if (FocusModeType != FocusMode.Navigation || !FocusOnNavigation || !Visible || !EventSystem.current) return;
 
             if (SampleInputSystemNavigation() || SampleLegacyInputNavigation())
             {

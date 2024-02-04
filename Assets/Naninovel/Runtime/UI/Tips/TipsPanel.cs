@@ -1,4 +1,4 @@
-// Copyright 2022 ReWaffle LLC. All rights reserved.
+// Copyright 2023 ReWaffle LLC. All rights reserved.
 
 using System.Collections.Generic;
 using UnityEngine;
@@ -9,6 +9,7 @@ namespace Naninovel.UI
     [RequireComponent(typeof(CanvasGroup))]
     public class TipsPanel : CustomUI, ITipsUI
     {
+        public const string DefaultUnlockableIdPrefix = "Tips";
         public const string DefaultManagedTextCategory = "Tips";
 
         public virtual int TipsCount { get; private set; }
@@ -23,7 +24,7 @@ namespace Naninovel.UI
 
         [Header("Tips Setup")]
         [Tooltip("All the unlockable item IDs with the specified prefix will be considered Tips items.")]
-        [SerializeField] private string unlockableIdPrefix = "Tips";
+        [SerializeField] private string unlockableIdPrefix = DefaultUnlockableIdPrefix;
         [Tooltip("The name of the managed text document (category) where all the tips data is stored.")]
         [SerializeField] private string managedTextCategory = DefaultManagedTextCategory;
 

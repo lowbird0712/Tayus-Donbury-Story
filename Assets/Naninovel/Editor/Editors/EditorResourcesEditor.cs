@@ -1,4 +1,4 @@
-// Copyright 2022 ReWaffle LLC. All rights reserved.
+// Copyright 2023 ReWaffle LLC. All rights reserved.
 
 using System;
 using System.Collections.Generic;
@@ -345,8 +345,8 @@ namespace Naninovel
 
         private UnityEngine.Object GetCachedOrLoadAssetByGuid (string guid, Type type)
         {
-            if (cachedObjects.ContainsKey(guid))
-                return cachedObjects[guid];
+            if (cachedObjects.TryGetValue(guid, out var cachedObj))
+                return cachedObj;
 
             var obj = EditorUtils.LoadAssetByGuid(guid, type);
             if (obj is null) return null;

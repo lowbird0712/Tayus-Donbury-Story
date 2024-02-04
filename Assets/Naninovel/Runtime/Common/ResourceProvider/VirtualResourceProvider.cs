@@ -1,4 +1,4 @@
-// Copyright 2022 ReWaffle LLC. All rights reserved.
+// Copyright 2023 ReWaffle LLC. All rights reserved.
 
 using System;
 using System.Collections.Generic;
@@ -36,6 +36,11 @@ namespace Naninovel
         public bool SupportsType<T> () where T : UnityEngine.Object => true;
 
         public void AddResource<T> (string path, T obj) where T : UnityEngine.Object
+        {
+            Resources.Add(path, new Resource<T>(path, obj));
+        }
+
+        public void SetResource<T> (string path, T obj) where T : UnityEngine.Object
         {
             Resources[path] = new Resource<T>(path, obj);
         }

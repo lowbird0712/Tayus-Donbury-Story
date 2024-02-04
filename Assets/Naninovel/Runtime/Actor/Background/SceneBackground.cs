@@ -1,4 +1,4 @@
-// Copyright 2022 ReWaffle LLC. All rights reserved.
+// Copyright 2023 ReWaffle LLC. All rights reserved.
 
 using System.Collections.Generic;
 using System.Linq;
@@ -26,7 +26,6 @@ namespace Naninovel
             public RenderTexture RenderTexture;
             public Camera Camera;
             public readonly HashSet<object> Holders = new HashSet<object>();
-            public readonly HashSet<SceneBackground> ActorHolders = new HashSet<SceneBackground>();
         }
 
         public override string Appearance { get => appearance; set => SetAppearance(value); }
@@ -62,11 +61,18 @@ namespace Naninovel
         public override async UniTask ChangeAppearanceAsync (string appearance, float duration,
             EasingType easingType = default, Transition? transition = default, AsyncToken asyncToken = default)
         {
+            var previousAppearance = this.appearance;
+
             this.appearance = appearance;
             if (string.IsNullOrEmpty(appearance)) return;
-            var sceneData = await GetOrLoadSceneAsync(appearance, asyncToken.CancellationToken);
-            sceneData.ActorHolders.Add(this);
-            await TransitionalRenderer.TransitionToAsync(sceneData.RenderTexture, duration, easingType, transition, asyncToken);
+            var data = await GetOrLoadSceneAsync(appearance, asyncToken.CancellationToken);
+            data.Holders.Add(this);
+            await TransitionalRenderer.TransitionToAsync(data.RenderTexture, duration, easingType, transition, asyncToken);
+
+            if (!string.IsNullOrEmpty(previousAppearance) && previousAppearance != this.appearance &&
+                loadedScenes.TryGetValue(previousAppearance, out var previousData) &&
+                previousData.Holders.Remove(this) && previousData.Holders.Count == 0)
+                UnloadScene(previousAppearance);
         }
 
         public override async UniTask ChangeVisibilityAsync (bool visible, float duration,
@@ -101,8 +107,8 @@ namespace Naninovel
             void UnloadUnused (string appearance)
             {
                 var data = loadedScenes[appearance];
-                data.ActorHolders.Remove(this);
-                if (data.ActorHolders.Count == 0) UnloadScene(appearance);
+                data.Holders.Remove(this);
+                if (data.Holders.Count == 0) UnloadScene(appearance);
             }
         }
 
@@ -124,25 +130,25 @@ namespace Naninovel
             // without awaiting when preloading script resources.
             await loadSemaphore.WaitAsync(asyncToken.CancellationToken);
             asyncToken.ThrowIfCanceled();
-            if (loadedScenes.ContainsKey(appearance))
+            if (loadedScenes.TryGetValue(appearance, out var loadedSceneData))
             {
                 loadSemaphore.Release();
-                return loadedScenes[appearance];
+                return loadedSceneData;
             }
             var renderTexture = CreateRenderTexture();
             var scene = await LoadSceneAsync(appearance, asyncToken);
             var camera = FindCameraInScene(scene);
             camera.targetTexture = renderTexture;
-            var sceneData = new SceneData { Scene = scene, RenderTexture = renderTexture, Camera = camera };
-            loadedScenes[appearance] = sceneData;
+            var data = new SceneData { Scene = scene, RenderTexture = renderTexture, Camera = camera };
+            loadedScenes[appearance] = data;
             loadSemaphore.Release();
-            return sceneData;
+            return data;
         }
 
         protected virtual RenderTexture CreateRenderTexture ()
         {
             var resolution = Engine.GetConfiguration<CameraConfiguration>().ReferenceResolution;
-            var descriptor = new RenderTextureDescriptor(resolution.x, resolution.y);
+            var descriptor = new RenderTextureDescriptor(resolution.x, resolution.y, RenderTextureFormat.Default, 16);
             return new RenderTexture(descriptor);
         }
 

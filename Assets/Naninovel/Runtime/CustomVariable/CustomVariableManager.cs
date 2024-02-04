@@ -1,9 +1,8 @@
-// Copyright 2022 ReWaffle LLC. All rights reserved.
+// Copyright 2023 ReWaffle LLC. All rights reserved.
 
 using System;
 using System.Collections.Generic;
 using Naninovel.Commands;
-using UnityEngine;
 
 namespace Naninovel
 {
@@ -36,6 +35,9 @@ namespace Naninovel
             Configuration = config;
             globalVariableMap = new SerializableLiteralStringMap();
             localVariableMap = new SerializableLiteralStringMap();
+
+            // Initialize local variables after engine init, so that managed text script vars are available.
+            Engine.AddPostInitializationTask(InitializeLocalVariables);
         }
 
         public virtual UniTask InitializeServiceAsync () => UniTask.CompletedTask;
@@ -45,7 +47,10 @@ namespace Naninovel
             ResetLocalVariables();
         }
 
-        public virtual void DestroyService () { }
+        public virtual void DestroyService ()
+        {
+            Engine.RemovePostInitializationTask(InitializeLocalVariables);
+        }
 
         public virtual void SaveServiceState (GlobalStateMap stateMap)
         {
@@ -112,7 +117,7 @@ namespace Naninovel
         public virtual void SetVariableValue (string name, string value)
         {
             if (string.IsNullOrEmpty(name)) throw new ArgumentException("Variable name cannot be null or empty.", nameof(name));
-            
+
             var isGlobal = CustomVariablesConfiguration.IsGlobalVariable(name);
             var initialValue = default(string);
 
@@ -155,6 +160,12 @@ namespace Naninovel
             }
         }
 
-        private void LogInitializeVarError (string varName, string expr, string error) => Debug.LogWarning($"Failed to initialize `{varName}` variable with `{expr}` expression: {error}");
+        protected virtual UniTask InitializeLocalVariables ()
+        {
+            ResetLocalVariables();
+            return UniTask.CompletedTask;
+        }
+
+        private void LogInitializeVarError (string varName, string expr, string error) => Engine.Warn($"Failed to initialize `{varName}` variable with `{expr}` expression: {error}");
     }
 }

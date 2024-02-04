@@ -1,4 +1,4 @@
-// Copyright 2022 ReWaffle LLC. All rights reserved.
+// Copyright 2023 ReWaffle LLC. All rights reserved.
 
 #if ADDRESSABLES_AVAILABLE
 
@@ -7,7 +7,6 @@ using UnityEditor;
 using UnityEditor.AddressableAssets;
 using UnityEditor.AddressableAssets.Settings;
 using UnityEditor.AddressableAssets.Settings.GroupSchemas;
-using UnityEngine;
 
 namespace Naninovel
 {
@@ -49,8 +48,8 @@ namespace Naninovel
             if (entry is null) return false;
             var address = PathToAddress(resourcePath);
             if (entry.address == address) return false;
-            Debug.Log($"Asset assigned as a `{resourcePath}` Naninovel resource is already registered " +
-                      $"in the Addressable Asset System as `{entry.address}`. It will be copied to prevent conflicts.");
+            Engine.Log($"Asset assigned as a `{resourcePath}` Naninovel resource is already registered " +
+                       $"in the Addressable Asset System as `{entry.address}`. It will be copied to prevent conflicts.");
             return true;
         }
 

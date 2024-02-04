@@ -1,4 +1,4 @@
-// Copyright 2022 ReWaffle LLC. All rights reserved.
+// Copyright 2023 ReWaffle LLC. All rights reserved.
 
 using System;
 using System.Collections.Generic;
@@ -131,13 +131,13 @@ namespace Naninovel
         {
             if (!ActorExists(characterId))
             {
-                Debug.LogWarning($"Failed to assign `{avatarTexturePath}` avatar texture to `{characterId}` character: character with the provided ID not found.");
+                Engine.Warn($"Failed to assign `{avatarTexturePath}` avatar texture to `{characterId}` character: character with the provided ID not found.");
                 return;
             }
 
             if (!AvatarTextureExists(avatarTexturePath))
             {
-                Debug.LogWarning($"Failed to assign `{avatarTexturePath}` avatar texture to `{characterId}` character: avatar texture with the provided path not found.");
+                Engine.Warn($"Failed to assign `{avatarTexturePath}` avatar texture to `{characterId}` character: avatar texture with the provided path not found.");
                 return;
             }
 
@@ -172,7 +172,7 @@ namespace Naninovel
             if (!string.IsNullOrEmpty(displayName) && displayName.StartsWithFast("{") && displayName.EndsWithFast("}"))
             {
                 var expression = displayName.GetAfterFirst("{").GetBeforeLast("}");
-                displayName = ExpressionEvaluator.Evaluate<string>(expression, desc => Debug.LogError($"Failed to evaluate `{characterId}` character display name: {desc}"));
+                displayName = ExpressionEvaluator.Evaluate<string>(expression, desc => Engine.Err($"Failed to evaluate `{characterId}` character display name: {desc}"));
             }
 
             return string.IsNullOrEmpty(displayName) ? null : displayName;

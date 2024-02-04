@@ -1,4 +1,4 @@
-// Copyright 2022 ReWaffle LLC. All rights reserved.
+// Copyright 2023 ReWaffle LLC. All rights reserved.
 
 using System;
 using System.Collections.Generic;
@@ -75,7 +75,20 @@ namespace Naninovel
         {
             var line = $"line #{lineNumber}{(inlineIndex <= 0 ? string.Empty : $".{inlineIndex}")}";
             var fullMessage = string.IsNullOrEmpty(scriptName) ? $"Transient Naninovel script: {message}" : $"Naninovel script `{scriptName}` at {line}: {message}";
-            Debug.LogFormat(logType, default, default, fullMessage);
+            switch (logType)
+            {
+                case LogType.Log:
+                    Engine.Log(fullMessage);
+                    break;
+                case LogType.Warning:
+                    Engine.Warn(fullMessage);
+                    break;
+                case LogType.Exception:
+                case LogType.Assert:
+                case LogType.Error:
+                    Engine.Err(fullMessage);
+                    break;
+            }
         }
 
         /// <summary>
@@ -125,14 +138,14 @@ namespace Naninovel
                         if (localizedLine is LabelScriptLine) break;
                         if (!rollbackEnabled && replacedAnything)
                         {
-                            Debug.LogWarning($"Multiple localized lines mapped to a single source line detected in localization script `{localizationScript.Name}` at line #{localizedLine.LineNumber}. " +
-                                             "That is not supported when state rollback is disabled. The extra lines won't be included to the localized version of the script.");
+                            Engine.Warn($"Multiple localized lines mapped to a single source line detected in localization script `{localizationScript.Name}` at line #{localizedLine.LineNumber}. " +
+                                        "That is not supported when state rollback is disabled. The extra lines won't be included to the localized version of the script.");
                             break;
                         }
                         if (!rollbackEnabled && localizedLine is GenericTextScriptLine localizedGenericLine
                                              && (!(sourceLine is GenericTextScriptLine sourceGenericLine) || sourceGenericLine.InlinedCommands.Count != localizedGenericLine.InlinedCommands.Count))
-                            Debug.LogWarning($"Inlined commands count in the localized content not equals to the source in `{localizationScript.Name}` script at line #{localizedLine.LineNumber}. " +
-                                             "That could break the playback when changing the locale while state rollback is disabled. Either enable state rollback or fix the localized content.");
+                            Engine.Warn($"Inlined commands count in the localized content not equals to the source in `{localizationScript.Name}` script at line #{localizedLine.LineNumber}. " +
+                                        "That could break the playback when changing the locale while state rollback is disabled. Either enable state rollback or fix the localized content.");
                         OverrideCommandIndexInLine(localizedLine, i, ref inlineIndex);
                         AddCommandsFromLine(localizedLine);
                         replacedAnything = true;

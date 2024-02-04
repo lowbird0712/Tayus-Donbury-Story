@@ -1,4 +1,4 @@
-// Copyright 2022 ReWaffle LLC. All rights reserved.
+// Copyright 2023 ReWaffle LLC. All rights reserved.
 
 using Naninovel.Commands;
 using System;
@@ -32,10 +32,9 @@ namespace Naninovel.FX
         protected virtual string SpawnedPath { get; private set; }
         protected virtual EasingType DefaultEasing { get; private set; }
         protected virtual ISpawnManager SpawnManager => Engine.GetService<ISpawnManager>();
-
-        private readonly List<UniTask> tasks = new List<UniTask>();
-        private CameraConfiguration cameraConfig => Engine.GetService<ICameraManager>().Configuration;
-        private CancellationTokenSource loopCTS;
+        protected virtual List<UniTask> tasks { get; } = new List<UniTask>();
+        protected virtual CameraConfiguration CameraConfig => Engine.GetService<ICameraManager>().Configuration;
+        protected virtual CancellationTokenSource CTS { get; private set; }
 
         public virtual void SetSpawnParameters (IReadOnlyList<string> parameters, bool asap)
         {
@@ -46,14 +45,15 @@ namespace Naninovel.FX
             FillMissingDurations();
         }
 
-        public async UniTask AwaitSpawnAsync (AsyncToken asyncToken = default)
+        public virtual async UniTask AwaitSpawnAsync (AsyncToken asyncToken = default)
         {
             var manager = Engine.FindAllServices<IActorManager>(c => c.ActorExists(ActorId)).FirstOrDefault();
             if (manager is null)
             {
-                Debug.LogWarning($"Can't find a manager with `{ActorId}` actor to apply `{SpawnedPath}` command.");
+                Engine.Warn($"Can't find a manager with `{ActorId}` actor to apply `{SpawnedPath}` command.");
                 return;
             }
+            asyncToken = InitializeCTS(asyncToken);
             DefaultEasing = manager.ActorManagerConfiguration.DefaultEasing;
             var actor = manager.GetActor(ActorId);
 
@@ -76,7 +76,7 @@ namespace Naninovel.FX
             var duration = Duration[keyIndex] ?? 0f;
             var easingType = DefaultEasing;
             if (EasingTypeName.ElementAtOrDefault(keyIndex) != null && !Enum.TryParse(EasingTypeName[keyIndex], true, out easingType))
-                Debug.LogWarning($"Failed to parse `{EasingTypeName}` easing.");
+                Engine.Warn($"Failed to parse `{EasingTypeName}` easing.");
 
             if (Appearance.ElementAtOrDefault(keyIndex) != null)
             {
@@ -104,13 +104,13 @@ namespace Naninovel.FX
             {
                 if (ColorUtility.TryParseHtmlString(TintColor[keyIndex], out var color))
                     tasks.Add(actor.ChangeTintColorAsync(color, duration, easingType, asyncToken));
-                else Debug.LogWarning($"Failed to parse `{TintColor}` color to apply tint animation for `{actor.Id}` actor. See the API docs for supported color formats.");
+                else Engine.Warn($"Failed to parse `{TintColor}` color to apply tint animation for `{actor.Id}` actor. See the API docs for supported color formats.");
             }
 
             await UniTask.WhenAll(tasks);
         }
 
-        private static Vector3? ParseScale (string value)
+        protected virtual Vector3? ParseScale (string value)
         {
             if (string.IsNullOrWhiteSpace(value)) return null;
             if (!value.Contains(','))
@@ -126,7 +126,7 @@ namespace Naninovel.FX
                 values.ElementAtOrDefault(2)?.AsInvariantFloat() ?? 1);
         }
 
-        private void ParseParameter (int paramIdx, IEnumerable<string> parameters)
+        protected virtual void ParseParameter (int paramIdx, IEnumerable<string> parameters)
         {
             var keys = parameters.ElementAtOrDefault(paramIdx)?.Split(AnimateActor.KeyDelimiter);
             if (keys is null || keys.Length == 0 || keys.All(s => s == string.Empty)) return;
@@ -136,8 +136,8 @@ namespace Naninovel.FX
             if (paramIdx == 2) AssignKeys(Appearance);
             if (paramIdx == 3) AssignKeys(Transition);
             if (paramIdx == 4) AssignKeys(Visibility, k => bool.TryParse(k, out var result) ? (bool?)result : null);
-            if (paramIdx == 5) AssignKeys(PositionX, k => cameraConfig.SceneToWorldSpace(new Vector2((k.AsInvariantFloat() ?? 0) / 100f, 0)).x);
-            if (paramIdx == 6) AssignKeys(PositionY, k => cameraConfig.SceneToWorldSpace(new Vector2(0, (k.AsInvariantFloat() ?? 0) / 100f)).y);
+            if (paramIdx == 5) AssignKeys(PositionX, k => CameraConfig.SceneToWorldSpace(new Vector2((k.AsInvariantFloat() ?? 0) / 100f, 0)).x);
+            if (paramIdx == 6) AssignKeys(PositionY, k => CameraConfig.SceneToWorldSpace(new Vector2(0, (k.AsInvariantFloat() ?? 0) / 100f)).y);
             if (paramIdx == 7) AssignKeys(PositionZ, k => k.AsInvariantFloat());
             if (paramIdx == 8) AssignKeys(RotationZ, k => k.AsInvariantFloat());
             if (paramIdx == 9) AssignKeys(Scale, ParseScale);
@@ -155,7 +155,7 @@ namespace Naninovel.FX
             }
         }
 
-        private void FillMissingDurations ()
+        protected virtual void FillMissingDurations ()
         {
             var lastDuration = 0f;
             for (int keyIdx = 0; keyIdx < KeyCount; keyIdx++)
@@ -165,27 +165,21 @@ namespace Naninovel.FX
                 else lastDuration = Duration[keyIdx].Value;
         }
 
-        private async UniTaskVoid LoopRoutine (IActor actor, AsyncToken asyncToken)
+        protected virtual async UniTaskVoid LoopRoutine (IActor actor, AsyncToken asyncToken)
         {
-            loopCTS?.Cancel();
-            loopCTS?.Dispose();
-            loopCTS = new CancellationTokenSource();
-            var combinedCTS = CancellationTokenSource.CreateLinkedTokenSource(asyncToken.CancellationToken, loopCTS.Token);
-            var combinedCTSToken = combinedCTS.Token;
-
-            while (Loop && Application.isPlaying && !combinedCTSToken.IsCancellationRequested)
+            while (Loop && Application.isPlaying && asyncToken.EnsureNotCanceledOrCompleted())
                 for (int keyIdx = 0; keyIdx < KeyCount; keyIdx++)
                 {
-                    await AnimateKey(actor, keyIdx, combinedCTSToken);
-                    if (combinedCTSToken.IsCancellationRequested) break;
+                    await AnimateKey(actor, keyIdx, asyncToken);
+                    if (!asyncToken.EnsureNotCanceledOrCompleted()) break;
                 }
-
-            combinedCTS.Dispose();
         }
 
-        private void OnDestroy ()
+        protected virtual void OnDestroy ()
         {
             Loop = false;
+            CTS?.Cancel();
+            CTS?.Dispose();
 
             // The following is possible to prevent unpredicted state mutations,
             // though it's hardly worth all the complications:
@@ -195,6 +189,14 @@ namespace Naninovel.FX
 
             if (Engine.Initialized && SpawnManager.IsSpawned(SpawnedPath))
                 SpawnManager.DestroySpawned(SpawnedPath);
+        }
+
+        protected virtual AsyncToken InitializeCTS (AsyncToken token)
+        {
+            CTS?.Cancel();
+            CTS?.Dispose();
+            CTS = CancellationTokenSource.CreateLinkedTokenSource(token.CancellationToken);
+            return new AsyncToken(CTS.Token, token.CompletionToken);
         }
     }
 }

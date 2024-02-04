@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-16"?>
 <Content xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-  <MessageType>Naninovel.Bridging.UpdateMetadata, Naninovel.Common, Version=2022.8.30.1926, Culture=neutral, PublicKeyToken=null</MessageType>
+  <MessageType>Naninovel.Bridging.UpdateMetadata, Naninovel.Common, Version=2023.8.20.1520, Culture=neutral, PublicKeyToken=null</MessageType>
   <SerializedMessage>&lt;?xml version="1.0" encoding="utf-16"?&gt;
 &lt;UpdateMetadata xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"&gt;
   &lt;Metadata&gt;
@@ -122,6 +122,34 @@
       &lt;Command&gt;
         &lt;Id&gt;SwitchToCardGameMode&lt;/Id&gt;
         &lt;Alias&gt;cardgame&lt;/Alias&gt;
+        &lt;Localizable&gt;false&lt;/Localizable&gt;
+        &lt;Parameters&gt;
+          &lt;Parameter&gt;
+            &lt;Id&gt;Wait&lt;/Id&gt;
+            &lt;Nameless&gt;false&lt;/Nameless&gt;
+            &lt;Required&gt;false&lt;/Required&gt;
+            &lt;Localizable&gt;false&lt;/Localizable&gt;
+            &lt;ValueContainerType&gt;Single&lt;/ValueContainerType&gt;
+            &lt;ValueType&gt;Boolean&lt;/ValueType&gt;
+          &lt;/Parameter&gt;
+          &lt;Parameter&gt;
+            &lt;Id&gt;ConditionalExpression&lt;/Id&gt;
+            &lt;Alias&gt;if&lt;/Alias&gt;
+            &lt;Nameless&gt;false&lt;/Nameless&gt;
+            &lt;Required&gt;false&lt;/Required&gt;
+            &lt;Localizable&gt;false&lt;/Localizable&gt;
+            &lt;ValueContainerType&gt;Single&lt;/ValueContainerType&gt;
+            &lt;ValueType&gt;String&lt;/ValueType&gt;
+            &lt;ValueContext&gt;
+              &lt;Type&gt;Expression&lt;/Type&gt;
+              &lt;SubType /&gt;
+            &lt;/ValueContext&gt;
+          &lt;/Parameter&gt;
+        &lt;/Parameters&gt;
+      &lt;/Command&gt;
+      &lt;Command&gt;
+        &lt;Id&gt;SwitchToMainMode&lt;/Id&gt;
+        &lt;Alias&gt;main&lt;/Alias&gt;
         &lt;Localizable&gt;false&lt;/Localizable&gt;
         &lt;Parameters&gt;
           &lt;Parameter&gt;
@@ -314,15 +342,27 @@
         &lt;Type&gt;UI&lt;/Type&gt;
       &lt;/Resource&gt;
       &lt;Resource&gt;
-        &lt;Path&gt;Stage&lt;/Path&gt;
-        &lt;Type&gt;Scripts&lt;/Type&gt;
-      &lt;/Resource&gt;
-      &lt;Resource&gt;
         &lt;Path&gt;Script 0&lt;/Path&gt;
         &lt;Type&gt;Scripts&lt;/Type&gt;
       &lt;/Resource&gt;
       &lt;Resource&gt;
         &lt;Path&gt;Script 0 JP&lt;/Path&gt;
+        &lt;Type&gt;Scripts&lt;/Type&gt;
+      &lt;/Resource&gt;
+      &lt;Resource&gt;
+        &lt;Path&gt;Script 1&lt;/Path&gt;
+        &lt;Type&gt;Scripts&lt;/Type&gt;
+      &lt;/Resource&gt;
+      &lt;Resource&gt;
+        &lt;Path&gt;Script 1 JP&lt;/Path&gt;
+        &lt;Type&gt;Scripts&lt;/Type&gt;
+      &lt;/Resource&gt;
+      &lt;Resource&gt;
+        &lt;Path&gt;Script 2&lt;/Path&gt;
+        &lt;Type&gt;Scripts&lt;/Type&gt;
+      &lt;/Resource&gt;
+      &lt;Resource&gt;
+        &lt;Path&gt;Script 2 JP&lt;/Path&gt;
         &lt;Type&gt;Scripts&lt;/Type&gt;
       &lt;/Resource&gt;
       &lt;Resource&gt;

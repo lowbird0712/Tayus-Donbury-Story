@@ -24,10 +24,10 @@ public class NaninovelMngScript : MonoBehaviour {
             return;
         switch (MainGameMngScript.StageNum)
         {
-            case 1:
-                MainGameMngScript.BackToScript = true;
-                MainGameMngScript.ScriptLabelNameTemp = "EndCardGame";
-                break;
+            //// When middle card game mode is needed
+                //MainGameMngScript.BackToScript = true;
+                //MainGameMngScript.ScriptLabelNameTemp = "EndCardGame";
+                //break;
             default :
                 MainGameMngScript.BackToScript = false;
                 MainGameMngScript.ScriptLabelNameTemp = "";

@@ -1,4 +1,4 @@
-// Copyright 2022 ReWaffle LLC. All rights reserved.
+// Copyright 2023 ReWaffle LLC. All rights reserved.
 
 namespace Naninovel
 {
@@ -19,6 +19,7 @@ namespace Naninovel
         /// </summary>
         public static YieldAwaitable WaitEndOfFrameAsync (AsyncToken asyncToken = default)
         {
+            // "LastPostLateUpdate" causes issues with rendering, using the one before.
             return UniTask.Yield(PlayerLoopTiming.PostLateUpdate, asyncToken);
         }
 

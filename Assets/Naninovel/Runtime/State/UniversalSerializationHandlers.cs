@@ -1,4 +1,4 @@
-// Copyright 2022 ReWaffle LLC. All rights reserved.
+// Copyright 2023 ReWaffle LLC. All rights reserved.
 
 #if UNITY_EDITOR || !(UNITY_SWITCH || UNITY_PS4 || UNITY_PS5 || UNITY_XBOXONE || UNITY_GAMECORE)
 #define IO_SERIALIZER_SUPPORTED

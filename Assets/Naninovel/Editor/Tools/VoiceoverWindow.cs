@@ -1,4 +1,4 @@
-// Copyright 2022 ReWaffle LLC. All rights reserved.
+// Copyright 2023 ReWaffle LLC. All rights reserved.
 
 using Naninovel.Commands;
 using System;
@@ -131,7 +131,7 @@ namespace Naninovel
             }
             catch (Exception e)
             {
-                Debug.LogError($"Failed to generate voiceover documents: {e}");
+                Engine.Err($"Failed to generate voiceover documents: {e}");
             }
             finally
             {

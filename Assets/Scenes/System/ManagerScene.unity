@@ -462,8 +462,8 @@ Transform:
   - {fileID: 1060200068}
   - {fileID: 1812828045}
   - {fileID: 643024260}
-  - {fileID: 279969330}
   - {fileID: 1896331306}
+  - {fileID: 279969330}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &51989568
@@ -5935,7 +5935,7 @@ MonoBehaviour:
   - {fileID: 2009074544}
   - {fileID: 1910832292}
   - {fileID: 1283704769}
-  usableMaxStageIndex: 1
+  usableMaxStageIndex: 2
 --- !u!114 &448180104
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -21651,6 +21651,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mainSceneCanvas: {fileID: 1812828044}
+  eventSystem: {fileID: 279969326}
   messagePanel: {fileID: 1593946337}
   dotoriNumText: {fileID: 1640462502}
   calander: {fileID: 448180101}

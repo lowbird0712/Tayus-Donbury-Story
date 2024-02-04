@@ -1,4 +1,4 @@
-// Copyright 2022 ReWaffle LLC. All rights reserved.
+// Copyright 2023 ReWaffle LLC. All rights reserved.
 
 using System;
 using System.Collections.Generic;
@@ -35,13 +35,13 @@ namespace Naninovel
             var manager = Engine.GetService<IResourceProviderManager>();
             if (manager is null)
             {
-                Debug.LogError("Failed to retrieve provider manager.");
+                Engine.Err("Failed to retrieve provider manager.");
                 return;
             }
             var googleDriveProvider = manager.GetProvider(ResourceProviderConfiguration.GoogleDriveTypeName) as GoogleDriveResourceProvider;
             if (googleDriveProvider is null)
             {
-                Debug.LogError("Failed to retrieve google drive provider.");
+                Engine.Err("Failed to retrieve google drive provider.");
                 return;
             }
             googleDriveProvider.PurgeCache();
@@ -64,7 +64,7 @@ namespace Naninovel
             var player = Engine.GetService<IScriptPlayer>();
             var playedScriptName = ObjectUtils.IsValid(player.PlayedScript) ? player.PlayedScript.Name : "null";
             var ok = await player.RewindAsync(line - 1);
-            if (!ok) Debug.LogWarning($"Failed to rewind to line #{line} of script `{playedScriptName}`. Make sure the line exists in the script and it's playable (either a command or a generic text line). When rewinding forward, `@stop` commands can prevent reaching the target line. When rewinding backward the target line should've been previously played and be kept in the rollback stack (capacity controlled by `{nameof(StateConfiguration.StateRollbackSteps)}` property in state configuration).");
+            if (!ok) Engine.Warn($"Failed to rewind to line #{line} of script `{playedScriptName}`. Make sure the line exists in the script and it's playable (either a command or a generic text line). When rewinding forward, `@stop` commands can prevent reaching the target line. When rewinding backward the target line should've been previously played and be kept in the rollback stack (capacity controlled by `{nameof(StateConfiguration.StateRollbackSteps)}` property in state configuration).");
         }
 
         [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.AfterSceneLoad)]

@@ -1,4 +1,4 @@
-// Copyright 2022 ReWaffle LLC. All rights reserved.
+// Copyright 2023 ReWaffle LLC. All rights reserved.
 
 using System.Linq;
 using Naninovel.FX;
@@ -67,7 +67,7 @@ namespace Naninovel
         {
             // When appearance is not set (and default one is not preloaded for some reason, eg when using dynamic parameters) 
             // and revealing the actor -- attempt to load default appearance texture.
-            if (!Visible && visible && string.IsNullOrWhiteSpace(Appearance) && (defaultAppearance is null || !defaultAppearance.Valid))
+            if (!Visible && visible && string.IsNullOrWhiteSpace(Appearance) && !AppearanceLoader.IsLoaded(defaultAppearance?.Path))
                 await ChangeAppearanceAsync(null, 0, asyncToken: asyncToken);
 
             this.visible = visible;
@@ -137,7 +137,7 @@ namespace Naninovel
 
             if (!texture.Valid)
             {
-                Debug.LogWarning($"Failed to load '{appearance}' appearance texture for `{Id}` sprite actor: the resource is not found.");
+                Engine.Warn($"Failed to load '{appearance}' appearance texture for `{Id}` sprite actor: the resource is not found.");
                 return null;
             }
 

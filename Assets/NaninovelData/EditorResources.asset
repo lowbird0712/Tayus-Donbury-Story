@@ -166,9 +166,6 @@ MonoBehaviour:
       guid: b6f0f285615d88d45a919664602a26bc
   - Id: Scripts
     Resources:
-    - name: Stage
-      pathPrefix: Scripts
-      guid: e07e66b5553a45f4f91859485a681cb8
     - name: Script 0
       pathPrefix: Scripts
       guid: f993ec47bf6777d48b45f711cd8a1c20
@@ -181,6 +178,12 @@ MonoBehaviour:
     - name: Script 1 JP
       pathPrefix: Scripts
       guid: 9c98ec95fb2b74974895550ceead47a8
+    - name: Script 2
+      pathPrefix: Scripts
+      guid: 72399bc20b36f4164a40f38e6237b82b
+    - name: Script 2 JP
+      pathPrefix: Scripts
+      guid: ef9ad1d0674774cf4b041535e3e6ade1
   - Id: Characters/e7a3a3d1-159d-4570-b79a-74ab527a6716
     Resources:
     - name: Tayu

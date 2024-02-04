@@ -1,4 +1,4 @@
-// Copyright 2022 ReWaffle LLC. All rights reserved.
+// Copyright 2023 ReWaffle LLC. All rights reserved.
 
 using System;
 using System.Text.RegularExpressions;
@@ -18,7 +18,7 @@ namespace Naninovel.UI
         [Serializable]
         public class LinkClickedEvent : UnityEvent<TMP_LinkInfo> { }
 
-        public override string text { get => base.text; set => base.text = ProcessText(value); }
+        public override string text { get => unprocessedText; set => base.text = ProcessText(unprocessedText = value); }
 
         protected virtual string RubyVerticalOffset => rubyVerticalOffset;
         protected virtual float RubySizeScale => rubySizeScale;
@@ -62,6 +62,7 @@ namespace Naninovel.UI
         private static readonly Regex captureLinkRegex = new Regex(@"<link=""([\w]*?)"">([\s\S]*?)<\/link>", RegexOptions.Compiled);
 
         private readonly FastStringBuilder arabicBuilder = new FastStringBuilder(RTLSupport.DefaultBufferSize);
+        private string unprocessedText = "";
         private Canvas topmostCanvasCache;
 
         public virtual void OnPointerClick (PointerEventData eventData)
@@ -86,11 +87,10 @@ namespace Naninovel.UI
             return linkIndex == -1;
         }
 
-        protected override void Start ()
+        protected override void Awake ()
         {
-            base.Start();
-            if (!string.IsNullOrEmpty(text) && !Edited)
-                text = text;
+            base.Awake();
+            if (!Edited) text = base.text ?? "";
         }
 
         protected virtual void OnLinkClicked (TMP_LinkInfo linkInfo)
@@ -159,10 +159,11 @@ namespace Naninovel.UI
                 var rubyValue = match.Groups[1].ToString();
                 var baseText = match.Groups[2].ToString();
 
-                var baseTextWidth = GetPreferredValues(baseText).x;
-                var rubyTextWidth = GetPreferredValues(rubyValue).x * RubySizeScale;
-                var rubyTextOffset = baseTextWidth / 2f + rubyTextWidth / 2f;
-                var compensationOffset = (baseTextWidth - rubyTextWidth) / 2f;
+                var margin = ((m_margin.x > 0 ? m_margin.x : 0) + (m_margin.z > 0 ? m_margin.z : 0)) / 2f;
+                var baseTextWidth = GetPreferredValues(baseText).x - margin;
+                var rubyTextWidth = GetPreferredValues(rubyValue).x * RubySizeScale - margin;
+                var rubyTextOffset = (baseTextWidth + rubyTextWidth - margin) / 2f;
+                var compensationOffset = (baseTextWidth - rubyTextWidth - margin) / 2f;
                 var replace = $"<space={compensationOffset}><voffset={RubyVerticalOffset}><size={RubySizeScale * 100f}%>{rubyValue}</size></voffset><space=-{rubyTextOffset}>{baseText}";
                 if (!AddRubyLineHeight) replace = "<line-height=100%>" + replace;
                 content = content.Replace(fullMatch, replace);

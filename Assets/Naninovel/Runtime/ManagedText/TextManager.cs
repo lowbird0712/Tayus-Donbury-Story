@@ -1,4 +1,4 @@
-// Copyright 2022 ReWaffle LLC. All rights reserved.
+// Copyright 2023 ReWaffle LLC. All rights reserved.
 
 using System;
 using System.Collections.Generic;
@@ -30,7 +30,7 @@ namespace Naninovel
         {
             documentLoader = Configuration.Loader.CreateLocalizableFor<TextAsset>(providersManager, localizationManager);
             localizationManager.AddChangeLocaleTask(ApplyManagedTextAsync);
-            return UniTask.CompletedTask;
+            return ReloadRecordsAsync();
         }
 
         public virtual void ResetService () { }
@@ -63,11 +63,7 @@ namespace Naninovel
 
         public virtual async UniTask ApplyManagedTextAsync ()
         {
-            records.Clear();
-            var documentResources = await documentLoader.LoadAndHoldAllAsync(this);
-            foreach (var resource in documentResources)
-                if (resource.Valid) records.UnionWith(ParseManagedText(resource));
-                else Debug.LogWarning($"Failed to load `{resource.Path}` managed text document.");
+            await ReloadRecordsAsync();
             foreach (var record in records)
                 ApplyRecord(record);
         }
@@ -86,8 +82,17 @@ namespace Naninovel
             if (type is null) return;
             var fieldName = record.Key.GetAfter(".") ?? record.Key;
             var fieldInfo = type.GetField(fieldName, ManagedTextUtils.ManagedFieldBindings);
-            if (fieldInfo is null) Debug.LogWarning($"Failed to apply managed text record value to '{type.FullName}.{fieldName}' field.");
+            if (fieldInfo is null) Engine.Warn($"Failed to apply managed text record value to '{type.FullName}.{fieldName}' field.");
             else fieldInfo.SetValue(null, record.Value);
+        }
+
+        protected virtual async UniTask ReloadRecordsAsync ()
+        {
+            records.Clear();
+            var documentResources = await documentLoader.LoadAndHoldAllAsync(this);
+            foreach (var resource in documentResources)
+                if (resource.Valid) records.UnionWith(ParseManagedText(resource));
+                else Engine.Warn($"Failed to load `{resource.Path}` managed text document.");
         }
     }
 }

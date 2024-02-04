@@ -1,4 +1,4 @@
-// Copyright 2022 ReWaffle LLC. All rights reserved.
+// Copyright 2023 ReWaffle LLC. All rights reserved.
 
 using System;
 using System.Collections.Generic;
@@ -33,17 +33,21 @@ namespace Naninovel
 
         private readonly UnlockablesMap unlockablesMap = new UnlockablesMap();
         private readonly IResourceProviderManager providerManager;
+        private readonly ITextManager textManager;
 
-        public UnlockableManager (UnlockablesConfiguration config, IResourceProviderManager providerManager)
+        public UnlockableManager (UnlockablesConfiguration config,
+            IResourceProviderManager providerManager, ITextManager textManager)
         {
             Configuration = config;
             this.providerManager = providerManager;
+            this.textManager = textManager;
         }
 
         public virtual async UniTask InitializeServiceAsync ()
         {
-            var loader = Configuration.Loader.CreateFor<GameObject>(providerManager);
-            foreach (var id in await loader.LocateAsync())
+            foreach (var id in await LocateUnlockableResources())
+                unlockablesMap[id] = false;
+            foreach (var id in GetAllTips())
                 unlockablesMap[id] = false;
         }
 
@@ -103,6 +107,18 @@ namespace Naninovel
         {
             foreach (var itemId in unlockablesMap.Keys.ToArray())
                 LockItem(itemId);
+        }
+
+        protected virtual UniTask<IReadOnlyCollection<string>> LocateUnlockableResources ()
+        {
+            var loader = Configuration.Loader.CreateFor<GameObject>(providerManager);
+            return loader.LocateAsync();
+        }
+
+        protected virtual IReadOnlyCollection<string> GetAllTips ()
+        {
+            return textManager.GetAllRecords(UI.TipsPanel.DefaultManagedTextCategory)
+                .Select(r => $"{UI.TipsPanel.DefaultUnlockableIdPrefix}/{r.Key}").ToArray();
         }
     }
 }

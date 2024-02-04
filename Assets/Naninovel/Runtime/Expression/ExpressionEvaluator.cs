@@ -1,4 +1,4 @@
-// Copyright 2022 ReWaffle LLC. All rights reserved.
+// Copyright 2023 ReWaffle LLC. All rights reserved.
 
 using Naninovel.NCalc;
 using System;
@@ -88,14 +88,14 @@ namespace Naninovel
                 var textManager = Engine.GetService<ITextManager>();
                 var managedTextValue = textManager.GetRecordValue(name, ManagedTextScriptCategory);
                 if (string.IsNullOrEmpty(managedTextValue))
-                    Debug.LogWarning($"Failed to find a managed text value of `{name}`. Make sure the corresponding record exists in a `{ManagedTextScriptCategory}` managed text document.");
+                    Engine.Warn($"Failed to find a managed text value of `{name}`. Make sure the corresponding record exists in a `{ManagedTextScriptCategory}` managed text document.");
                 args.Result = managedTextValue;
                 return;
             }
 
             var variableManager = Engine.GetService<ICustomVariableManager>();
             if (!variableManager.VariableExists(name))
-                Debug.LogWarning($"Custom variable `{name}` doesn't exist, but its value is requested in a script expression; this could lead to evaluation errors. Make sure to initialize variables with `@set` command or via `Custom Variables` configuration menu before using them.");
+                Engine.Warn($"Custom variable `{name}` doesn't exist, but its value is requested in a script expression; this could lead to evaluation errors. Make sure to initialize variables with `@set` command or via `Custom Variables` configuration menu before using them.");
             var strValue = variableManager.GetVariableValue(name) ?? string.Empty;
             args.Result = CustomVariablesConfiguration.ParseVariableValue(strValue);
         }

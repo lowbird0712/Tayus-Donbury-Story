@@ -1,7 +1,6 @@
-// Copyright 2022 ReWaffle LLC. All rights reserved.
+// Copyright 2023 ReWaffle LLC. All rights reserved.
 
 using UnityEditor;
-using UnityEngine;
 
 namespace Naninovel
 {
@@ -57,7 +56,7 @@ namespace Naninovel
             #if ADDRESSABLES_AVAILABLE
             if (config.UseAddressables) return new AddressableBuilder(config);
             #endif
-            Debug.Log("Consider installing Addressable Asset System and enabling `Use Addressables` in Naninovel's `Resource Provider` configuration menu. When the system is not available, all the assets assigned as Naninovel resources and not stored in `Resources` folders will be copied and re-imported when building the player, which could significantly increase build time. Check https://naninovel.com/guide/resource-providers.html#addressable for more info.");
+            Engine.Log("Consider installing Addressable Asset System and enabling `Use Addressables` in Naninovel's `Resource Provider` configuration menu. When the system is not available, all the assets assigned as Naninovel resources and not stored in `Resources` folders will be copied and re-imported when building the player, which could significantly increase build time. Check https://naninovel.com/guide/resource-providers.html#addressable for more info.");
             return new MockAddressableBuilder();
         }
     }

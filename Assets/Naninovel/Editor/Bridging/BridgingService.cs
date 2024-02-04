@@ -1,4 +1,4 @@
-// Copyright 2022 ReWaffle LLC. All rights reserved.
+// Copyright 2023 ReWaffle LLC. All rights reserved.
 
 using System;
 using System.IO;
@@ -20,7 +20,7 @@ namespace Naninovel
         {
             metadataFilePath = Path.Combine(PackagePath.GeneratedDataPath, "Metadata.xml");
             server = new Server($"{Application.productName} (Unity)", new BridgingListener());
-            server.OnClientException += (e, _) => Debug.LogError($"Bridging: {e.Message}");
+            server.OnClientException += (e, _) => Engine.Err($"Bridging: {e.Message}");
             server.OnClientConnected += c => c.Send(new UpdateMetadata { Metadata = LoadCachedMetadata() });
             server.Subscribe<GotoRequest>(HandleGotoRequest);
         }

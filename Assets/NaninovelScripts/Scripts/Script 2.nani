@@ -1,0 +1,42 @@
+@set localizedJP=false
+@back ForestDay
+@bgm Campfire
+(미니모리 마을의 들판.)
+(언제나처럼 지금의 미니모리 들판에는 노을이 지어 있고, 잔잔한 바람이 불어온다.)
+@char Tayu.Default pos:35,0 wait:false
+@char Bear.Default pos:65,0
+Bear: 이제 며칠 뒤면 여기랑도 이별이네!
+Tayu: 그러게.. 시간이 정말 빠르다.
+Bear: 응.
+Bear: 어릴 때부터 살아온 미니모리를 처음 떠나는 건데 아쉬운 마음은 없어?
+Tayu.Serious: ...
+Tayu: 언젠가는 떠나야 된다고 생각했어.
+Bear: 동감이야.
+Bear: 좋은 경험은 자신의 성장에 밑거름이 되지. 
+Bear: 그리고 나는 인형이지만 이건 알 수 있어.
+Bear: 이곳 저곳을 둘이서 여행하면 재미있을 거야.
+Bear: 많이 구경하고, 연회에서 맛있는 것도 먹고..
+Tayu: ...
+Tayu.Smile: ..곰씨 말이 맞아!
+Tayu.Default: 기대된다.
+Bear.Serious: ...
+@hideChars wait:false
+@hide Dialogue
+@back ForestNight time:3
+@char Tayu.NightDefault pos:35,0 wait:false
+@char Bear.NightDefault pos:65,0
+Bear: 이것저것 준비하느라 피곤했지?
+Bear: 내일이면 출발이니까 타유 먼저 들어가서 자.
+Bear: 얼려 놓을 밥은 내가 마저 만들어 놓을게.
+Bear: 난 인형이니까 잠은 조금만 자도 괜찮아.
+Tayu: 고마워. 부탁할게.
+@hide Tayu
+@char Bear pos:50,0
+Bear: 내일 떠나야 되니까 오늘은 좀 서둘러야겠어.
+Bear: 보니까 카드를 넣는 <color=red>홈의 개수가 매 턴 하나씩 늘어나는 것</color> 같던데.
+Bear: <color=red>한 턴에 여러 개의 카드를 사용</color>하면 시간 절약이 되겠어.
+Bear.NightSerious: 흠..
+Bear: 오브젝트에 사용하는 카드는 전 턴에 <color=red>필요한 오브젝트가 미리 배치</color>된 것이 아니면 사용할 수가 없구나.
+Bear.NightDefault: 그래. 이런 식으로 하면 되겠다.
+Bear: 밤이 늦었으니 빨리 마무리 짓자.
+@cardgame

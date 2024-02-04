@@ -1,4 +1,4 @@
-// Copyright 2022 ReWaffle LLC. All rights reserved.
+// Copyright 2023 ReWaffle LLC. All rights reserved.
 
 using System.Collections.Generic;
 using Naninovel.Commands;
@@ -54,7 +54,7 @@ namespace Naninovel.FX
                     cameraComponent.PointOfFocus = obj.transform;
                 else
                 {
-                    Debug.LogWarning($"Failed to find game object with name `{focusObjectName}`; depth of field effect will use a default focus distance.");
+                    Engine.Warn($"Failed to find game object with name `{focusObjectName}`; depth of field effect will use a default focus distance.");
                     FocusDistance = defaultFocusDistance;
                 }
             }
@@ -133,7 +133,7 @@ namespace Naninovel.FX
                 var shader = Shader.Find("Naninovel/FX/DepthOfField");
                 if (!shader.isSupported || !SystemInfo.SupportsRenderTextureFormat(RenderTextureFormat.ARGBHalf))
                 {
-                    Debug.LogWarning("Naninovel's Depth Of Field is not supported on the current platform.");
+                    Engine.Warn("Naninovel's Depth Of Field is not supported on the current platform.");
                     return;
                 }
 

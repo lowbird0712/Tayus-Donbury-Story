@@ -1,4 +1,4 @@
-// Copyright 2022 ReWaffle LLC. All rights reserved.
+// Copyright 2023 ReWaffle LLC. All rights reserved.
 
 using System.Linq;
 using Naninovel.UI;
@@ -148,8 +148,12 @@ namespace Naninovel.Commands
 
             if (ShouldWaitForInput(metadata, asyncToken))
                 await WaitForInputAsync(printedText, asyncToken);
-            else if (ShouldAllowRollbackWhenInputNotAwaited(asyncToken))
-                Engine.GetService<IStateManager>()?.PeekRollbackStack()?.AllowPlayerRollback();
+            else
+            {
+                if (IsPlayingAutoVoice()) await WaitAutoVoiceAsync(asyncToken);
+                if (ShouldAllowRollbackWhenInputNotAwaited(asyncToken))
+                    Engine.GetService<IStateManager>()?.PeekRollbackStack()?.AllowPlayerRollback();
+            }
 
             if (metadata.AddToBacklog)
                 AddBacklog(printedText, appendBacklog);
@@ -273,18 +277,9 @@ namespace Naninovel.Commands
 
         protected virtual async UniTask WaitForInputAsync (string text, AsyncToken asyncToken)
         {
-            if (ScriptPlayer.AutoPlayActive) // Add delay per printed chars when in auto mode.
-            {
-                var baseDelay = Configuration.ScaleAutoWait ? PrinterManager.BaseAutoDelay * AssignedRevealSpeed : PrinterManager.BaseAutoDelay;
-                var autoPlayDelay = Mathf.Lerp(0, Configuration.MaxAutoWaitDelay, baseDelay) * text.Count(char.IsLetterOrDigit);
-                var waitUntilTime = Time.time + autoPlayDelay;
-                while ((Time.time < waitUntilTime || PlayingVoice()) && asyncToken.EnsureNotCanceledOrCompleted())
-                    await AsyncUtils.DelayFrameAsync(1);
-            }
-
+            if (ScriptPlayer.AutoPlayActive)
+                await WaitAutoPlayDelayAsync(text, asyncToken);
             ScriptPlayer.SetWaitingForInputEnabled(true);
-
-            bool PlayingVoice () => ShouldPlayAutoVoice() && AudioManager.GetPlayedVoicePath() == AutoVoicePath;
         }
 
         protected virtual void AddBacklog (string message, bool append)
@@ -294,6 +289,26 @@ namespace Naninovel.Commands
             var voiceClipName = AudioManager.VoiceLoader.IsLoaded(AutoVoicePath) ? AutoVoicePath : null;
             if (append) backlogUI.AppendMessage(message, voiceClipName, PlaybackSpot);
             else backlogUI.AddMessage(message, AssignedAuthorId, voiceClipName, PlaybackSpot);
+        }
+
+        protected virtual async UniTask WaitAutoVoiceAsync (AsyncToken asyncToken)
+        {
+            while (IsPlayingAutoVoice() && asyncToken.EnsureNotCanceledOrCompleted())
+                await AsyncUtils.WaitEndOfFrameAsync();
+        }
+
+        protected virtual async UniTask WaitAutoPlayDelayAsync (string text, AsyncToken asyncToken)
+        {
+            var baseDelay = Configuration.ScaleAutoWait ? PrinterManager.BaseAutoDelay * AssignedRevealSpeed : PrinterManager.BaseAutoDelay;
+            var autoPlayDelay = Mathf.Lerp(0, Configuration.MaxAutoWaitDelay, baseDelay) * text.Count(char.IsLetterOrDigit);
+            var waitUntilTime = Time.time + autoPlayDelay;
+            while ((Time.time < waitUntilTime || IsPlayingAutoVoice()) && asyncToken.EnsureNotCanceledOrCompleted())
+                await AsyncUtils.WaitEndOfFrameAsync();
+        }
+
+        protected virtual bool IsPlayingAutoVoice ()
+        {
+            return ShouldPlayAutoVoice() && AudioManager.GetPlayedVoicePath() == AutoVoicePath;
         }
     }
 }

@@ -1,4 +1,4 @@
-// Copyright 2022 ReWaffle LLC. All rights reserved.
+// Copyright 2023 ReWaffle LLC. All rights reserved.
 
 using System;
 using UnityEngine;
@@ -14,8 +14,9 @@ namespace Naninovel.UI
         private class OnTitleTextChangedEvent : UnityEvent<string> { }
 
         public override string Id => SlotNumber.ToString();
-        public int SlotNumber { get; private set; }
-        public GameStateMap State { get; private set; }
+        public virtual int SlotNumber { get; private set; }
+        public virtual GameStateMap State { get; private set; }
+        public virtual bool Empty => State == null;
 
         [ManagedText("DefaultUI")]
         protected static string EmptySlotLabel = "Empty";
@@ -36,11 +37,14 @@ namespace Naninovel.UI
         private Action<int> onClicked, onDeleteClicked;
         private ScriptableUIBehaviour deleteButtonBehaviour;
         private ISaveLoadUI saveLoadUI;
+        private ILocalizationManager l10n;
 
         public virtual void Initialize (Action<int> onClicked, Action<int> onDeleteClicked)
         {
             this.onClicked = onClicked;
             this.onDeleteClicked = onDeleteClicked;
+            l10n = Engine.GetService<ILocalizationManager>();
+            l10n.OnLocaleChanged += HandleLocaleChanged;
             saveLoadUI = Engine.GetService<IUIManager>().GetUI<ISaveLoadUI>();
             if (Engine.GetService<IInputManager>().GetDelete() is IInputSampler deleteInput)
                 deleteInput.OnStart += HandleDeleteInputActivated;
@@ -50,20 +54,8 @@ namespace Naninovel.UI
         {
             State = state;
             SlotNumber = slotNumber;
-
-            if (state is null)
-            {
-                DeleteButton.gameObject.SetActive(false);
-                SetTitleText(titleTemplate.Replace("{N}", SlotNumber.ToString()).Replace("{D}", EmptySlotLabel));
-                ThumbnailImage.texture = EmptySlotThumbnail;
-            }
-            else
-            {
-                DeleteButton.gameObject.SetActive(true);
-                var date = state.SaveDateTime.ToString(dateFormat);
-                SetTitleText(titleTemplate.Replace("{N}", SlotNumber.ToString()).Replace("{D}", date));
-                ThumbnailImage.texture = state.Thumbnail;
-            }
+            if (Empty) SetEmptyState(slotNumber);
+            else SetNonEmptyState(slotNumber, state);
         }
 
         public override void OnPointerEnter (PointerEventData eventData)
@@ -87,8 +79,7 @@ namespace Naninovel.UI
             base.Awake();
             this.AssertRequiredObjects(DeleteButton, ThumbnailImage);
 
-            if (!EmptySlotThumbnail)
-                emptySlotThumbnail = Texture2D.whiteTexture;
+            if (!EmptySlotThumbnail) emptySlotThumbnail = Texture2D.whiteTexture;
             DeleteButton.TryGetComponent<ScriptableUIBehaviour>(out deleteButtonBehaviour);
             DeleteButton.onClick.AddListener(HandleDeleteButtonClicked);
         }
@@ -98,6 +89,22 @@ namespace Naninovel.UI
             base.OnDestroy();
 
             DeleteButton.onClick.RemoveListener(HandleDeleteButtonClicked);
+            if (l10n != null) l10n.OnLocaleChanged -= HandleLocaleChanged;
+        }
+
+        protected virtual void SetEmptyState (int slotNumber)
+        {
+            DeleteButton.gameObject.SetActive(false);
+            SetTitleText(titleTemplate.Replace("{N}", slotNumber.ToString()).Replace("{D}", EmptySlotLabel));
+            ThumbnailImage.texture = EmptySlotThumbnail;
+        }
+
+        protected virtual void SetNonEmptyState (int slotNumber, GameStateMap state)
+        {
+            DeleteButton.gameObject.SetActive(true);
+            var date = state.SaveDateTime.ToString(dateFormat);
+            SetTitleText(titleTemplate.Replace("{N}", slotNumber.ToString()).Replace("{D}", date));
+            ThumbnailImage.texture = state.Thumbnail;
         }
 
         protected virtual void SetTitleText (string value)
@@ -120,6 +127,11 @@ namespace Naninovel.UI
         {
             if (saveLoadUI.Visible && gameObject.activeInHierarchy && Selected)
                 onDeleteClicked?.Invoke(SlotNumber);
+        }
+
+        protected virtual void HandleLocaleChanged (string _)
+        {
+            if (Empty) SetEmptyState(SlotNumber); // Update "Empty" label.
         }
     }
 }

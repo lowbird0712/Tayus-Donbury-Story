@@ -1,4 +1,4 @@
-// Copyright 2022 ReWaffle LLC. All rights reserved.
+// Copyright 2023 ReWaffle LLC. All rights reserved.
 
 using System;
 using System.Collections.Generic;
@@ -119,12 +119,12 @@ namespace Naninovel
         {
             if (ActorExists(actorId))
             {
-                Debug.LogWarning($"Actor '{actorId}' was requested to be added, but it already exists.");
+                Engine.Warn($"Actor '{actorId}' was requested to be added, but it already exists.");
                 return GetActor(actorId);
             }
 
-            if (pendingAddActorTasks.ContainsKey(actorId))
-                return await pendingAddActorTasks[actorId].Task;
+            if (pendingAddActorTasks.TryGetValue(actorId, out var task))
+                return await task.Task;
 
             pendingAddActorTasks[actorId] = new UniTaskCompletionSource<TActor>();
 
@@ -145,7 +145,7 @@ namespace Naninovel
         {
             if (string.IsNullOrWhiteSpace(actorId))
             {
-                Debug.LogWarning($"Can't add an actor with '{state}' state: actor name is undefined.");
+                Engine.Warn($"Can't add an actor with '{state}' state: actor name is undefined.");
                 return default;
             }
 

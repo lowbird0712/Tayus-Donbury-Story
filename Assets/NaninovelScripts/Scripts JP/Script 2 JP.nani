@@ -1,0 +1,42 @@
+@set localizedJP=true
+@back ForestDay
+@bgm Campfire
+(ミニモリ森村の平野.)
+(いつものように今のミニモリ平野には夕焼けがあり, 細やかな風が吹いて来る.)
+@char Tayu.Default pos:35,0 wait:false
+@char Bear.Default pos:65,0
+Bear: もう数日語でここともお別れだね!
+Tayu: そうだな.. 時間が本当に早いね.
+Bear: うん.
+Bear: 小さな頃から住んでいたミニモリから初めて離れるんだけど, 心残りはない?
+Tayu.Serious: ...
+Tayu: いつかは去るべきだと思っていたよ.
+Bear: 同感だ.
+Bear: いい経験は自分の成長に捨て石になる. 
+Bear: そして俺は人形だけど, これは分かってるよ.
+Bear: あっちこっちを二人で旅するときっと楽しいと思う.
+Bear: 沢山見て, 祭りで美味しいものも食べて..
+Tayu: ...
+Tayu.Smile: ..くまさんの言うとうりだね!
+Tayu.Default: 楽しみだね.
+Bear.Serious: ...
+@hideChars wait:false
+@hide Dialogue
+@back ForestNight time:3
+@char Tayu.NightDefault pos:35,0 wait:false
+@char Bear.NightDefault pos:65,0
+Bear: 色々の準備で疲れただろう?
+Bear: 明日で出発だから, たゆは先に寝てもいいよ.
+Bear: 残り分の凍らせる飯は俺が作っておくよ.
+Bear: 俺は人形だから睡眠は少しだけとっても大丈夫だよ.
+Tayu: ありがとう. 頼むよ.
+@hide Tayu
+@char Bear pos:50,0
+Bear: 明日行かないといけないから今日はちょっと急ぐか.
+Bear: 見てみると, カードの<color=red>入れ口の個数が毎ターン一つづつ増える</color>ようだったが.
+Bear: <color=red>1ターンに複数のカードを使う</color>と時間節約になりそう.
+Bear.NightSerious: ふん..
+Bear: オブジェクトに使うカードは<color=red>前のターンに必要なオブジェクトを先に配置</color>されていなければ使えないんだね.
+Bear.NightDefault: そうだ. こんなふうにすればいいかもね.
+Bear: 夜が遅いからさっさと終わらせよう.
+@cardgame

@@ -1,4 +1,4 @@
-// Copyright 2022 ReWaffle LLC. All rights reserved.
+// Copyright 2023 ReWaffle LLC. All rights reserved.
 
 #if !defined(KERNEL_SMALL) && !defined(KERNEL_MEDIUM) && \
     !defined(KERNEL_LARGE) && !defined(KERNEL_VERYLARGE)

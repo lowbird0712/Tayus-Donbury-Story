@@ -1,10 +1,9 @@
-// Copyright 2022 ReWaffle LLC. All rights reserved.
+// Copyright 2023 ReWaffle LLC. All rights reserved.
 
 using System;
 using System.Collections.Generic;
 using System.IO;
 using UnityEditor;
-using UnityEngine;
 
 namespace Naninovel
 {
@@ -63,12 +62,12 @@ namespace Naninovel
             var secondLine = (linesEnum.MoveNext() && linesEnum.MoveNext()) ? linesEnum.Current : null;
             linesEnum.Dispose(); // Release the file.
             if (!secondLine?.EqualsFast(AssetMenuItems.DefaultScriptContent.GetAfterFirst(Environment.NewLine)) ?? true) return;
-            
+
             // Don't add if another with the same name is already added.
             if (editorResources.Exists(name, configuration.Loader.PathPrefix, configuration.Loader.PathPrefix))
             {
-                Debug.LogError($"Failed to add `{name}` script: another script with the same name is already added. " +
-                               $"Either delete the existing script or use another name.");
+                Engine.Err($"Failed to add `{name}` script: another script with the same name is already added. " +
+                           $"Either delete the existing script or use another name.");
                 AssetDatabase.MoveAssetToTrash(assetPath);
                 return;
             }

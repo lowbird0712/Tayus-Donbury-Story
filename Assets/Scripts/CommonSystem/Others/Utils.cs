@@ -64,18 +64,30 @@ public class Utils : MonoBehaviour {
         }
     }
 
+    static void ScenePrepare(string _sceneName)
+    {
+        if (_sceneName == "MainScene")
+        {
+            MainGameMngScript.EventSystem.SetActive(true);
+            MainGameMngScript.MainSceneCanvas.SetActive(true);
+        }
+        else if (_sceneName == "NaninovelScene")
+            MainGameMngScript.EventSystem.SetActive(false);
+        else if (_sceneName == "CardGameScene")
+            MainGameMngScript.EventSystem.SetActive(true);
+    }
+
     static public IEnumerator LoadSceneCo(string _sceneName) {
         Inst.SetSceneCurtain(_sceneName);
         Inst.sceneCurtain.enabled = true;
         Inst.sceneCurtain.DOFade(1, sceneCurtainDotweenTime);
         yield return new WaitForSeconds(sceneCurtainDotweenTime);
         PastSceneClean();
+        ScenePrepare(_sceneName);
         SceneManager.LoadScene(_sceneName);
         SceneManager.sceneLoaded += SceneLoadingCompleted;
         while (!sceneLoadingCompleted)
             yield return null;
-        if (_sceneName == "MainScene")
-            MainGameMngScript.MainSceneCanvas.SetActive(true);
         sceneLoadingCompleted = false;
         Inst.sceneCurtain.DOFade(0, sceneCurtainDotweenTime);
         yield return new WaitForSeconds(sceneCurtainDotweenTime);

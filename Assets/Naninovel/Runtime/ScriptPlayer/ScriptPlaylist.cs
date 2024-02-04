@@ -1,4 +1,4 @@
-// Copyright 2022 ReWaffle LLC. All rights reserved.
+// Copyright 2023 ReWaffle LLC. All rights reserved.
 
 using System;
 using System.Collections.Generic;
@@ -153,7 +153,9 @@ namespace Naninovel
             foreach (var command in this)
             {
                 if (!command.ShouldExecute) continue;
-                if (config.ShouldWait(command)) await command.ExecuteAsync(asyncToken);
+                if (config.ShouldWait(command))
+                    try { await command.ExecuteAsync(asyncToken); }
+                    catch (AsyncOperationCanceledException) { }
                 else command.ExecuteAsync(asyncToken).Forget();
                 asyncToken.ThrowIfCanceled();
             }

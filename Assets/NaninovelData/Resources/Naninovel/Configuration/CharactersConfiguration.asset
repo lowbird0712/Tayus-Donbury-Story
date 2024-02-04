@@ -32,7 +32,7 @@ MonoBehaviour:
         Culture=neutral, PublicKeyToken=null
     guid: f16ae2c7-0e24-4e45-8064-3abcf001a4c8
     customData:
-      id: 0
+      rid: -2
     Pivot: {x: 0.5, y: 0}
     PixelsPerUnit: 100
     EnableDepthPass: 1
@@ -79,7 +79,7 @@ MonoBehaviour:
           Culture=neutral, PublicKeyToken=null
       guid: e7a3a3d1-159d-4570-b79a-74ab527a6716
       customData:
-        id: 0
+        rid: -2
       Pivot: {x: 0.5, y: 0.3}
       PixelsPerUnit: 143
       EnableDepthPass: 1
@@ -121,7 +121,7 @@ MonoBehaviour:
           Culture=neutral, PublicKeyToken=null
       guid: 80636c36-8dfd-406a-be27-7034e644b922
       customData:
-        id: 0
+        rid: -2
       Pivot: {x: 0.5, y: 0.1}
       PixelsPerUnit: 115
       EnableDepthPass: 1
@@ -144,7 +144,7 @@ MonoBehaviour:
       HighlightWhenSpeaking: 0
       HighlightCharacterCount: 0
       SpeakingPose: 
-      NotSpeakingPose: 
+      NotSpeakingPose: NotSpeaking
       PlaceOnTop: 1
       HighlightDuration: 0.35
       HighlightEasing: 1
@@ -162,6 +162,7 @@ MonoBehaviour:
       Culture=neutral, PublicKeyToken=null
   SharedPoses: []
   references:
-    version: 1
-    00000000:
+    version: 2
+    RefIds:
+    - rid: -2
       type: {class: , ns: , asm: }

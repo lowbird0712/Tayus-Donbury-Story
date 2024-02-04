@@ -1,4 +1,4 @@
-// Copyright 2022 ReWaffle LLC. All rights reserved.
+// Copyright 2023 ReWaffle LLC. All rights reserved.
 
 using System;
 using System.Collections.Generic;
@@ -45,7 +45,7 @@ namespace Naninovel.UI
 
         UniTask IManagedUI.ChangeVisibilityAsync (bool visible, float? duration, AsyncToken asyncToken)
         {
-            Debug.LogError("@showUI and @hideUI commands can't be used with choice handlers; use @show/hide commands instead");
+            Engine.Err("@showUI and @hideUI commands can't be used with choice handlers; use @show/hide commands instead");
             return UniTask.CompletedTask;
         }
 
@@ -145,12 +145,20 @@ namespace Naninovel.UI
             switch (FocusModeType)
             {
                 case FocusMode.Visibility:
-                    if (EventSystem.current)
-                        EventSystem.current.SetSelectedGameObject(button.gameObject);
+                    FocusButtonDelayed().Forget();
                     break;
                 case FocusMode.Navigation:
                     FocusOnNavigation = button.gameObject;
                     break;
+            }
+
+            async UniTaskVoid FocusButtonDelayed ()
+            {
+                // Delay focus to prevent button activation when submit key was pressed this frame
+                // (eg, when showing choices after user pressed enter to activate continue input)
+                await AsyncUtils.WaitEndOfFrameAsync();
+                if (this && button && EventSystem.current)
+                    EventSystem.current.SetSelectedGameObject(button.gameObject);
             }
         }
 

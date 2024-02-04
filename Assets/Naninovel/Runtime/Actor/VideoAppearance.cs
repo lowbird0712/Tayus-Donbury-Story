@@ -1,4 +1,4 @@
-// Copyright 2022 ReWaffle LLC. All rights reserved.
+// Copyright 2023 ReWaffle LLC. All rights reserved.
 
 using UnityEngine;
 using UnityEngine.Video;
@@ -24,7 +24,7 @@ namespace Naninovel
         {
             var source = Audio;
             var tween = new FloatTween(Audio.volume, value, time, v => source.volume = v);
-            await volumeTweener.RunAsync(tween, asyncToken, Video);
+            await volumeTweener.RunAsync(tween, asyncToken, Audio);
         }
     }
 }

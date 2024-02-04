@@ -18,11 +18,7 @@ Tayu: 몇 끼 분량을 만든 다음에 나눠서 상자 안에 얼려 놓을 �
 Tayu: 그렇게 하면 나중에 밥을 녹이기만 하면 바로 식사가 가능해져서 간편해.
 Tayu.NightSmile: 밥에 올릴 요리만 만들면 되니까 시간도 단축되서 좋아!
 Bear.NightDefault: 그렇군.
-@cardgame
-# EndCardGame
-@set localizedJP=false
-@back ForestNight
-@bgm Campfire
+@hideChars
 @char Tayu.NightDefault pos:35,0 wait:false
 @char Bear.NightDefault pos:65,0
 Tayu.NightDefault: 그런데 곰씨, 여러 개를 한번에 요리할 떄에는 주의할 점이 있어.
@@ -41,4 +37,6 @@ Bear: 그렇군..
 @char Bear.NightDefault pos:65,0
 Bear: 알겠어. 카운트다운을 잘 활용해서 턴 수를 절약하면 되는 거지?
 Tayu.NightSmile: 응, 곰씨라면 잘 할 수 있을 거야!
-@main
+@cardgame
+; # EndCardGame
+; @main

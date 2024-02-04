@@ -1,4 +1,4 @@
-// Copyright 2022 ReWaffle LLC. All rights reserved.
+// Copyright 2023 ReWaffle LLC. All rights reserved.
 
 // using System;
 // using System.IO;
@@ -41,7 +41,7 @@
 //                     if (!isCharacter && !isBackground) continue;
 //                     assetText = assetText.Replace(layeredBehaviourComponentGuid, isCharacter ? layeredCharacterComponentGuid : layeredBackgroundComponentGuid);
 //                     File.WriteAllText(assetPath, assetText);
-//                     Debug.Log($"Upgrader: Replaced `LayeredActorBehaviour` component on `{assetPath}`.");
+//                     Engine.Log($"Upgrader: Replaced `LayeredActorBehaviour` component on `{assetPath}`.");
 //                 }
 //             }
 //             finally { EditorUtility.ClearProgressBar(); }

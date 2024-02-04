@@ -1,4 +1,4 @@
-// Copyright 2022 ReWaffle LLC. All rights reserved.
+// Copyright 2023 ReWaffle LLC. All rights reserved.
 
 using System;
 using System.Collections.Generic;
@@ -42,7 +42,7 @@ namespace Naninovel.UI
         private class AuthorChangedEvent : UnityEvent<string> { }
 
         public override string PrintedText { get => RevealableText.Text; set => RevealableText.Text = value; }
-        public override string AuthorNameText { get => authorNamePanel ? authorNamePanel.Text : null; set => SetAuthorNameText(value); }
+        public override string AuthorNameText { get => AuthorNamePanel ? AuthorNamePanel.Text : null; set => SetAuthorNameText(value); }
         public override float RevealProgress { get => RevealableText.RevealProgress; set => SetRevealProgress(value); }
         public override string Appearance { get => GetActiveAppearance(); set => SetActiveAppearance(value); }
         public virtual IRevealableText RevealableText { get; private set; }
@@ -89,17 +89,17 @@ namespace Naninovel.UI
         {
             await base.InitializeAsync();
 
-            if (charsSfx != null && charsSfx.Count > 0)
+            if (CharsSfx != null && CharsSfx.Count > 0)
             {
                 var loadTasks = new List<UniTask>();
-                foreach (var charSfx in charsSfx)
+                foreach (var charSfx in CharsSfx)
                     if (!string.IsNullOrEmpty(charSfx.SfxName))
                         loadTasks.Add(audioManager.AudioLoader.LoadAndHoldAsync(charSfx.SfxName, this));
                 await UniTask.WhenAll(loadTasks);
             }
 
-            if (charsCommands != null && charsCommands.Count > 0)
-                foreach (var charsCommand in charsCommands)
+            if (CharsCommands != null && CharsCommands.Count > 0)
+                foreach (var charsCommand in CharsCommands)
                     if (!string.IsNullOrEmpty(charsCommand.CommandText))
                         charsCommand.Playlist = new ScriptPlaylist(Script.FromScriptText($"`{name}` printer `{charsCommand.Characters}` char command", charsCommand.CommandText));
         }
@@ -170,13 +170,13 @@ namespace Naninovel.UI
 
             RevealableText.TextColor = authorMeta.UseCharacterColor ? authorMeta.MessageColor : defaultMessageColor;
 
-            if (authorNamePanel)
-                authorNamePanel.TextColor = authorMeta.UseCharacterColor ? authorMeta.NameColor : defaultNameColor;
+            if (AuthorNamePanel)
+                AuthorNamePanel.TextColor = authorMeta.UseCharacterColor ? authorMeta.NameColor : defaultNameColor;
 
-            if (authorAvatarImage)
+            if (AuthorAvatarImage)
             {
                 var avatarTexture = CharacterManager.GetAvatarTextureFor(authorId);
-                authorAvatarImage.ChangeTextureAsync(avatarTexture).Forget();
+                AuthorAvatarImage.ChangeTextureAsync(avatarTexture).Forget();
             }
 
             onAuthorChanged?.Invoke(authorId);
@@ -188,10 +188,10 @@ namespace Naninovel.UI
             this.AssertRequiredObjects(inputIndicator);
 
             RevealableText = GetComponentInChildren<IRevealableText>();
-            Debug.Assert(RevealableText != null, $"IRevealableText component not found on {gameObject.name} or it's descendants.");
+            Debug.Assert(RevealableText != null, $"IRevealableText component not found on {gameObject.name} or its descendants.");
 
             defaultMessageColor = RevealableText.TextColor;
-            defaultNameColor = authorNamePanel ? authorNamePanel.TextColor : default;
+            defaultNameColor = AuthorNamePanel ? AuthorNamePanel.TextColor : default;
 
             if (inputIndicator.transform.IsChildOf(transform))
                 InputIndicator = inputIndicator.GetComponent<IInputIndicator>();
@@ -231,8 +231,8 @@ namespace Naninovel.UI
         {
             base.OnDestroy();
 
-            if (charsSfx != null && charsSfx.Count > 0)
-                foreach (var charSfx in charsSfx)
+            if (CharsSfx != null && CharsSfx.Count > 0)
+                foreach (var charSfx in CharsSfx)
                     if (!string.IsNullOrEmpty(charSfx.SfxName))
                         audioManager?.AudioLoader?.Release(charSfx.SfxName, this);
         }
@@ -247,8 +247,8 @@ namespace Naninovel.UI
         {
             base.HandleVisibilityChanged(visible);
 
-            if (!visible && authorAvatarImage && authorAvatarImage.isActiveAndEnabled)
-                authorAvatarImage.ChangeTextureAsync(null).Forget();
+            if (!visible && AuthorAvatarImage && AuthorAvatarImage.isActiveAndEnabled)
+                AuthorAvatarImage.ChangeTextureAsync(null).Forget();
         }
 
         protected virtual async void PlaceInputIndicatorOverText ()
@@ -259,14 +259,14 @@ namespace Naninovel.UI
             if (!ObjectUtils.IsValid(InputIndicator)) return;
             var lastRevelPos = RevealableText.GetLastRevealedCharPosition();
             if (float.IsNaN(lastRevelPos.x) || float.IsNaN(lastRevelPos.y)) return;
-            InputIndicator.RectTransform.position = lastRevelPos;
+            InputIndicator.RectTransform.position = new Vector3(lastRevelPos.x, lastRevelPos.y, InputIndicator.RectTransform.position.z);
         }
 
         protected virtual string GetActiveAppearance ()
         {
-            if (appearances is null || appearances.Count == 0)
+            if (Appearances is null || Appearances.Count == 0)
                 return DefaultAppearanceName;
-            foreach (var grp in appearances)
+            foreach (var grp in Appearances)
                 if (Mathf.Approximately(grp.alpha, 1f))
                     return grp.gameObject.name;
             return DefaultAppearanceName;
@@ -274,10 +274,10 @@ namespace Naninovel.UI
 
         protected virtual void SetActiveAppearance (string appearance)
         {
-            if (appearances is null || appearances.Count == 0 || !appearances.Any(g => g.gameObject.name == appearance))
+            if (Appearances is null || Appearances.Count == 0 || !Appearances.Any(g => g.gameObject.name == appearance))
                 return;
 
-            foreach (var grp in appearances)
+            foreach (var grp in Appearances)
                 grp.alpha = grp.gameObject.name == appearance ? 1 : 0;
         }
 
@@ -288,20 +288,20 @@ namespace Naninovel.UI
 
         protected virtual void SetAuthorNameText (string text)
         {
-            if (!authorNamePanel) return;
+            if (!AuthorNamePanel) return;
 
             var isActive = !string.IsNullOrWhiteSpace(text);
-            authorNamePanel.gameObject.SetActive(isActive);
+            AuthorNamePanel.gameObject.SetActive(isActive);
             if (!isActive) return;
 
-            authorNamePanel.Text = text;
+            AuthorNamePanel.Text = text;
         }
 
         protected virtual void HandleAvatarChanged (CharacterAvatarChangedArgs args)
         {
-            if (!authorAvatarImage || args.CharacterId != AuthorId) return;
+            if (!AuthorAvatarImage || args.CharacterId != AuthorId) return;
 
-            authorAvatarImage.ChangeTextureAsync(args.AvatarTexture).Forget();
+            AuthorAvatarImage.ChangeTextureAsync(args.AvatarTexture).Forget();
         }
 
         protected virtual async UniTask<int> WaitForCharsToRevealAsync (float start, float delay, AsyncToken asyncToken)
@@ -336,9 +336,9 @@ namespace Naninovel.UI
 
         protected virtual void PlayRevealSfxForChar (char character)
         {
-            if (charsSfx is null) return;
+            if (CharsSfx is null) return;
 
-            foreach (var chars in charsSfx)
+            foreach (var chars in CharsSfx)
                 if (ShouldPlay(chars))
                     audioManager.PlaySfxFast(chars.SfxName);
 
@@ -349,9 +349,9 @@ namespace Naninovel.UI
 
         protected virtual async UniTask ExecuteCommandForCharAsync (char character, AsyncToken asyncToken)
         {
-            if (charsCommands is null) return;
+            if (CharsCommands is null) return;
 
-            foreach (var chars in charsCommands)
+            foreach (var chars in CharsCommands)
                 if (ShouldExecute(chars))
                     await chars.Playlist.ExecuteAsync(asyncToken);
 

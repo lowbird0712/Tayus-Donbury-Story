@@ -607,28 +607,6 @@
             </summary>
             <param name="lineText">The script text line to parse.</param>
         </member>
-        <member name="T:Naninovel.Parsing.ScriptSerializer">
-            <summary>
-            Allows transforming parsed script line semantic models back to text form.
-            </summary>
-        </member>
-        <member name="M:Naninovel.Parsing.ScriptSerializer.Serialize(Naninovel.Parsing.IScriptLine)">
-            <summary>
-            Transforms provided script line semantic model back to text form.
-            </summary>
-        </member>
-        <member name="M:Naninovel.Parsing.ScriptSerializer.Serialize(System.Collections.Generic.IEnumerable{Naninovel.Parsing.IScriptLine})">
-            <summary>
-            Transforms provided script line semantic models back to text form.
-            </summary>
-        </member>
-        <member name="M:Naninovel.Parsing.ScriptSerializer.Serialize(System.Collections.Generic.IEnumerable{Naninovel.Parsing.IValueComponent},System.Boolean)">
-            <summary>
-            Transforms provided mixed value semantic model back to text form.
-            </summary>
-            <param name="value">The value to transform.</param>
-            <param name="wrap">Whether to wrap in quotes when whitespace is detected in plain text.</param>
-        </member>
         <member name="T:Naninovel.Parsing.Command">
             <summary>
             Represents an operation executed at script playback.
@@ -812,6 +790,40 @@
             <summary>
             The underlying text content.
             </summary>
+        </member>
+        <member name="T:Naninovel.Parsing.ListValueSerializer">
+            <summary>
+            Allows transforming list values parsed via
+            <see cref="T:Naninovel.Parsing.ListValueParser"/> back to semantic model.
+            </summary>
+        </member>
+        <member name="T:Naninovel.Parsing.NamedValueSerializer">
+            <summary>
+            Allows transforming named values parsed via
+            <see cref="T:Naninovel.Parsing.NamedValueParser"/> back to semantic model.
+            </summary>
+        </member>
+        <member name="T:Naninovel.Parsing.ScriptSerializer">
+            <summary>
+            Allows transforming parsed script line semantic models back to text form.
+            </summary>
+        </member>
+        <member name="M:Naninovel.Parsing.ScriptSerializer.Serialize(Naninovel.Parsing.IScriptLine)">
+            <summary>
+            Transforms provided script line semantic model back to text form.
+            </summary>
+        </member>
+        <member name="M:Naninovel.Parsing.ScriptSerializer.Serialize(System.Collections.Generic.IEnumerable{Naninovel.Parsing.IScriptLine})">
+            <summary>
+            Transforms provided script line semantic models back to text form.
+            </summary>
+        </member>
+        <member name="M:Naninovel.Parsing.ScriptSerializer.Serialize(System.Collections.Generic.IEnumerable{Naninovel.Parsing.IValueComponent},System.Boolean)">
+            <summary>
+            Transforms provided mixed value semantic model back to text form.
+            </summary>
+            <param name="value">The value to transform.</param>
+            <param name="wrap">Whether to wrap in quotes when whitespace is detected in plain text.</param>
         </member>
     </members>
 </doc>

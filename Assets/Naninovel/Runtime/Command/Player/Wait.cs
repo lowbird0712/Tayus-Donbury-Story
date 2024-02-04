@@ -1,4 +1,4 @@
-// Copyright 2022 ReWaffle LLC. All rights reserved.
+// Copyright 2023 ReWaffle LLC. All rights reserved.
 
 using System;
 using UnityEngine;
@@ -74,7 +74,7 @@ namespace Naninovel.Commands
             if (player.SkipActive) return;
 
             var startTime = Time.time;
-            while (Application.isPlaying && asyncToken.EnsureNotCanceledOrCompleted())
+            while (Application.isPlaying && !player.Synchronizing && asyncToken.EnsureNotCanceledOrCompleted())
             {
                 await AsyncUtils.WaitEndOfFrameAsync(asyncToken);
                 var waitedEnough = Time.time - startTime >= waitTime;

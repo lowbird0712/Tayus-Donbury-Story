@@ -1,4 +1,4 @@
-// Copyright 2022 ReWaffle LLC. All rights reserved.
+// Copyright 2023 ReWaffle LLC. All rights reserved.
 
 using System;
 using System.Collections.Generic;
@@ -17,12 +17,12 @@ namespace Naninovel
         [Serializable]
         public class GameState
         {
-            public bool ProcessInput = true;
+            public bool ProcessInput;
             public List<string> DisabledSamplers;
         }
 
         public virtual InputConfiguration Configuration { get; }
-        public virtual bool ProcessInput { get; set; } = true;
+        public virtual bool ProcessInput { get; set; }
 
         private readonly Dictionary<string, InputSampler> samplersMap = new Dictionary<string, InputSampler>(StringComparer.Ordinal);
         private readonly Dictionary<IManagedUI, string[]> blockingUIs = new Dictionary<IManagedUI, string[]>();

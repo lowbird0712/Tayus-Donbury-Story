@@ -1,4 +1,4 @@
-// Copyright 2022 ReWaffle LLC. All rights reserved.
+// Copyright 2023 ReWaffle LLC. All rights reserved.
 
 using UnityEngine;
 
@@ -76,16 +76,15 @@ namespace Naninovel
                 textureRenderer.RenderRectangle = actorMetadata.RenderRectangle;
                 return textureRenderer;
             }
-            else
-            {
-                var spriteRenderer = actorObject.AddComponent<TransitionalSpriteRenderer>();
-                var matchMode = actorMetadata is BackgroundMetadata backMeta ? backMeta.MatchMode : AspectMatchMode.Disable;
-                spriteRenderer.Initialize(actorMetadata.Pivot, actorMetadata.PixelsPerUnit, premultipliedAlpha, matchMode,
-                    actorMetadata.CustomTextureShader, actorMetadata.CustomSpriteShader);
-                spriteRenderer.DepthPassEnabled = actorMetadata.EnableDepthPass;
-                spriteRenderer.DepthAlphaCutoff = actorMetadata.DepthAlphaCutoff;
-                return spriteRenderer;
-            }
+            var spriteRenderer = actorObject.AddComponent<TransitionalSpriteRenderer>();
+            var (matchMode, matchRatio) = actorMetadata is BackgroundMetadata backMeta
+                ? (backMeta.MatchMode, backMeta.CustomMatchRatio)
+                : (AspectMatchMode.Disable, 0);
+            spriteRenderer.Initialize(actorMetadata.Pivot, actorMetadata.PixelsPerUnit, premultipliedAlpha, matchMode, matchRatio,
+                actorMetadata.CustomTextureShader, actorMetadata.CustomSpriteShader);
+            spriteRenderer.DepthPassEnabled = actorMetadata.EnableDepthPass;
+            spriteRenderer.DepthAlphaCutoff = actorMetadata.DepthAlphaCutoff;
+            return spriteRenderer;
         }
 
         /// <summary>

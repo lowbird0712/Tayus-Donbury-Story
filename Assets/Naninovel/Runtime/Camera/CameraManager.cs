@@ -1,4 +1,4 @@
-// Copyright 2022 ReWaffle LLC. All rights reserved.
+// Copyright 2023 ReWaffle LLC. All rights reserved.
 
 using System;
 using System.Collections.Generic;
@@ -176,18 +176,14 @@ namespace Naninovel
                 canvas.enabled = false;
 
             var initialRenderTexture = Camera.targetTexture;
-            Camera.targetTexture = thumbnailRenderTexture;
-            ForceTransitionalSpritesUpdate();
-            Camera.Render();
-            Camera.targetTexture = initialRenderTexture;
 
-            if (RenderUI && Configuration.UseUICamera)
-            {
-                initialRenderTexture = UICamera.targetTexture;
-                UICamera.targetTexture = thumbnailRenderTexture;
-                UICamera.Render();
-                UICamera.targetTexture = initialRenderTexture;
-            }
+            #if URP_AVAILABLE
+            CaptureUI();
+            CaptureMain();
+            #else
+            CaptureMain();
+            CaptureUI();
+            #endif
 
             var thumbnail = thumbnailRenderTexture.ToTexture2D();
 
@@ -199,13 +195,30 @@ namespace Naninovel
 
             return thumbnail;
 
-            void ForceTransitionalSpritesUpdate ()
+            void CaptureMain ()
             {
-                var updateMethod = typeof(TransitionalSpriteRenderer).GetMethod("Update", BindingFlags.NonPublic | BindingFlags.Instance);
-                if (updateMethod is null) throw new Error("Failed to locate `Update` method of transitional sprite renderer.");
-                var sprites = UnityEngine.Object.FindObjectsOfType<TransitionalSpriteRenderer>();
-                foreach (var sprite in sprites)
-                    updateMethod.Invoke(sprite, null);
+                Camera.targetTexture = thumbnailRenderTexture;
+                ForceTransitionalSpritesUpdate();
+                Camera.Render();
+                Camera.targetTexture = initialRenderTexture;
+
+                void ForceTransitionalSpritesUpdate ()
+                {
+                    var updateMethod = typeof(TransitionalSpriteRenderer).GetMethod("Update", BindingFlags.NonPublic | BindingFlags.Instance);
+                    if (updateMethod is null) throw new Error("Failed to locate `Update` method of transitional sprite renderer.");
+                    var sprites = UnityEngine.Object.FindObjectsOfType<TransitionalSpriteRenderer>();
+                    foreach (var sprite in sprites)
+                        updateMethod.Invoke(sprite, null);
+                }
+            }
+
+            void CaptureUI ()
+            {
+                if (!RenderUI || !Configuration.UseUICamera) return;
+                initialRenderTexture = UICamera.targetTexture;
+                UICamera.targetTexture = thumbnailRenderTexture;
+                UICamera.Render();
+                UICamera.targetTexture = initialRenderTexture;
             }
         }
 

@@ -1,4 +1,4 @@
-// Copyright 2022 ReWaffle LLC. All rights reserved.
+// Copyright 2023 ReWaffle LLC. All rights reserved.
 
 using System;
 using System.Collections.Generic;
@@ -170,7 +170,7 @@ namespace Naninovel
 
         private async void HandleLowMemoryAsync ()
         {
-            Debug.LogWarning("Forcing resource unloading due to out of memory.");
+            Engine.Warn("Forcing resource unloading due to out of memory.");
             await Resources.UnloadUnusedAssets();
         }
 

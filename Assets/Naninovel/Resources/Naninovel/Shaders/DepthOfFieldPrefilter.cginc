@@ -1,8 +1,8 @@
-// Copyright 2022 ReWaffle LLC. All rights reserved.
+// Copyright 2023 ReWaffle LLC. All rights reserved.
 
 #include "DepthOfFieldCommon.cginc"
 
-sampler2D_float _CameraDepthTexture;
+UNITY_DECLARE_DEPTH_TEXTURE(_CameraDepthTexture);
 
 // Camera parameters
 float _Distance;

@@ -1,4 +1,4 @@
-// Copyright 2022 ReWaffle LLC. All rights reserved.
+// Copyright 2023 ReWaffle LLC. All rights reserved.
 
 using System;
 using System.Collections.Generic;
@@ -137,7 +137,7 @@ namespace Naninovel
             {
                 var locateTask = LocateRunners[locateKey] as LocateResourcesRunner<T>;
                 if (locateTask is null) throw new Error($"Failed to wait for `{path}` resource location runner.");
-                await locateTask;
+                return await locateTask;
             }
 
             var locateRunner = CreateLocateResourcesRunner<T>(path);
@@ -155,7 +155,7 @@ namespace Naninovel
         {
             if (path is null) path = string.Empty;
 
-            if (LocatedFolders.ContainsKey(path)) return LocatedFolders[path];
+            if (LocatedFolders.TryGetValue(path, out var cached)) return cached;
 
             var locateKey = new Tuple<string, Type>(path, typeof(Folder));
 

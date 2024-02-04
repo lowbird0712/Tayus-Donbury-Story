@@ -1,4 +1,4 @@
-// Copyright 2022 ReWaffle LLC. All rights reserved.
+// Copyright 2023 ReWaffle LLC. All rights reserved.
 
 using System;
 
@@ -17,5 +17,9 @@ namespace Naninovel.UI
         /// <param name="onClick">Action to invoke when clicked/interacted.</param>
         /// <param name="allowedSamplers">List of the input samplers to allow while the panel is visible.</param>
         void Show (bool hideOnClick, Action onClick, params string[] allowedSamplers);
+        /// <summary>
+        /// Hides the panel, unblocking the UI interaction and input sampling.
+        /// </summary>
+        void Hide ();
     }
 }

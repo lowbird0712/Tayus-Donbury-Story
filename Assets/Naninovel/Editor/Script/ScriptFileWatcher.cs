@@ -1,4 +1,4 @@
-// Copyright 2022 ReWaffle LLC. All rights reserved.
+// Copyright 2023 ReWaffle LLC. All rights reserved.
 
 using System;
 using System.Collections.Concurrent;
@@ -125,7 +125,7 @@ namespace Naninovel
             }
             catch (Exception e)
             {
-                Debug.LogError($"Failed to stop script file watcher: {e.Message}");
+                Engine.Err($"Failed to stop script file watcher: {e.Message}");
             }
         }
     }

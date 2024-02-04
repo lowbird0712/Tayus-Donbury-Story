@@ -1,4 +1,4 @@
-// Copyright 2022 ReWaffle LLC. All rights reserved.
+// Copyright 2023 ReWaffle LLC. All rights reserved.
 
 using System;
 using System.Collections.Generic;
@@ -84,7 +84,7 @@ namespace Naninovel
         {
             assetPath = AssetDatabase.GUIDToAssetPath(assetGuid);
             if (!string.IsNullOrEmpty(assetPath)) return true;
-            Debug.LogWarning($"Failed to resolve `{resourcePath}` resource GUID. The resource won't be included to the build.");
+            Engine.Warn($"Failed to resolve `{resourcePath}` resource GUID. The resource won't be included to the build.");
             return false;
         }
 
@@ -92,7 +92,7 @@ namespace Naninovel
         {
             assetType = AssetDatabase.GetMainAssetTypeAtPath(assetPath);
             if (assetType != null) return true;
-            Debug.LogWarning($"Failed to evaluate type of `{assetPath}` asset. The asset won't be included to the build.");
+            Engine.Warn($"Failed to evaluate type of `{assetPath}` asset. The asset won't be included to the build.");
             return false;
         }
 

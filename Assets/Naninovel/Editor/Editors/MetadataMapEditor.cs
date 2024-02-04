@@ -1,4 +1,4 @@
-// Copyright 2022 ReWaffle LLC. All rights reserved.
+// Copyright 2023 ReWaffle LLC. All rights reserved.
 
 using System;
 using System.Collections.Generic;
@@ -124,8 +124,8 @@ namespace Naninovel
 
         private SerializedProperty GetIdPropertyAt (int index)
         {
-            if (idsCache.ContainsKey(index)) 
-                return idsCache[index];
+            if (idsCache.TryGetValue(index, out var cached)) 
+                return cached;
 
             var property = idsProperty.GetArrayElementAtIndexOrNull(index);
             idsCache[index] = property;
@@ -134,8 +134,8 @@ namespace Naninovel
 
         private SerializedProperty GetMetaPropertyAt (int index)
         {
-            if (metasCache.ContainsKey(index)) 
-                return metasCache[index];
+            if (metasCache.TryGetValue(index, out var cached)) 
+                return cached;
 
             var property = metasProperty.GetArrayElementAtIndexOrNull(index);
             metasCache[index] = property;

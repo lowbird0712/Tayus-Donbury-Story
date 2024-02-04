@@ -1,4 +1,4 @@
-// Copyright 2022 ReWaffle LLC. All rights reserved.
+// Copyright 2023 ReWaffle LLC. All rights reserved.
 
 using System;
 using System.Linq;
@@ -142,7 +142,7 @@ namespace Naninovel
         protected virtual async UniTask PreparePlayerAsync (AsyncToken asyncToken)
         {
             Player.Prepare();
-            while (!Player.isPrepared)
+            while (Playing && !Player.isPrepared)
                 await AsyncUtils.WaitEndOfFrameAsync(asyncToken);
         }
 
