@@ -10517,8 +10517,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sceneCurtain: {fileID: 1156822478}
   curtainList:
-  - {fileID: 21300000, guid: fbc715cad8c4d496cb4ca67fd28eeef2, type: 3}
-  - {fileID: 21300000, guid: fafaad43f10d34e11bcd2a80ab36f766, type: 3}
+  - {fileID: 21300000, guid: 189ebececea674a689e7d54f7254ed19, type: 3}
+  - {fileID: 21300000, guid: 8e6400803b2f4453c94b7b786673de26, type: 3}
 --- !u!1 &743717934
 GameObject:
   m_ObjectHideFlags: 0
