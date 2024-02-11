@@ -1,0 +1,86 @@
+@set localizedJP=true
+@back ForestDay
+@bgm Campfire
+(どんぐりの盛道。夕方。)
+(ミニモリから北方向に出るとすぐある道だ。)
+(周りには多くのどんぐり木がたくましく上に向かっている。)
+(森中の故に、風はもうちょっと力強く吹いている。)
+@char Bear.Mogumogu pos:65,0
+Bear: うん。。！
+@char Tayu.Smile pos:35,0
+Tayu: 美味しいでしょう？
+Bear: うん！うまい。
+Tayu: 沢山あるからゆっくり食べてていいよ！
+Tayu.Default: 周りが全部どんぐりの木だから、こんなのはいいね。
+Tayu: さあ、どんぐりをもうちょっと降ってあげるよ！
+(すりすり)
+Bear.Default: ありがとう。
+Bear: 。。。。。。
+Bear.Mogumogu: 。。。はっ！
+Tayu.Smile: ふふ。。
+Tayu.Serious: 。。。。。。
+Tayu.Default: 。。。くまさん。
+Bear: もぐもぐ。。。ゴックリ。。。！
+Bear.Default: 。。。うん？
+Tayu: いつも今のようだったらいいな。
+Bear.Serious: 。。。。。。
+Bear.Default: うん。これからの旅行も今日みたいに何の問題もないはずだから心配するな。
+Bear: たゆはこんなところで無駄な心配が多いよ。
+Tayu.Serious: 。。。。。。
+Bear: ところで、たゆ。
+Tayu.Default: うん？
+Bear: この飯てさ。なんでこんなにうまいだろ？
+Bear: ミニモリで食べてたものよりは味のレベルが一段階違うようだが。
+Tayu: あ、それはちょっと後で言ってあげるよ！
+@hideChars wait:false
+@hide Dialogue
+@back ForestNight time:3
+(時間がたち、どんぐり森にも夜が訪ねてきた。)
+(草むしの音とともに焚き火を燃やす音が静かに聞こえる。)
+@char Tayu.NightDefault pos:35,0 wait:false
+@char Bear.NightDefault pos:65,0
+Tayu: 今までカードを使って料理してきたでしょう？
+Bear: うん。箱の横の穴にカードを入れる感じだったよね。
+Tayu.NightSmile: そうだよ。ところでこのカード、裏面で使うのもできるよ！
+Bear.NightSerious: ほう。
+Tayu.NightDefault: カードを中心の方へドラッグしてから、<color=red>カードをタッチ</color>するとカードを繰り返すことができるよ。
+Tayu: そうしてから、裏面のカードを穴に入れて使うと。。。
+Tayu: こんなふうにそれぞれのカードによる<color=red>どんぐりカードが手札に追加</color>されるよ。
+Tayu: そして、どんぐりカードをまた裏面で使うとそのカードの<color=red>元のカード一枚がデッキに加えられて、カードを一枚</color>引くことになるよ。
+Bear.NightDefault: そうだな。
+Bear: で、これで得たカードたちは何が違う？ 
+Tayu: くまさん、さっき私が夕方に食べたご飯が何でこんなに美味しかったのかを教えてあげる、て言ったでしょう？
+Tayu: 配置されているめし釜を一回タッチしてみて！
+Bear: 分かった。
+Bear.NightSerious: 。。。この前に飯を炊いたより何かが増えたようだが。。。<color=red>どんぐり酒</color>？
+Tayu: うん。さっきご飯にどんぐりを降って食べたらご飯がより美味しくなったでしょう？
+Tayu: 実は、今回ご飯を炊く時には最初からどんぐりで作ったお酒を入れてたよ。
+Tayu.NightSmile: どんぐり酒はご飯を炊く時に入れるとお米の旨みを立たせる役割をしてくれるよ！
+Tayu: どんぐりをすってご飯の上に降っても美味しいけど、どんぐり酒を入れた方がより味のバランスがいいよ。
+Bear: 。。。。。。！
+Bear: そうだったのか。。
+Bear.NightDefault: どんぐり酒カードはどうすれば得られるか？
+Tayu.NightDefault: それはね。。。
+Tayu: <color=red>めし釜、米、火づける</color>カードを裏面で使ってそれぞれ<color=red>どんぐり釜、どんぐり、どんぐり焼き</color>カードに変えてから。
+Tayu: ご飯を炊くことと同じ方式で料理をするとデッキに<color=red>調味料</color>カードが三枚加えられるよ。
+Tayu: この調味料カードを使って食材を配置した時、周りに<color=red>必要な調味料がある調理道具があるとランダムに一つ</color>に変わって配置されるよ。
+Tayu.NightSmile: めし釜に必要な調味料はどんぐり酒一つのみだから調味料をめし釜の周りに配置すると必ずどんぐり酒に変わるようになるのよ！
+Tayu.NightDefault: そして、どんぐりカードを使用することで配置されるオブジェクトだちを<color=red>どんぐりオブジェクト</color>て言うけど、今は知っておくだけでいいよ。
+Bear: なるほど。。。
+@hideChars
+(時間がたち。。。夜はより深くある。)
+@char Bear.NightDefault pos:65,0
+Bear: ところでたゆちゃん、短い間に箱の使いにずいぶん慣れてきたね。
+Bear: おじいさんから箱をもらってからまだ一ヶ月も経ってなかったはずだけどさ。
+Bear: 料理知識もそうだし。
+Bear: たゆちゃんは習う速度が早いよね。出発前に頑張って準備したのかな。
+@char Tayu.NightDefault pos:35,0
+Tayu: 。。。難しいことではないよ。
+Tayu.NightSerious: そんなのは、、ちょっとだけ調べたらすぐ分かることができるから。。。
+Tayu: 。。。。。。
+Tayu.NightDefault: 。。。残りの冷凍用ご飯はくまさんが作ってくれる？
+Tayu: 私は周りで今後使うどんぐりをちょっと拾ってくるよ。
+Tayu.NightSmile: どんぐり酒と一緒にご飯炊くの、くまさんも一回やってみた方がいいよ！
+Bear: うん。暗いからあまり遠くまでは行かないで。
+Tayu: 分かった！
+@cardgame

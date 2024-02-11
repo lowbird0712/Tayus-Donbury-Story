@@ -1,0 +1,86 @@
+@set localizedJP=false
+@back ForestDay
+@bgm Campfire
+(도토리나무 숲길. 저녁.)
+(미니모리에서 북쪽으로 나가면 바로 있는 길이다.)
+(주변에는 많은 도토리 나무들이 우람하게 위로 뻗어 있다.)
+(숲속이어서 바람은 조금 더 힘차게 불고 있다.)
+@char Bear.Mogumogu pos:65,0
+Bear: 음..!
+@char Tayu.Smile pos:35,0
+Tayu: 맛있지?
+Bear: 음! 맛있어.
+Tayu: 많이 있으니까 천천히 먹어!
+Tayu.Default: 주변이 전부 도토리나무니까 이런 건 좋네.
+Tayu: 자, 여기 도토리 좀 더 뿌려 줄게!
+(사각사각)
+Bear.Default: 고마워.
+Bear: ......
+Bear.Mogumogu: ..합!
+Tayu.Smile: 헤헤..
+Tayu.Serious: ......
+Tayu.Default: ...곰씨.
+Bear: 우물우물.. 꿀꺽..!
+Bear.Default: ...응?
+Tayu: 항상 지금만 같았으면 좋겠다.
+Bear.Serious: ......
+Bear.Default: 응. 앞으로의 여행도 오늘 같이 별 문제 없을 거니까 걱정하지 마.
+Bear: 타유는 이런 곳에서 쓸데없이 걱정이 많더라.
+Tayu.Serious: ......
+Bear: 그나저나 타유.
+Tayu.Default: 응?
+Bear: 이 밥 말이야. 왜 이렇게 맛있는 걸까?
+Bear: 미니모리에서 먹었던 거랑은 맛의 레벨이 한 단계 다른 것 같은데.
+Tayu: 아, 그건 조금 이따가 말해줄게!
+@hideChars wait:false
+@hide Dialogue
+@back ForestNight time:3
+(시간이 흘러 도토리나무 숲에도 밤이 찾아왔다.)
+(풀벌레 소리와 모닥불을 태우는 소리가 고요하게 들린다.)
+@char Tayu.NightDefault pos:35,0 wait:false
+@char Bear.NightDefault pos:65,0
+Tayu: 지금까지 카드를 통해 요리를 해 왔잖아?
+Bear: 응. 상자 옆의 홈에 카드를 넣는 식으로 했었지.
+Tayu.NightSmile: 맞아. 그런데 이 카드, 뒷면으로 쓰는 거도 가능해!
+Bear.NightSerious: 호오.
+Tayu.NightDefault: 카드를 중심으로 드래그 해 놓은 후 <color=red>카드를 터치</color>하면 카드를 뒤집을 수 있어.
+Tayu: 그런 뒤에 뒷면인 카드를 홈에 넣어 사용하면...
+Tayu: 이렇게 각각의 카드에 따른 <color=red>도토리 카드가 패에 추가</color>되게 돼.
+Tayu: 그리고 도토리 카드를 뒷면으로 다시 사용하게 되면 그 카드의 <color=red>원래 카드 한 장이 덱에 섞여 들어가고 카드를 한 장</color> 뽑게 돼.
+Bear.NightDefault: 그렇구나.
+Bear: 근데 이렇게 얻은 카드들은 어떤 게 다른 거지? 
+Tayu: 곰씨, 아까 내가 저녁에 먹은 밥이 왜 그렇게 맛있었는지 알려주겠다 했잖아?
+Tayu: 배치되어 있는 밥솥을 한 번 터치해 봐!
+Bear: 알겠어.
+Bear.NightSerious: ...저번에 밥을 만들 때보다 무언가 늘어간 거 같은데... <color=red>도토리주</color>?
+Tayu: 응. 아까 밥에 도토리를 뿌려 먹었더니 밥이 맛있어졌었잖아?
+Tayu: 사실 이번에 밥을 지을 때에는 아예 처음부터 도토리로 빚은 술을 넣었었어.
+Tayu.NightSmile: 도토리주는 밥 지을 때 넣으면 쌀의 감칠맛을 부각시키는 역할을 해 줘!
+Tayu: 도토리를 갈아서 밥 위에 뿌려도 맛있지만, 도토리주를 넣는 쪽이 맛의 밸런스가 더 좋아.
+Bear: ......!
+Bear: 그런 거였군...
+Bear.NightDefault: 도토리주 카드는 어떻게 해야 얻을 수 있지?
+Tayu.NightDefault: 그건 말이지...
+Tayu: <color=red>밥솥, 쌀, 불지피기</color> 카드를 뒷면으로 써서 각각 <color=red>도토리 솥, 도토리, 도토리 굽기</color> 카드로 바꾼 뒤에.
+Tayu: 밥을 짓는 것과 같은 방식으로 요리를 마치면 덱에 <color=red>조미료</color> 카드가 3장 섞여 들어가.
+Tayu: 이 조미료 카드를 사용해 재료를 배치했을 때 근처에 <color=red>필요한 조미료가 있는 도구가 있으면 랜덤하게 하나</color>로 바뀌어 배치되어.
+Tayu.NightSmile: 밥솥에 필요한 조미료는 도토리주 하나니까 조미료를 밥솥 근처에 배치하면 무조건 도토리주로 바뀌게 되는 거지!
+Tayu.NightDefault: 그리고 도토리 카드를 사용하는 것으로 배치되는 오브젝트들을 <color=red>도토리 오브젝트</color>라고 하는데 지금은 알고만 있어도 돼.
+Bear: 그렇군...
+@hideChars
+(시간이 흐르고... 밤은 더욱 깊어진다.)
+@char Bear.NightDefault pos:65,0
+Bear: 그나저나 타유, 짧은 사이에 상자의 사용이 꽤나 익숙해진 것 같아.
+Bear: 아저씨께 상자를 받은 지 아직 한 달도 되지 않았을텐데.
+Bear: 요리 지식도 그렇고.
+Bear: 타유는 배우는 속도가 빠르구나. 출발 전에 열심히 준비한 모양이야.
+@char Tayu.NightDefault pos:35,0
+Tayu: ...어려운 건 아니야.
+Tayu.NightSerious: 그런 것들은.. 조금만 찾아보면 금방 알 수 있으니까...
+Tayu: ......
+Tayu.NightDefault: ...나머지 냉동할 밥들은 곰씨가 만들어 줄 수 있어?
+Tayu: 나는 근처에서 앞으로 쓸 도토리들 좀 주워 올게.
+Tayu.NightSmile: 도토리주랑 같이 밥 짓는거, 곰씨도 한 번 해 보면 좋아!
+Bear: 응. 어두우니까 너무 멀리 가지는 말고.
+Tayu: 알았어!
+@cardgame
