@@ -13,10 +13,16 @@ public class MainGameMngScript : MonoBehaviour {
     [SerializeField] GameObject             travelNote;
     [SerializeField] GameObject             recipeBook;
     [SerializeField] GameObject             tayuBox;
-    [SerializeField] GameObject             linBox;
+    [SerializeField] GameObject             inventory;
     [SerializeField] GameObject             campingShop;
+    [SerializeField] GameObject             calanderButton;
+    [SerializeField] GameObject             travelNoteButton;
+    [SerializeField] GameObject             recipeBookButton;
+    [SerializeField] GameObject             tayuBoxButton;
+    [SerializeField] GameObject             inventoryButton;
+    [SerializeField] GameObject             campingShopButton;
 
-    bool                                    isUIActive;
+    bool isUIActive;
     bool                                    isPractice = false;
     ReactiveProperty<int>                   dotoriNum = new ReactiveProperty<int>();
     int                                     stageNum = -1;
@@ -58,17 +64,19 @@ public class MainGameMngScript : MonoBehaviour {
         Inst.travelNote.SetActive(false);
         Inst.recipeBook.SetActive(false);
         Inst.tayuBox.SetActive(false);
-        Inst.linBox.SetActive(false);
+        Inst.inventory.SetActive(false);
         Inst.campingShop.SetActive(false);
     }
 
     public void CalanderButton() {
         if (!isUIActive) {
             isUIActive = true;
+            calanderButton.transform.localPosition += Vector3.left * 50;
             calander.SetActive(true);
         }
         else if (calander.activeSelf) {
             isUIActive = false;
+            calanderButton.transform.localPosition -= Vector3.left * 50;
             calander.SetActive(false);
         }
     }
@@ -76,10 +84,12 @@ public class MainGameMngScript : MonoBehaviour {
     public void TravelNoteButton() {
         if (!isUIActive) {
             isUIActive = true;
+            travelNoteButton.transform.localPosition += Vector3.left * 50;
             travelNote.SetActive(true);
         }
         else if (travelNote.activeSelf) {
             isUIActive = false;
+            travelNoteButton.transform.localPosition -= Vector3.left * 50;
             travelNote.SetActive(false);
         }
     }
@@ -87,10 +97,12 @@ public class MainGameMngScript : MonoBehaviour {
     public void RecipeBookButton() {
         if (!isUIActive) {
             isUIActive = true;
+            recipeBookButton.transform.localPosition += Vector3.left * 50;
             recipeBook.SetActive(true);
         }
         else if (recipeBook.activeSelf) {
             isUIActive = false;
+            recipeBookButton.transform.localPosition -= Vector3.left * 50;
             recipeBook.SetActive(false);
         }
     }
@@ -98,33 +110,39 @@ public class MainGameMngScript : MonoBehaviour {
     public void TayuBoxButton() {
         if (!isUIActive) {
             isUIActive = true;
+            tayuBoxButton.transform.localPosition += Vector3.left * 50;
             tayuBox.SetActive(true);
         }
         else if (tayuBox.activeSelf) {
             isUIActive = false;
+            tayuBoxButton.transform.localPosition -= Vector3.left * 50;
             tayuBox.SetActive(false);
         }
     }
 
-    public void LinBoxButton() {
+    public void InventoryButton() {
         if (!isUIActive) {
             isUIActive = true;
             LinBoxMngScript.Init();
-            linBox.SetActive(true);
+            inventoryButton.transform.localPosition += Vector3.left * 50;
+            inventory.SetActive(true);
         }
-        else if (linBox.activeSelf) {
+        else if (inventory.activeSelf) {
             isUIActive = false;
-            linBox.SetActive(false);
+            inventoryButton.transform.localPosition -= Vector3.left * 50;
+            inventory.SetActive(false);
         }
     }
 
     public void CampingShopButton() {
         if (!isUIActive) {
             isUIActive = true;
+            campingShopButton.transform.localPosition += Vector3.left * 50;
             campingShop.SetActive(true);
         }
         else if (campingShop.activeSelf) {
             isUIActive = false;
+            campingShopButton.transform.localPosition -= Vector3.left * 50;
             campingShop.SetActive(false);
         }
     }

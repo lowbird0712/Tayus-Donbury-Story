@@ -187,9 +187,9 @@ MonoBehaviour:
     - name: Script 3
       pathPrefix: Scripts
       guid: 554d59dee9c5b46038dfd0670de51812
-    - name: 
+    - name: Script 3 JP
       pathPrefix: Scripts
-      guid: 
+      guid: a9875c808e8304577a36c0d8cee4eaee
   - Id: Characters/e7a3a3d1-159d-4570-b79a-74ab527a6716
     Resources:
     - name: Tayu
