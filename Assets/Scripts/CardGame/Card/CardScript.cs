@@ -15,6 +15,7 @@ public class CardScript : DotweenMovingScript {
     [SerializeField] Sprite         cardTypeNormalSprite;
     [SerializeField] Sprite         cardTypeDotoriSprite;
     [SerializeField] Sprite         dotoriSprite;
+    [SerializeField] GameObject     notUsableImage;
 
     string                          cardName;
     string                          tmpCardName;
@@ -89,6 +90,8 @@ public class CardScript : DotweenMovingScript {
         dotoriRenderer.enabled = false;
         nameTMP.enabled = false;
         neededDotoriNumTMP.enabled = false;
+        if (!CardMngScript.HasPutCardSpace())
+            notUsableImage.SetActive(true);
     }
 
     public void ChangeToCard() {
@@ -102,5 +105,6 @@ public class CardScript : DotweenMovingScript {
         dotoriRenderer.enabled = true;
         nameTMP.enabled = true;
         neededDotoriNumTMP.enabled = true;
+        notUsableImage.SetActive(false);
     }
 }

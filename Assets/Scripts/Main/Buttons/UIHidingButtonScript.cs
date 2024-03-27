@@ -9,7 +9,8 @@ public class UIHidingButtonScript : SFXButtonScript {
     public void UIHidingButtonClicked() {
         if (!settingButton)
             settingButton = GameObject.Find("Setting Button");
-        MainGameMngScript.CloseEveryUIs();
+        if (hidingUIs.activeSelf)
+            MainGameMngScript.CloseEveryUIs();
         hidingUIs.SetActive(!hidingUIs.activeSelf);
         settingButton.SetActive(!settingButton.activeSelf);
     }

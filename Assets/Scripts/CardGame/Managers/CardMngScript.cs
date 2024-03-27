@@ -52,7 +52,6 @@ public class CardMngScript : MonoBehaviour {
     bool                                cardPuttingUp;
     float                               oneCardPutWidth;
     float                               oneCardPutX;
-    //int                                 cardPutCount;
 
     public static SO_CardItemScript     CardItemSO => Inst.SO_cardItem;
     public static CardScript            EmptyCard => Inst.emptyCard;
@@ -286,6 +285,14 @@ public class CardMngScript : MonoBehaviour {
 
         putCards.Clear();
         CardGameMngScript.IsCoroutine[0] = false;
+    }
+
+    public static bool HasPutCardSpace()
+    {
+        if (DraggingCard.IsFront == true && !CardItemSO.GetUsable(DraggingCard.CardName))
+            return false;
+        else
+            return true;
     }
 
     void SetupCardItemSO() {

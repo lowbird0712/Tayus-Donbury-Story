@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Networking;
+using TMPro;
 
 [Serializable]
 public class LanguageData {
@@ -13,6 +14,9 @@ public class LanguageData {
 
 public class LocalizeManager : MonoBehaviour
 {
+    [SerializeField] public TextMeshProUGUI testText1;
+    [SerializeField] public TextMeshProUGUI testText2;
+
     static public LocalizeManager           Inst { get; set; } = null;
 
     [Header("Manager Classes")]
@@ -33,7 +37,6 @@ public class LocalizeManager : MonoBehaviour
 
     private void Awake() {
         Inst = this;
-        GetLocalizingSheet();
         InitLanguage();
     }
 
