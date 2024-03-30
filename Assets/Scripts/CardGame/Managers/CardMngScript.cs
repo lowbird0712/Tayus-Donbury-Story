@@ -287,13 +287,7 @@ public class CardMngScript : MonoBehaviour {
         CardGameMngScript.IsCoroutine[0] = false;
     }
 
-    public static bool HasPutCardSpace()
-    {
-        if (DraggingCard.IsFront == true && !CardItemSO.GetUsable(DraggingCard.CardName))
-            return false;
-        else
-            return true;
-    }
+    public static bool HasPutCardSpace() => !(DraggingCard.IsFront == true && !CardItemSO.GetUsable(DraggingCard.CardName));
 
     void SetupCardItemSO() {
         SO_cardItem.SetUp(deckName);
