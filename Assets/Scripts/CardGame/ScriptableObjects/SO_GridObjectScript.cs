@@ -28,27 +28,42 @@ public class CurrentObjectItem {
         // 처음부터 쓸 수 있는 스펠을 세팅
     }
 
-    public void CurrentSpellNameUpdate() {
+    public bool CurrentSpellNameUpdate() {
         ObjectItem          objectItem = GridObjectMngScript.GridObjectSO.GetObjectItem(objectName);
         ObjectSubItemTool   tool = objectItem.tool;
-        bool                neededObjectFlag = false;
-        foreach (var spellName in objectItem.usableSpellNames) {
-            if (tool.neededSpiceNames != null && tool.neededSpiceNames.Count != currentSpiceNames.Count)
-                continue;
-            if (tool.neededObjectNames != null) {
-                for (int i = 0; i < tool.neededObjectNames.Count; i++) {
-                    if (tool.neededObjectNums[i] != currentObjectNums[i]) {
-                        neededObjectFlag = true;
-                        break;
-                    }
-                }
-                if (neededObjectFlag) {
-                    neededObjectFlag = false;
-                    continue;
-                }
+        //bool                neededObjectFlag = false;
+
+        if (tool.neededSpiceNames != null && tool.neededSpiceNames.Count != currentSpiceNames.Count)
+            return false;
+        if (tool.neededObjectNames != null)
+        {
+            for (int i = 0; i < tool.neededObjectNames.Count; i++)
+            {
+                if (tool.neededObjectNums[i] != currentObjectNums[i])
+                    return false;
             }
-            currentSpellNames.Add(spellName);
         }
+        foreach (var spellName in objectItem.usableSpellNames)
+            currentSpellNames.Add(spellName);
+        return true;
+
+        //foreach (var spellName in objectItem.usableSpellNames) {
+        //    if (tool.neededSpiceNames != null && tool.neededSpiceNames.Count != currentSpiceNames.Count)
+        //        continue;
+        //    if (tool.neededObjectNames != null) {
+        //        for (int i = 0; i < tool.neededObjectNames.Count; i++) {
+        //            if (tool.neededObjectNums[i] != currentObjectNums[i]) {
+        //                neededObjectFlag = true;
+        //                break;
+        //            }
+        //        }
+        //        if (neededObjectFlag) {
+        //            neededObjectFlag = false;
+        //            continue;
+        //        }
+        //    }
+        //    currentSpellNames.Add(spellName);
+        //}
     }
 }
 

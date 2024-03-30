@@ -5,6 +5,7 @@ using TMPro;
 
 public class GridObjectScript : MonoBehaviour {
     [SerializeField] int[]          position = new int[2];
+    [SerializeField] GameObject     usableSpellObject;
     [SerializeField] Animator       effectAnimator;     //// 별도의 오브젝트로 분리
     [SerializeField] Animator       objectAnimator;
     [SerializeField] Transform      objectPlateGroupTransform;
@@ -74,6 +75,7 @@ public class GridObjectScript : MonoBehaviour {
 
     public void UseSpell(string _spellName) {
         effectAnimator.SetTrigger(CardMngScript.CardItemSO.GetSpellAnimationKey(_spellName));
+        usableSpellObject.SetActive(false);
     }
     public void StartCooking() {
         string nextName = GridObjectMngScript.GridObjectSO.GetObjectItem(objectName).tool.nextObjectName;
@@ -121,7 +123,8 @@ public class GridObjectScript : MonoBehaviour {
             currentObjectItem.currentSpiceNames.Add(_objectName);
         else
             currentObjectItem.currentObjectNums[GridObjectMngScript.GridObjectSO.GetObjectItem(objectName).tool.neededObjectNames.IndexOf(_objectName)]++;
-        currentObjectItem.CurrentSpellNameUpdate();
+        if (currentObjectItem.CurrentSpellNameUpdate())
+            usableSpellObject.SetActive(true);
     }
 
     public bool AdjacentObjectCheck(string _objectName) {
