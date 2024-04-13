@@ -8,7 +8,6 @@ public class SettingMngScript : MonoBehaviour {
     static public SettingMngScript  Inst { get; set; } = null;
 
     [SerializeField] GameObject     setting;
-    [SerializeField] GameObject     nonUIBlocker;
     [SerializeField] Slider         sliderBGM;
     [SerializeField] Slider         sliderSFX;
 
@@ -21,8 +20,5 @@ public class SettingMngScript : MonoBehaviour {
         Utils.LoadScene("MainScene");
     }
 
-    static public void SettingButton() {
-        Inst.nonUIBlocker.SetActive(!Inst.nonUIBlocker.activeSelf);
-        Inst.setting.SetActive(!Inst.setting.activeSelf);
-    }
+    static public void SettingButton() => Inst.setting.SetActive(!Inst.setting.activeSelf);
 }

@@ -3098,7 +3098,7 @@ Canvas:
   m_GameObject: {fileID: 387539889}
   m_Enabled: 1
   serializedVersion: 3
-  m_RenderMode: 0
+  m_RenderMode: 1
   m_Camera: {fileID: 924700970}
   m_PlaneDistance: 100
   m_PixelPerfect: 0
@@ -15866,7 +15866,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   setting: {fileID: 1993437513}
-  nonUIBlocker: {fileID: 1326301670}
   sliderBGM: {fileID: 1256877473}
   sliderSFX: {fileID: 1005844370}
 --- !u!4 &1730417835
