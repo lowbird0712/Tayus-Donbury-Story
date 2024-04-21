@@ -39,6 +39,7 @@ public class CardGameMngScript : MonoBehaviour {
     Dictionary<string, int>                                                                 stageInfo = new Dictionary<string, int>();
     ReactiveDictionary<string, int>                                                         currentStageInfo = new ReactiveDictionary<string, int>();
     string                                                                                  recipeString;
+    string                                                                                  tipString;
     int                                                                                     stageNum = -1;
     int                                                                                     maxTurnNum;
     ReactiveProperty<int>                                                                   turnNum = new ReactiveProperty<int>();
@@ -105,6 +106,7 @@ public class CardGameMngScript : MonoBehaviour {
         Inst.currentStageInfoText.text = text;
     }
     public void ShowRecipeString() => CardExplainPanel.Show(recipeString);
+    public void ShowTipString() => CardExplainPanel.Show(tipString);
 
     void GameSetup(int _stageNum) {
         if (fastMode) {
@@ -148,7 +150,7 @@ public class CardGameMngScript : MonoBehaviour {
                             "조미료 : 간장, 설탕, 해초도토리\n" +
                             "2. 끓인 후의 냄비에 아래의 재료를 넣고 다시 끓인다.\n" +
                             "주재료 : 우삼겹"; ;
-                recipeExplanationInfo["소고기 덮밥 토핑 세트"] = // 레시피 설명 수정 필요!!!!
+                recipeExplanationInfo["소고기 덮밥 토핑 세트"] = // TODO: 레시피 설명 수정 필요!!!!
                             "도토리를 사용하는 법!\n" +
                             "1. 카드를 뒤집어 도토리 오브젝트 배치가 가능한 도토리 카드를 만든다.\n" +
                             "2. 도토리 : X 가 적혀 있는 카드를 사용하면 필드에 배치된 도토리 X개를 사용해서 효과를 발동할 수 있다.\n\n" +
@@ -156,7 +158,7 @@ public class CardGameMngScript : MonoBehaviour {
                             "1. 토핑 추가를 사용하면 조미료를 미리 만들어 덱에 추가할 수 있다.\n" +
                             "2. 이 방법을 사용하면 턴을 기다릴 필요 없이 바로 덱에 조미료를 넣는 것이 가능하다.\n" +
                             "3. 소고기 덮밥 토핑 세트 덱에는 여분의 카드가 많이 들어있으니 뒤집어서 도토리 오브젝트로서 활용해보자.";
-                recipeExplanationInfo["소고기 덮밥 레드와인"] = // 레시피 설명 수정 필요!!!!
+                recipeExplanationInfo["소고기 덮밥 레드와인"] = // TODO: 레시피 설명 수정 필요!!!!
                             "레드와인을 만드는 법!\n" +
                             "1. 도토리 오브젝트 하나를 그리드에 배치한다.\n" +
                             "2. 오크통 배치를 사용하면 도토리 오브젝트가 있던 위치에 오크통을 놓을 수 있다.\n" +
@@ -189,7 +191,7 @@ public class CardGameMngScript : MonoBehaviour {
                             "調味料 : 醤油, 砂糖, 海草どんぐり\n" +
                             "2. 煮込み終えた後の鍋に以下の食材を入れ, また煮込む.\n" +
                             "メイン食材 : 牛バラ肉"; ;
-                recipeExplanationInfo["소고기 덮밥 토핑 세트"] = // 로컬라이징 필요!!!!
+                recipeExplanationInfo["소고기 덮밥 토핑 세트"] = // TODO: 로컬라이징 필요!!!!
                             "도토리를 사용하는 법!\n" +
                             "1. 카드를 뒤집어 도토리 오브젝트 배치가 가능한 도토리 카드를 만든다.\n" +
                             "2. 도토리 : X 가 적혀 있는 카드를 사용하면 필드에 배치된 도토리 X개를 사용해서 효과를 발동할 수 있다.\n\n" +
@@ -197,7 +199,7 @@ public class CardGameMngScript : MonoBehaviour {
                             "1. 토핑 추가를 사용하면 조미료를 미리 만들어 덱에 추가할 수 있다.\n" +
                             "2. 이 방법을 사용하면 턴을 기다릴 필요 없이 바로 덱에 조미료를 넣는 것이 가능하다.\n" +
                             "3. 소고기 덮밥 토핑 세트 덱에는 여분의 카드가 많이 들어있으니 뒤집어서 도토리 오브젝트로서 활용해보자.";
-                recipeExplanationInfo["소고기 덮밥 레드와인"] = // 로컬라이징 필요!!!!
+                recipeExplanationInfo["소고기 덮밥 레드와인"] = // TODO: 로컬라이징 필요!!!!
                             "레드와인을 만드는 법!\n" +
                             "1. 도토리 오브젝트 하나를 그리드에 배치한다.\n" +
                             "2. 오크통 배치를 사용하면 도토리 오브젝트가 있던 위치에 오크통을 놓을 수 있다.\n" +
@@ -238,6 +240,7 @@ public class CardGameMngScript : MonoBehaviour {
                         maxTurnNum = 50;
                         turnNumText.text = "남은 턴 : " + maxTurnNum.ToString();
                         recipeString = recipeExplanationInfo["밥"];
+                        tipString = "카운트다운을 활용해서 턴 수를 절약하자!";
                         menuImage.sprite = RecipeBookMngScript.RecipeSprites[0];
                         menuNameText.text = "밥";
                         goalNumText.text = "목표 개수 : " + 2;
@@ -250,6 +253,8 @@ public class CardGameMngScript : MonoBehaviour {
                         maxTurnNum = 30;
                         turnNumText.text = "남은 턴 : " + maxTurnNum.ToString();
                         recipeString = recipeExplanationInfo["밥"];
+                        tipString = "1. 한 턴에 여러 개의 카드를 사용해서 턴 수를 절약하자!\n" +
+                            "2. 오브젝트에 사용하는 카드는 이전 턴에 그 오브젝트가 배치되어 있지 않으면 사용 불가!";
                         menuImage.sprite = RecipeBookMngScript.RecipeSprites[0];
                         menuNameText.text = "밥";
                         goalNumText.text = "목표 개수 : " + 2;
@@ -494,6 +499,7 @@ public class CardGameMngScript : MonoBehaviour {
                         maxTurnNum = 50;
                         turnNumText.text = "残りターン : " + maxTurnNum.ToString();
                         recipeString = recipeExplanationInfo["밥"];
+                        tipString = "カウントダウンを活用してターン数を節約しよう！";
                         menuImage.sprite = RecipeBookMngScript.RecipeSprites[0];
                         menuNameText.text = "ご飯";
                         goalNumText.text = "目標数 : " + 2;
@@ -506,6 +512,8 @@ public class CardGameMngScript : MonoBehaviour {
                         maxTurnNum = 30;
                         turnNumText.text = "残りターン : " + maxTurnNum.ToString();
                         recipeString = recipeExplanationInfo["밥"];
+                        tipString = "１。一つのターンに複数のカードを使ってターン数を節約しよう！\n" +
+                            "２。オブジェクトに使うカードは前のターンにそのオブジェクトが配置されてないのであれば使えない！";
                         menuImage.sprite = RecipeBookMngScript.RecipeSprites[0];
                         menuNameText.text = "ご飯";
                         goalNumText.text = "目標数 : " + 2;

@@ -22,7 +22,7 @@ Bear.NightDefault: 그렇군.
 @char Tayu.NightDefault pos:35,0 wait:false
 @char Bear.NightDefault pos:65,0
 Tayu.NightDefault: 그런데 곰씨, 여러 개를 한번에 요리할 떄에는 주의할 점이 있어.
-Bear.NightDefault: …?
+Bear.NightDefault: ...?
 @hide Bear wait:false
 @back Tutorial1 id:Explain pos:62,65
 Tayu: 오른쪽 위를 보면 남은 턴 수와 우리가 만들어야 할 것들의 개수가 보이지?
@@ -38,5 +38,3 @@ Bear: 그렇군..
 Bear: 알겠어. 카운트다운을 잘 활용해서 턴 수를 절약하면 되는 거지?
 Tayu.NightSmile: 응, 곰씨라면 잘 할 수 있을 거야!
 @cardgame
-; # EndCardGame
-; @main
