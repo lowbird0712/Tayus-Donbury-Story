@@ -1,0 +1,55 @@
+@set localizedJP=false
+@back ForestDay
+@bgm Campfire
+(어느 때와 같은 도토리나무 숲길의 저녁.)
+(타유와 곰씨는 계속해서 앞으로, 같은 방향으로만, 꾸준히 걸어가고 있다.)
+@char Bear pos:65,0
+Bear: 타유.
+@char Tayu pos:35,0
+Tayu: 응?
+Bear: 타유는 여행할 때 커다란 상자를 메고 다니잖아?
+Tayu: 그렇지?
+Bear: 그거 정말로 안 무거워?
+Bear: 타유는 예전부터 체력이 약해서 사실은 조금 걱정이 돼.
+Tayu: 괜찮아.
+Tayu.Smile: 메고 다니다보니 이제는 생긴거랑 다르게 가볍게 느껴져..!
+Tayu.Default: 아저씨께서도 최대한 경령화에 신경 써서 이 “떠돌이 개발자용 캠핑 상자”를 만들어 주셨잖아?
+Bear: ...그런가?
+Bear.Serious: 흠.. 아무리 그래도 조리 시설이랑 텐트 같은 것들 전부 들어 있을 텐데.
+Bear: ...
+Bear.Default: 아니다. 이럴 때일수록 아저씨를 믿어야지.
+Bear: 오히려 좋은 체력 단련의 기회가 될 수도 있겠어.
+Tayu.Serious: ...
+Tayu: ..맞아. 분명 도움이 될 거야.
+Bear: 그래도 걷다가 무거우면 말해야 돼, 알겠지?
+Tayu.Smile: 응!
+@hideChars wait:false
+@hide Dialogue
+@back ForestNight time:3
+(시간이 흘러 밤이 되고..)
+(타유 일행은 지친 몸을 달래기 위해 모닥불을 피워 휴식을 취하고 있다.)
+@char Tayu.NightDefault pos:35,0 wait:false
+@char Bear.NightDefault pos:65,0
+Tayu: 곰씨, 잠깐 이리 와 봐..!
+Bear: 응?
+Tayu: 저번에 카드를 통해 오브젝트를 배치할 때와 재료가 조리 도구 안으로 들어갈 때 어떤 식으로 진행되는 지 알려준 적이 있잖아?
+Bear: 그렇지.
+Tayu: 오늘은 어떻게 해야 효율적으로 재료를 도구 안에 넣을 수 있는지 말해줄게!
+Bear: 알겠어.
+Tayu: 이제 설명할 테니까 머릿속에 이미지를 떠올리면서 들어 봐..!
+Tayu.NightSmile: 노트 같은 데에 적으면서 듣는 것도 좋을 것 같아!
+Tayu.NightDefault: 지금 패에 “밥솥” 2장과 “쌀” 1장이 있다고 생각해보자!
+Tayu: 이 상태에서 3장의 카드를 “밥솥”, “쌀”, “밥솥”의 순서로 사용하면..
+Tayu: 오브젝트 기준, <color=red>좌상우하</color> 순서대로 오브젝트가 도구에 들어가니까..
+Tayu.NightSmile: 두 “밥솥” 사이에 있는 “쌀”이 <color=red>왼쪽 “밥솥”</color> 안으로 들어가서 <color=red>두 “밥솥” 사이에 공간</color>이 만들어지게 돼!
+Bear: 그렇군..!
+Tayu.NightDefault: 그렇게 되면 오른쪽 “밥솥”에 필요한 “쌀”과 두 밥솥들에 필요한 “도토리주”를 넣을 때 공간적으로 고민할 부분이 줄어들어서 요리하기가 더 편해져!
+Bear: 확실히 알아 두면 좋은 팁인 것 같네.
+Bear: 앞으로 어떤 요리든 만들 때 참고해야겠다.
+Tayu.NightSmile: 그치!
+Tayu.NightDefault: 오늘은 이 점에 유의해서 곰씨가 한 번 냉동할 밥을 만들어 봐..!
+Tayu: 나는 저번처럼 다시 주변에서 도토리를 좀 주워올게.
+Tayu: 불을 피울 때도 요리할 때도 사용하다 보니까 아무리 주워와도 모자란 거 같아.
+Bear: 알겠어. 매번 말하지만 어두우니까 조심하고.
+Tayu: 걱정 마, 다녀올게!
+@cardgame
