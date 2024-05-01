@@ -1,7 +1,7 @@
 @set localizedJP=true
 @back ForestDay
 @bgm Campfire
-(ある日の夕方, ミニモリの森村のとある平野.)
+(ミニモリの森村のとある平野, 夕方.)
 (周りには草が風に揺れる音, 少しの焚き火音しか聞こえません.)
 @char Tayu pos:35,0
 Tayu: ルンルン~

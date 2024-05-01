@@ -1,7 +1,7 @@
 @set localizedJP=true
 @back ForestDay
 @bgm Campfire
-(ミニモリ森村の平野.)
+(ミニモリの森村のとある平野, 夕方.)
 (いつものように今のミニモリ平野には夕焼けがあり, 細やかな風が吹いて来る.)
 @char Tayu.Default pos:35,0 wait:false
 @char Bear.Default pos:65,0

@@ -1,7 +1,7 @@
 @set localizedJP=false
 @back ForestDay
 @bgm Campfire
-(미니모리 마을의 들판.)
+(미니모리 마을의 들판, 저녁.)
 (언제나처럼 지금의 미니모리 들판에는 노을이 지어 있고, 잔잔한 바람이 불어온다.)
 @char Tayu.Default pos:35,0 wait:false
 @char Bear.Default pos:65,0

@@ -1,7 +1,7 @@
 @set localizedJP=false
 @back ForestDay
 @bgm Campfire
-(어느 날 저녁, 미니모리 마을의 한 들판.)
+(미니모리 마을의 들판. 저녁)
 (주위에는 풀이 바람에 흔들리는 소리, 약간의 불 지피는 소리만이 들린다.)
 @char Tayu pos:35,0
 Tayu: 흥흥~
