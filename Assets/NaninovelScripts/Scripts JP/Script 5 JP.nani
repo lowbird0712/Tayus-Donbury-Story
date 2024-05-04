@@ -1,0 +1,54 @@
+@set localizedJP=true
+@back ForestDay
+@bgm Campfire
+(いつもと同じ、どんぐり森道の夕方。)
+(長かった盛道も終わりが見え、遠くからは村の明かりが見え始める。)
+@char Bear pos:65,0
+Bear: もう明日で目的地に着くんだったっけ？
+@char Tayu pos:35,0
+Tayu: うん、もう一日残ってる。
+Tayu: このまま北の方へずっと行けばいい！
+Bear: ふう、、ようやく一息できそうだな。
+Bear: 今回行くところが多分、”どんぐり森の村”だったよね？
+Tayu: そうだよ。
+Tayu.Smile: ちょうど私たちが着く日から大きな祭りが開かれるんだって！
+Bear: そう？そんなことはまたどうやって調べた？
+Tayu.Default: 箱で検索してみたら全部出てたよ？
+Bear.Serious: その箱てさ、僕が思ってたより性能高そうだな。
+Bear.Default: とにかくよかった。
+Bear: 小さい頃からたゆちゃんは祭りみたいにうまい食べ物が多いところに行くことが好きだっただじゃないか。
+Tayu.Serious: ...
+Tayu: そうだったよね、、
+Tayu.Smile: 今回の祭りもきっと楽しいはず！
+Bear: うん。一緒に美味しいもの沢山食べよう。
+Bear: ところでたゆちゃん。
+Tayu.Default: うん？
+Bear: もしかして温泉もある？
+Tayu.Serious: 。。。
+Tayu: 機械人形は水に濡れると壊れちゃうよ、、
+@hideChars wait:false
+@hide Dialogue
+@back ForestNight time:3
+(時間は流れて、夜になり、、)
+@char Tayu.NightDefault pos:35,0 wait:false
+@char Bear.NightDefault pos:65,0
+Tayu.NightDefault: あのさ、くまさん。
+Bear.NightDefault: どうした？
+Tayu: 前に”調味料”の作り方教えてあげたこと、覚えてる？
+Bear: もちろん、覚えてるよ。
+Bear: 飯を炊くときに必要なカードたちをひっくり返して得たものたちで作ることだったけ？
+Tayu.NightSmile: そう！
+Tayu.NightDefault: でもさ、くまさん。
+Tayu: ”どんぐり釜”の調理が終わるにも<color=red>3ターン</color>が必要でしょう？
+Bear: だよね？
+Tayu: だからなんだけど、“調味料”が必要になる前に<color=red>先に”調味料”カードを作っておくこと</color>も可能だよ。
+Bear.NightSerious: ふん、、
+Bear.NightDefault: どうせい料理するのに“調味料”は必要だから前もって作っておくことが当然かもしれないな。
+Tayu: そう。
+Tayu: 今後、料理する時に参考にすればいい知識かと思うよ。
+Bear: 教えてくれてありがとう。
+Tayu: いえいえ、、
+Tayu.NightSmile: じゃ私は今日もどんぐり拾いに行ってくる！
+Tayu: 村の近くなのにまだいっぱい落ちていたよ。
+Bear: 分かった。気を付けて。
+@cardgame

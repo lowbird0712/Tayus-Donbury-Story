@@ -46,24 +46,6 @@ public class CurrentObjectItem {
         foreach (var spellName in objectItem.usableSpellNames)
             currentSpellNames.Add(spellName);
         return true;
-
-        //foreach (var spellName in objectItem.usableSpellNames) {
-        //    if (tool.neededSpiceNames != null && tool.neededSpiceNames.Count != currentSpiceNames.Count)
-        //        continue;
-        //    if (tool.neededObjectNames != null) {
-        //        for (int i = 0; i < tool.neededObjectNames.Count; i++) {
-        //            if (tool.neededObjectNums[i] != currentObjectNums[i]) {
-        //                neededObjectFlag = true;
-        //                break;
-        //            }
-        //        }
-        //        if (neededObjectFlag) {
-        //            neededObjectFlag = false;
-        //            continue;
-        //        }
-        //    }
-        //    currentSpellNames.Add(spellName);
-        //}
     }
 }
 

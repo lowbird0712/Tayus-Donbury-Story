@@ -291,6 +291,7 @@ public class CardGameMngScript : MonoBehaviour {
                         maxTurnNum = 30;
                         turnNumText.text = "남은 턴 : " + maxTurnNum.ToString();
                         recipeString = recipeExplanationInfo["맛있는 밥"];
+                        tipString = "도토리 솥의 조리 완료까지는 여러 턴이 걸리니까, 미리 조미료를 준비해 놓자!";
                         menuImage.sprite = RecipeBookMngScript.RecipeSprites[0];
                         menuNameText.text = "맛있는 밥";
                         goalNumText.text = "목표 개수 : " + 2;
@@ -303,6 +304,8 @@ public class CardGameMngScript : MonoBehaviour {
                         maxTurnNum = 100;
                         turnNumText.text = "남은 턴 : " + maxTurnNum.ToString();
                         recipeString = recipeExplanationInfo["소고기 덮밥 기본"];
+                        tipString = "1. 레시피나 카드게임 팁이 잘 기억나지 않으면 오른쪽 위의 팁, 레시피 버튼을 눌러 확인하자!\n" +
+                            "2. 패가 최대 매수(10장)일 경우 카드를 패에 추가할 수 없고, 카드를 생성해 패에 추가하는 상황이라면 생성된 카드가 사라지니 주의하자!";
                         menuImage.sprite = RecipeBookMngScript.RecipeSprites[1];
                         menuNameText.text = "소고기 덮밥 - 기본";
                         goalNumText.text = "목표 개수 : " + 1;
@@ -550,6 +553,7 @@ public class CardGameMngScript : MonoBehaviour {
                         maxTurnNum = 30;
                         turnNumText.text = "残りターン : " + maxTurnNum.ToString();
                         recipeString = recipeExplanationInfo["맛있는 밥"];
+                        tipString = "どんぐり釜の調理完了までは複数ターンがかかるので、先に調味料を用意しておこう！";
                         menuImage.sprite = RecipeBookMngScript.RecipeSprites[0];
                         menuNameText.text = "美味しいご飯";
                         goalNumText.text = "目標数 : " + 2;
@@ -562,6 +566,8 @@ public class CardGameMngScript : MonoBehaviour {
                         maxTurnNum = 100;
                         turnNumText.text = "残りターン : " + maxTurnNum.ToString();
                         recipeString = recipeExplanationInfo["소고기 덮밥 기본"];
+                        tipString = "1. レシピやカードゲームのコツがよく覚えられなかったなら、右上のコツ、レシピボタンを推して確認しよう！\n" +
+                            "2. 手札が最大枚数(10枚)だった場合、カードを手札に追加するができなく、カードを生成して追加する状況だったらそのカードが消えるから注意しよう！";
                         menuImage.sprite = RecipeBookMngScript.RecipeSprites[1];
                         menuNameText.text = "牛丼 - 基本";
                         goalNumText.text = "目標数 : " + 1;

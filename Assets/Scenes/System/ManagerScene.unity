@@ -4431,6 +4431,7 @@ MonoBehaviour:
     - Stage Clear!
     - No Acorn!
     - Save
+    - Tip
   - language: Korean
     languageLocalized: "\uD55C\uAD6D\uC5B4"
     value:
@@ -4466,6 +4467,7 @@ MonoBehaviour:
     - "\uC2A4\uD14C\uC774\uC9C0 \uD074\uB9AC\uC5B4!"
     - "\uB3C4\uD1A0\uB9AC\uAC00 \uBD80\uC871\uD569\uB2C8\uB2E4!"
     - "\uC800\uC7A5"
+    - "\uD301"
   - language: "Japanese\r"
     languageLocalized: "\u65E5\u672C\u8A9E\r"
     value:
@@ -4496,7 +4498,8 @@ MonoBehaviour:
     - "\u6B8B\u308A\u30AB\u30A6\u30F3\u30C8\u30C0\u30A6\u30F3\r"
     - "\u30B9\u30C6\u30FC\u30B8\u30AF\u30EA\u30A2!\r"
     - "\u3069\u3093\u3050\u308A\u304C\u8DB3\u308A\u307E\u305B\u3093!\r"
-    - "\u30BB\u30FC\u30D6"
+    - "\u30BB\u30FC\u30D6\r"
+    - "\u30B3\u30C4"
   currentLanguageIndex: 0
 --- !u!1 &347915603
 GameObject:
@@ -5939,7 +5942,7 @@ MonoBehaviour:
   - {fileID: 2009074544}
   - {fileID: 1910832292}
   - {fileID: 1283704769}
-  usableMaxStageIndex: 21
+  usableMaxStageIndex: 6
 --- !u!114 &448180104
 MonoBehaviour:
   m_ObjectHideFlags: 0

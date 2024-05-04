@@ -1,0 +1,65 @@
+@set localizedJP=false
+@back ForestDay
+@bgm Campfire
+(어느 때와 같은 도토리나무 숲길의 저녁.)
+(오늘 타유 일행은 도토리숲 마을에 도착했다.)
+(도착한 날부터 열리는 연회에서 즐거운 시간을 보낸 타유 일행은, 휴식을 취하기 위해 근처의 도토리나무 숲에 자리를 잡았다.)
+@char Bear pos:65,0
+Bear: 오늘 축제 재밌었어.
+@char Tayu pos:35,0
+Tayu: 맞아, 오랜만에 정말 재미있었던 것 같아.
+Tayu: 온천도 있어서 여행하면서 쌓인 피로도 풀 수 있었고!
+Bear.Serious: 이럴 때는 내가 기계인 게 아쉽단 말이지..
+Bear.Default: 그나저나 여기, 소고기 덮밥이 정말 맛있었어.
+Tayu.Smile: 그치! 곰씨 오늘 점심에 소고기 덮밥만 세 그릇이나 먹었잖아!
+Tayu.Default: 그것보다, 어떻게 기계인데 밥을 먹을 수 있는거야?
+Bear: 사소한 건 넘어가자고.
+Tayu.Serious: ...
+@hideChars wait:false
+@hide Dialogue
+@back ForestNight time:3
+(시간이 흘러 밤이 되고..)
+@char Tayu.NightDefault pos:35,0 wait:false
+@char Bear.NightDefault pos:65,0
+Bear: 벌써 밤이네.
+Tayu: 그러게.
+Tayu: 곰씨, 내가 아까 먹었던 소고기 덮밥 만들어 줄까?
+Bear: 오..
+Bear: 만들 줄 알아?
+Tayu.NightSmile: 응, 해 보니까 어렵지 않더라고!
+Tayu.NightDefault: 오늘은 가장 기본적인 소고기 덮밥인 “소고기 덮밥 기본”을 만들 거야.
+Bear: “소고기 덮밥 기본”이라.. 말 그대로 기본적인 이름이네.
+Tayu: “소고기 덮밥 기본”을 포함해서, 모든 덮밥을 만들 때에는 한 그릇 당 <color=red>두 가지의 요리</color>를 완성할 필요가 있어.
+Tayu: 우선은, 지금까지 우리가 만들어왔던, 도토리주를 넣어 만드는 <color=red>“맛있는 밥”</color>.
+Tayu: 많이 만들어 보았을 테니까 이 부분은 설명 따로 안 할게!
+Bear: 응.
+Tayu: 나머지 하나는 밥 위에 올릴 <color=red>메뉴 별 고유한 요리</color>야!
+Tayu: 오늘 만들 “소고기 덮밥 기본”의 경우에는 소고기와 양파를 끓인 것이 되겠지.
+Bear: 그렇군.
+Bear: 그건 어떻게 만드는 거지?
+Tayu.NightSmile: 그건 이제부터 알려줄게!
+Tayu.NightDefault: 우선 냄비를 놓고 그 안에 “필요한 재료”인 <color=red>“양파”</color>를 넣어.
+Tayu: 그리고 “필요한 조미료”인 <color=red>“간장”, “설탕”, “해초도토리”</color>를 넣어.
+Bear: 밥과 비교해서 필요한 조미료의 가짓수가 더 많네?
+Tayu: 맞아. 보통 밥에 올리는 부분의 경우 요리할 때 <color=red>많은 종류의 “조미료”</color>를 필요로 해.
+Tayu: 이제부터는 더더욱 미리 “조미료” 카드를 만들어 놓을 필요가 생길 거야.
+Tayu: 패에 가지고 있을 수 있는 카드는 <color=red>최대 10장까지＜/color＞니까 주의해야 돼!
+Bear: 만약 패가 가득 찬 상태에서 카드를 뽑거나 패에 카드를 생성해 추가하게 되면 어떻게 되지?
+Tayu: 패가 가득 차 있으면 <color=red>카드를 패에 추가하는 행동이 불가능</color>해져.
+Tayu: 패에 추가하기 위해 만들어진 카드는 <color=red>패가 가득 차 있을 때 사라지게</color> 되니까 미리미리 써서 패의 공간을 만들어 놓아야 해!
+Tayu: 만약에 도토리 솥의 카운트타운이 0이 되는 시점에 패가 가득 차 있다면 기껏 만든 조미료가 사라지게 되서 스테이지 클리어에 큰 영향을 줄 수 있으니 주의해야겠지?
+Bear.NightSerious: ..이제부터는 뭔가 점점 복잡해지는 것 같아.
+Bear.NightDefault: 타유, 거의 처음일텐데 정말로 할 수 있겠어?
+Tayu.NightSerious: ...
+Tayu.NightDefault: ..걱정하지 마, 몇 번 해보니까 익숙해졌어.
+Tayu: 이렇게 모든 필요한 재료들을 냄비에 다 넣고 나면 “밥솥”과 마찬가지로 <color=red>“불지피기”</color>를 사용할 수 있는 상태가 돼!
+Bear: 그 뒤에는 밥솥, 도토리 솥의 경우와 마찬가지로 카운트다운이 0이 될 때까지 기다리면 되는 건가?
+Tayu: 맞아. 이 부분은 모든 조리 도구가 공통이야.
+Tayu: 그렇게 한 번 끓이는 것을 끝낸 뒤에는 “필요한 재료”인 <color=red>“우삼겹”을 넣고 한 번 더 “불지피기”</color>를 사용해 끓여 주면 끝이야.
+Tayu: “우삼겹”은 너무 많이 가열하면 질겨지니까 한 턴만 기다리면 충분해.
+Tayu: 혹시 요리 과정이 잘 기억나지 않으면 오른쪽 위에 있는 <color=red>“레시피 버튼”</color>을 누르면 다시 한 번 현재 진행하는 스테이지에서 새롭게 추가된 시스템 혹은 레시피에 대해 볼 수 있으니 참고해!
+Bear.NightSerious: 흠.. 알겠어.
+Tayu.NightDefault: 곰씨도 한 번 해볼래? 내가 옆에서 같이 봐 줄게.
+Bear.NightDefault: 응. 잘 할 수 있을지는 모르겠지만 재미있어 보이네.
+Tayu.NightSmile: 잘 할 수 있을 거야!
+@cardgame
