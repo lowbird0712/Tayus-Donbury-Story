@@ -318,6 +318,7 @@ public class CardGameMngScript : MonoBehaviour {
                         maxTurnNum = 50;
                         turnNumText.text = "남은 턴 : " + maxTurnNum.ToString();
                         recipeString = recipeExplanationInfo["소고기 덮밥 기본"];
+                        tipString = "오브젝트를 놓을 때에는 앞으로의 오브젝트 배치 상황을 생각하자!";
                         menuImage.sprite = RecipeBookMngScript.RecipeSprites[1];
                         menuNameText.text = "소고기 덮밥 - 기본";
                         goalNumText.text = "목표 개수 : " + 1;
@@ -580,6 +581,7 @@ public class CardGameMngScript : MonoBehaviour {
                         maxTurnNum = 50;
                         turnNumText.text = "残りターン : " + maxTurnNum.ToString();
                         recipeString = recipeExplanationInfo["소고기 덮밥 기본"];
+                        tipString = "オブジェクトを置く時には、今後のオブジェクト配置状況を考えましょう！";
                         menuImage.sprite = RecipeBookMngScript.RecipeSprites[1];
                         menuNameText.text = "牛丼 - 基本";
                         goalNumText.text = "目標数 : " + 1;
