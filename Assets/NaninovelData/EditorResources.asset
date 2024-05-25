@@ -169,45 +169,51 @@ MonoBehaviour:
     - name: Script 0
       pathPrefix: Scripts
       guid: f993ec47bf6777d48b45f711cd8a1c20
-    - name: Script 0 JP
-      pathPrefix: Scripts
-      guid: 64ed45b389d701c4d9ec8c10445781b4
     - name: Script 1
       pathPrefix: Scripts
       guid: 36dd9777d9bf9458d9d449f5af7857c9
-    - name: Script 1 JP
-      pathPrefix: Scripts
-      guid: 9c98ec95fb2b74974895550ceead47a8
     - name: Script 2
       pathPrefix: Scripts
       guid: 72399bc20b36f4164a40f38e6237b82b
-    - name: Script 2 JP
-      pathPrefix: Scripts
-      guid: ef9ad1d0674774cf4b041535e3e6ade1
     - name: Script 3
       pathPrefix: Scripts
       guid: 554d59dee9c5b46038dfd0670de51812
-    - name: Script 3 JP
-      pathPrefix: Scripts
-      guid: a9875c808e8304577a36c0d8cee4eaee
     - name: Script 4
       pathPrefix: Scripts
       guid: 8f2d7242b95284bcf94a4695d489a034
-    - name: Script 4 JP
-      pathPrefix: Scripts
-      guid: 5a97a6af050bc43abab0486066737eac
     - name: Script 5
       pathPrefix: Scripts
       guid: 51eb5c73ae8f04da4a82b1079d80ef28
-    - name: Script 5 JP
-      pathPrefix: Scripts
-      guid: a242f01c69d8a49caab8c07aba2d07b8
     - name: Script 6
       pathPrefix: Scripts
       guid: 9fdfab0fb60564ff3aeaa11d2c2947ad
+    - name: Script 7
+      pathPrefix: Scripts
+      guid: 76d6324d09fe743f599ac1745d6c63b2
+    - name: Script 0 JP
+      pathPrefix: Scripts
+      guid: 64ed45b389d701c4d9ec8c10445781b4
+    - name: Script 1 JP
+      pathPrefix: Scripts
+      guid: 9c98ec95fb2b74974895550ceead47a8
+    - name: Script 2 JP
+      pathPrefix: Scripts
+      guid: ef9ad1d0674774cf4b041535e3e6ade1
+    - name: Script 3 JP
+      pathPrefix: Scripts
+      guid: a9875c808e8304577a36c0d8cee4eaee
+    - name: Script 4 JP
+      pathPrefix: Scripts
+      guid: 5a97a6af050bc43abab0486066737eac
+    - name: Script 5 JP
+      pathPrefix: Scripts
+      guid: a242f01c69d8a49caab8c07aba2d07b8
     - name: Script 6 JP
       pathPrefix: Scripts
       guid: 19c49abc8516043729b8579bc3e41e2e
+    - name: Script 7 JP
+      pathPrefix: Scripts
+      guid: b668768b3fd0a48629beaeb4d4f6035a
   - Id: Characters/e7a3a3d1-159d-4570-b79a-74ab527a6716
     Resources:
     - name: Tayu
