@@ -1,0 +1,59 @@
+@set localizedJP=false
+@back ForestDay
+@bgm Campfire
+(어느 때와 같은 도토리나무 숲길의 저녁.)
+(타유 일행은 오늘 참가했던 마을의 이벤에 대해 이야기하고 있다.)
+@char Bear pos:65,0
+Bear: 타유 오늘 고생 많았어.
+Bear: 대회에서 쓰일 소고기 덮밥을 만드느라 거의 반나절 내내 요리만 했지?
+@char Tayu pos:35,0
+Tayu: 괜찮아, 걱정 고마워.
+Tayu: 앞으로 여행하려면 돈, 많이 필요하니까.
+Tayu.Smile: 그리고 요리하는 거 좋아해서 재미있기도 했어!
+Bear: 그럼 다행이네.
+Bear: 타유가 처음으로 밖에서 벌어온 돈, 소중하게 계획적으로 쓰자.
+Tayu.Serious: ...
+Tayu.Default: ...고마워!
+Tayu: 근데 돈 하니까 생각난 건데, 이번 대회에서 벌어온 금액은 곰씨가 훨씬 더 많지 않아?
+Tayu: 곰씨는 이번 “소고기 덮밥 많이 먹기 대회”에 나가서 우승했잖아.
+Bear.Serious: ...
+Bear.Default: 뭐.. 어쩌다 보니 그렇게 됐어.
+Bear: 맛있는 음식은 많이 먹을 수 있으니까.
+Tayu.Smile: 그렇구나!
+Tayu.Default: 근데 곰씨, 곰씨가 그런 많이 먹기 대회에 나가도 괜찮은거야?
+Tayu: 뭔가 부정행위 같은데..?
+Bear.Serious: ...
+Bear: 사소한 건 신경 쓰지 말자니까.
+@hideChars wait:false
+@hide Dialogue
+@back ForestNight time:3
+(시간이 흘러 밤이 되고..)
+@char Tayu.NightSmile pos:35,0 wait:false
+@char Bear.NightDefault pos:65,0
+Tayu: 곰씨, 오늘은 배치 공간을 잘 활용하기 위한 팁을 하나 더 알려주고 싶어!
+Bear: 오.. 뭔데?
+Tayu.NightDefault: “소고기 덮밥 - 기본” 덱에는 “양파”와 “우삼겹” 카드가 있잖아?
+Tayu: 혹시 “양파”와 “우삼겹” 카드를 뒤집어서 얻은 “도토리 카드”는 어디에 쓰이는지 궁금하지 않아?
+Bear: 그러고보니 “소고기 덮밥 기본”의 레시피에는 두 카드의 “도토리 카드”가 쓰이는 것 같지는 않네.
+Tayu: 맞아. 요리 자체에 쓰이고 있지는 않아.
+Tayu: 그래도 아예 쓸모가 없는 것은 아니야!
+Bear: 오..?
+Tayu.NightSmile: 이번에도 잘 상상하면서 들어봐!
+Tayu.NightDefault: 가장 윗 줄 세 번째 칸에 이미 “양파”가 들어가있는 “냄비”가 있다고 생각해보자?
+Tayu: 그러면 그 “냄비”에 더 이상의 “양파”는 필요 없겠지?
+Tayu: 앞으로 이 “냄비”에는 여러 조미료들을 넣어야 되기 때문에 <color=red>세 번째 칸과 인접한 칸들에 여러 번 “조미료”를 배치</color>할 필요가 있어.
+Tayu.NightSmile: 이 때 <color=red>가장 윗 줄의 두 번째 칸</color>을 활용하는 것이 가장 간단한 방법일거야!
+Tayu.NightDefault: 그리고 가장 윗 줄 첫 번째 칸이 비어 있다고 한다면..
+Tayu: 첫 번째 칸부터 오브젝트가 배치되기 때문에, 두 번째 칸에 도달하기 위해서는 <color=red>다른 오브젝트를 첫 번째 칸에 배치</color>해야 할 필요가 생겨.
+Tayu: 이런 상황에서 “밥솥”, “도토리 솥”, “냄비”와 같이, <color=red>다른 도구에 들어가서 비워져버릴 가능성이 없는</color>, “양파”, “우삼겹”의 “도토리 오브젝트”를 첫 번째 칸에 배치하면..
+Tayu.NightSmile: <color=red>항상 첫 번째 칸이 메워져 있는 것이 보장</color>되니까, 맘 편하게 계속해서 두 번째 칸부터 오브젝트를 배치할 수 있게 되지!
+Bear.NightSerious: 그런 거구나.
+Bear.NightDefault: 이 방식을 잘 활용하면 패의 중요한 카드들을 첫 번째 그리드를 메우는 데 사용하느라 낭비하게 되는 일을 줄일 수 있겠어.
+Tayu.NightDefault: 맞아.
+Tayu.NightSmile: 이번 팁도 조금은 어려울 수 있겠지만 앞으로의 요리에서도 빈번하게 사용될 거니까 미리 익숙해져 놓으면 좋을 거야!
+Bear: 알겠어.
+Bear: 그러면 오늘 저녁밥도 연습 겸 내가 만들어 놓을게.
+Bear: 조금 있으면 대회 우승 상품을 받아올 시간인데 타유는 대회장에 잠시 다녀와 줄 수 있겠어?
+Bear.NightSerious: 어떤 상품을 줄 지 정말 기대가 되네.
+Tayu.NightDefault: 후후.. 알겠어!
+@cardgame

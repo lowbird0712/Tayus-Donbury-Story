@@ -331,6 +331,7 @@ public class CardGameMngScript : MonoBehaviour {
                         maxTurnNum = 30;
                         turnNumText.text = "남은 턴 : " + maxTurnNum.ToString();
                         recipeString = recipeExplanationInfo["소고기 덮밥 기본"];
+                        tipString = "도토리 카드를 써서 배치하는 도토리 오브젝트는, 아무 효과가 없더라도 공간을 메워주는 역할을 할 수 있으니 활용하자!";
                         menuImage.sprite = RecipeBookMngScript.RecipeSprites[1];
                         menuNameText.text = "소고기 덮밥 - 기본";
                         goalNumText.text = "목표 개수 : " + 1;
@@ -594,6 +595,7 @@ public class CardGameMngScript : MonoBehaviour {
                         maxTurnNum = 30;
                         turnNumText.text = "残りターン : " + maxTurnNum.ToString();
                         recipeString = recipeExplanationInfo["소고기 덮밥 기본"];
+                        tipString = "どんぐりカードを使って配置するどんぐりオブジェクトは、何の効果もなくても、空間を埋めてくれる役目ができるから活用しよう！";
                         menuImage.sprite = RecipeBookMngScript.RecipeSprites[1];
                         menuNameText.text = "牛丼 - 基本";
                         goalNumText.text = "目標数 : " + 1;

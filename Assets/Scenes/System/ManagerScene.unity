@@ -5942,7 +5942,7 @@ MonoBehaviour:
   - {fileID: 2009074544}
   - {fileID: 1910832292}
   - {fileID: 1283704769}
-  usableMaxStageIndex: 7
+  usableMaxStageIndex: 8
 --- !u!114 &448180104
 MonoBehaviour:
   m_ObjectHideFlags: 0
