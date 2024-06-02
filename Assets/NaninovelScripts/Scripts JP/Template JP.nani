@@ -1,0 +1,17 @@
+@set localizedJP=true
+@back ForestDay
+@bgm Campfire
+(いつもと同じ、どんぐり森道の夕方。)
+(たゆたちは、今日参加していた村のイベントに関して話をしている。)
+@char Bear pos:65,0
+Bear: 
+@char Tayu pos:35,0
+Tayu: 
+@hideChars wait:false
+@hide Dialogue
+@back ForestNight time:3
+(時間は流れて、夜になり、、)
+@char Tayu.NightSmile pos:35,0 wait:false
+@char Bear.NightDefault pos:65,0
+
+@cardgame
