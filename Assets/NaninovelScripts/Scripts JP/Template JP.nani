@@ -2,7 +2,7 @@
 @back ForestDay
 @bgm Campfire
 (いつもと同じ、どんぐり森道の夕方。)
-(たゆたちは、今日参加していた村のイベントに関して話をしている。)
+()
 @char Bear pos:65,0
 Bear: 
 @char Tayu pos:35,0

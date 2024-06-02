@@ -1,0 +1,46 @@
+@set localizedJP=false
+@back ForestDay
+@bgm Campfire
+(어느 때와 같은 도토리나무 숲길의 저녁.)
+(타유 일행은 마을의 많이먹기 대회에서 곰씨가 받아온 우승 상품을 정리하고 있다.)
+@char Bear pos:65,0
+Bear: 하나.. 둘.. 셋..
+Bear: 도토리 간장은 다 해서 10병 정도 들어있는 거 같네.
+@char Tayu pos:35,0
+Tayu: 오, 그렇게나 많이?
+Bear: 그리고 “도토리숲 마을 특산 도토리”도 이 만큼이나 받아 왔어.
+Tayu.Smile: 우와, 이정도면 앞으로 한동안 도토리 걱정은 없겠다!
+Tayu.Default: 아무리 그래도 이걸 땔감으로 쓸 수는 없으니까 태우는 용도의 도토리를 주워오는 건 계속 해야겠네.
+Bear: 흠.. 뭐 그건 어쩔 수 없는 부분이니까.
+Tayu: 곰씨, 이걸 전부 저번에 있었던 대회의 우승 상품으로 받아 온거야?
+Bear: 나도 믿기지 않지만, 그런 거 같아.
+Bear.Serious: 상자에 전부 넣고 갈 수 있을까? 갑자기 걱정이 되네.
+Tayu.Smile: 후후.. 행복한 걱정이네!
+Tayu.Default: 괜찮아, 이 상자 경량화 뿐만이 아니라 부피까지 줄여주는 거 같더라.
+Bear.Default: 오 그래?
+Bear: 아저씨께서 만드느라 고생 좀 하셨겠는걸.
+Tayu: 그러게, 항상 감사하고 있어!
+Bear: 타유는 착하구나..
+@hideChars wait:false
+@hide Dialogue
+@back ForestNight time:3
+(시간이 흘러 밤이 되고..)
+@char Tayu.NightDefault pos:35,0 wait:false
+@char Bear.NightDefault pos:65,0
+Bear: ..이제 저녁 먹을 시간이야.
+Bear: 오늘은 내가 당번이었던가?
+Tayu: 맞아.
+Tayu.NightSmile: 그럼 나는 오랜만에 주변에서 땔감용 도토리를 좀 주워올게!
+Bear: 알겠어, 조심하고.
+@hide Tayu
+@char Bear pos:50,0
+Bear: 저번에 타유가 조미료를 미리 만들어 놓는 것이 좋다고 설명해 준 적이 있었지..?
+Bear: 그러면 “소고기 덮밥 - 기본” 한 그릇을 완성하기 위해 필요한 조미료의 총 개수는..
+Bear: <color=red>“맛있는 밥”</color>을 만드는 데 필요한 <color=red>조미료 1개</color>와..
+Bear: <color=red>“소고기 덮밥 - 기본”</color>을 만드는 데 필요한 <color=red>조미료 3개</color>를 더하면..
+Bear: <color=red>총 4개</color>가 되겠군. <color=red>2그릇을 만드려면 총 8개의 조미료</color>가 필요하겠고.
+Bear: 한 번의 <color=red>도토리 솥 조리 완료</color>로 만들 수 있는 <color=red>조미료의 개수는 3개</color>니까..
+Bear: 다 해서 <color=red>3번의 도토리 솥 조리 완료</color>가 반드시 필요하겠고..
+Bear: 그러면 <color=red>1개의 조미료가 남으니까</color> 패를 버리거나 공간을 메우는 용도로 활용할 수 있겠어.
+Bear: 자 그러면 타유가 돌아오기 전에 슬슬 요리를 시작해보자.
+@cardgame

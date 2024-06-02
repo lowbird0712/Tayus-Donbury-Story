@@ -209,15 +209,13 @@ public class SO_GridObjectScript : ScriptableObject {
             item.xPivot = 0.07f;
             item.tool = new ObjectSubItemTool();
             item.tool.nextObjectName = "냄비(조리중)";
+            item.tool.neededObjectNames = new List<string> { "양파" };
+            item.tool.neededObjectNums = new List<int> { 1 };
             item.tool.neededSpiceNames = new List<string>() { "간장", "설탕", "해초 도토리" };
             if (deckName == "소고기 덮밥 레드와인") {
-                item.tool.neededObjectNames = new List<string>(2) { "양파", "레드와인" };
-                item.tool.neededObjectNums = new List<int>(2) { 1, 1 };
+                item.tool.neededObjectNames.Add("레드와인");
+                item.tool.neededObjectNums.Add(1);
                 item.tool.neededSpiceNames.Add("생강");
-            }
-            else {
-                item.tool.neededObjectNames = new List<string>(1) { "양파" };
-                item.tool.neededObjectNums = new List<int>(1) { 1 };
             }
             item.tool.useHeatPlate = true;
         }

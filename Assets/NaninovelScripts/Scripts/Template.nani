@@ -2,7 +2,7 @@
 @back ForestDay
 @bgm Campfire
 (어느 때와 같은 도토리나무 숲길의 저녁.)
-(타유 일행은 오늘 참가했던 마을의 이벤에 대해 이야기하고 있다.)
+()
 @char Bear pos:65,0
 Bear: 
 @char Tayu pos:35,0
