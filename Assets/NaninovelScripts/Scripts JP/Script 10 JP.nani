@@ -1,0 +1,55 @@
+@set localizedJP=true
+@back ForestDay
+@bgm Campfire
+(いつもと同じ、どんぐり森道の夕方。)
+(出発の前日、たゆたちは次の旅行の目的地について話している)
+@char Bear pos:65,0
+Bear:　もう明日になったら、また離れるんだよね？
+@char Tayu pos:35,0
+Tayu:　うん。
+Tayu:　祭りは楽しかったけど、いつまでもここにいるわけにはいかないからね。
+Bear:　それはそうだね。
+Bear:　祭りは十分に楽しんだ？
+Tayu.Smile:　うん！
+Tayu.Default:　祭り音楽も良かったし、屋台の食べ物も美味しかったよ。
+Tayu:　そして料理で観客席では見れなかったけど、大会でくまさんが活躍するのも後ろから見ながらたくさん笑ったよ。
+Tayu.Smile:　やっぱり祭りはいつも楽しいよね..！
+Bear:　だよね？
+Tayu.Serious:　···
+Bear: ..たゆ？
+Tayu: ···
+Tayu.Default: ..あ、ごめん。
+Tayu:　とても楽しかったみたい。 気にしなくてもいいよ。
+Bear.Serious: ···
+Bear.Default: ..たゆが楽しかったならそれでいい。
+Bear:　これからはどこに行くの？
+Tayu:　うん.. どんぐり森の村から北にまっすぐ行くと、<color=red>"ゴールドスプーン"</color>という大都市が出てくるよ。
+Tayu:　そこが私たちの次の目的地だよ。
+Bear: 大都市か.. いろいろ見どころが多いだろうね。
+Tayu: うん。食材貿易の中心地だから、様々な種類の香辛料があるそうだよ。
+Tayu.Smile:　そしてかなり大規模のキャンピングショップがあるらしいよ！
+Bear:　それではキャンプ装備を整備することもできるね。
+Tayu.Default:　そうだよ。
+Tayu:　それでもしばらくはずっと森の道だけを歩かなければならないから無理はしないようにしよう。
+Bear:　そうだね。急ぐ必要はないよ。
+@hideChars wait:false
+@hide Dialogue
+@back ForestNight time:3
+(時間は流れて、夜になり..)
+@char Tayu.NightSmile pos:35,0 wait:false
+@char Bear.NightDefault pos:65,0
+Bear: ..もう夕食を食べようか？
+Tayu:　もうこんな時間になったね。
+Tayu:　私は周りからどんぐりを拾ってきて、くまさんがもらってきた商品、箱に入れるようにまで整理しておくね！
+Bear:　わかった。完成したら教えてあげる。
+Tayu.NightSmile:　ありがとう！
+@hide Tayu
+@char Bear pos:50,0
+Bear: 前、たゆちゃんが基本的なデッキの構成について話してくれたことがあったよね..
+Bear.NightSerious:　二つの丼物を作るのに<color=red>必要最小限のカードがぴったり入っている</color>って言ってたっけ？
+Bear:　そうだと、今日料理に使われる"牛丼 - 基本"デッキには鍋、玉ねぎ、牛バラは2枚ずつだけ入っていて..
+Bear:　めし釜、米、火つけるカードはひっくり返して調味料を作るのにも使われるから、2枚よりもっと多く入っているだろうね..
+Bear:　おっと.. そうすると、必要なカードが手元にない時、<color=red>序盤から調味料を作りすぎるのは注意</color>しないと。
+Bear:　調味料がデッキに混ざっていて、<color=red>デッキにあまり入っていないカードを引く確率がもっと減ると</color>困るかもしれないから..
+Bear.NightDefault: そうだね、これらを意識しながら料理を始めてみよう。
+@cardgame

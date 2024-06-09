@@ -10,7 +10,7 @@ Tayu:
 @hideChars wait:false
 @hide Dialogue
 @back ForestNight time:3
-(時間は流れて、夜になり、、)
+(時間は流れて、夜になり..)
 @char Tayu.NightSmile pos:35,0 wait:false
 @char Bear.NightDefault pos:65,0
 

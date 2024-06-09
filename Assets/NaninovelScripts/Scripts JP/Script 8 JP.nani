@@ -27,7 +27,7 @@ Bear: 細かいのは気にするな、て。
 @hideChars wait:false
 @hide Dialogue
 @back ForestNight time:3
-(時間は流れて、夜になり、、)
+(時間は流れて、夜になり..)
 @char Tayu.NightSmile pos:35,0 wait:false
 @char Bear.NightDefault pos:65,0
 Tayu: くまさん、今日は配置空間をよく活用するためのコツをもう一つ教えたいよ！
