@@ -4,63 +4,108 @@ using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using UniRx;
 using TMPro;
+using Naninovel;
 
 public class WallpaperTimerMngScript : MonoBehaviour {
-    static public WallpaperTimerMngScript Inst { get; set; } = null;
+    static public WallpaperTimerMngScript   Inst { get; set; } = null;
 
-    [SerializeField] Button             dotoriButton;
-    [SerializeField] TextMeshProUGUI    timerText;
+    [Header("UI Settings")]
+    [SerializeField] Button                 rewardButton;
+    [SerializeField] TextMeshProUGUI        timerText;
+    [SerializeField] TextMeshProUGUI        rewardNumText;
+    [Header("Client Settings")]
+    [SerializeField] const int              startTime = 12; // 19
+    [SerializeField] const int              endTime = 23;
+    [SerializeField] const int              rewardDotoriNum = 1;
+    [SerializeField] const int              maxRewardNum = 4;
+    [SerializeField] const int              rewardSeconds = 5; // 1800
 
-    ReactiveProperty<int>               timerSec = new ReactiveProperty<int>(0);
-    DateTime                            tmp = default;
-    bool                                timerOn;
+    ReactiveProperty<int>                   rewardNum = new ReactiveProperty<int>(0);
+    int                                     constRewardNum = 0;
+    int                                     timerSec = 0;
+    ReactiveProperty<int>                   constTimerSec = new ReactiveProperty<int>(0);
+    SerializedDateTime                      lastPlayDateTime;
+    DateTime                                tmp = default;
+    bool                                    timerOn;
 
-    static public int TimerSec => Inst.timerSec.Value;
+    static public int                       RewardNum => Inst.rewardNum.Value;
+    static public int                       ConstTimerSec => Inst.constTimerSec.Value;
 
 
     private void Awake() => Inst = this;
 
     private void Start() {
-        timerSec
-            .Subscribe(_ => UpdateTimerText());
-
-        if (19 > DateTime.Now.Hour || DateTime.Now.Hour >= 23) {
-            timerSec.Value = 0;
-            return;
-        }
-        timerSec.Value = SaveLoadMngScript.SaveData.lastPlayDateTime.timerSec;
-        StartTimer();
+        rewardNum
+            .Subscribe(num =>
+            {
+                rewardButton.interactable = num > 0;
+                rewardNumText.text = num.ToString();
+            })
+            .AddTo(this);
+        constTimerSec
+            .Subscribe(_ => timerText.text = string.Format("{0:D2} : {1:D2}", constTimerSec.Value / 60, constTimerSec.Value % 60))
+            .AddTo(this);
+        SetupTimer();
     }
 
     private void Update() {
+        if (!timerOn &&
+            startTime <= DateTime.Now.Hour && DateTime.Now.Hour < endTime &&
+            constTimerSec.Value < maxRewardNum * rewardSeconds)
+        {
+            StartTimer();
+        }
         if (SceneManager.GetActiveScene().name != "MainScene" || !timerOn)
             return;
+        if (DateTime.Now.Hour >= endTime || tmp.Day < DateTime.Now.Day || tmp.Month < DateTime.Now.Month)
+        {
+            StopTimer();
+            return;
+        }
         if ((int)(DateTime.Now - tmp).TotalSeconds < 1)
             return;
-        timerSec.Value++;
+        timerSec++;
+        constTimerSec.Value++;
         tmp = DateTime.Now;
-        if (timerSec.Value >= 3600)
-            FullTimer();
-        else if (DateTime.Now.Hour >= 23)
-            StopTimer();
-        else if (!timerOn && DateTime.Now.Hour >= 19)
-            StartTimer();
+        if (timerSec >= rewardSeconds)
+            AddRewardDotori();
     }
 
-    void UpdateTimerText() => timerText.text = string.Format("{0:D2} : {1:D2}", timerSec.Value / 60, timerSec.Value % 60);
+    void SetupTimer()
+    {
+        lastPlayDateTime = SaveLoadMngScript.SaveData.lastPlayDateTime;
+        rewardNum.Value = SaveLoadMngScript.SaveData.wallPaperRewardNum;
+        if (lastPlayDateTime.day != DateTime.Now.Day || lastPlayDateTime.month != DateTime.Now.Month)
+        {
+            lastPlayDateTime.timerSec = 0;
+            rewardNum.Value = 0;
+        }
+        constRewardNum = lastPlayDateTime.timerSec / rewardSeconds;
+        timerSec = lastPlayDateTime.timerSec % rewardSeconds;
+        constTimerSec.Value = lastPlayDateTime.timerSec;
+    }
 
     void StartTimer() {
         tmp = DateTime.Now;
         timerOn = true;
+        timerSec = lastPlayDateTime.timerSec % rewardSeconds;
+        constTimerSec.Value = lastPlayDateTime.timerSec;
     }
 
-    void StopTimer() {
-        timerOn = false;
+    void StopTimer() => timerOn = false;
+
+    void AddRewardDotori()
+    {
+        rewardNum.Value++;
+        constRewardNum++;
+        timerSec = 0;
+        if (constRewardNum == maxRewardNum)
+            StopTimer();
     }
 
-    void FullTimer() {
-        dotoriButton.interactable = true;
-        timerSec.Value = 0;
-        StopTimer();
+    public void OnClickRewardButton()
+    {
+        rewardNum.Value--;
+        rewardButton.GetComponent<FullTimerButtonScript>().FullTimerButtonClicked();
     }
 }

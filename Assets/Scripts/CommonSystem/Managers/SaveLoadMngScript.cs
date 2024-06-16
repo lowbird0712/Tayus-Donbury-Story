@@ -11,6 +11,7 @@ public class SaveData {
     public int                  travelNoteOpenPageNum;
     public List<string>         itemNameList = new List<string>();
     public SerializedDateTime   lastPlayDateTime;
+    public int                  wallPaperRewardNum;
     public List<QuestData>      questDataList = new List<QuestData>();
 }
 
@@ -60,7 +61,8 @@ public class SaveLoadMngScript : MonoBehaviour {
         saveData.unlockedStageNum = StageMngScript.GetUnlockedStageNum();
         saveData.travelNoteOpenPageNum = TravelNoteMngScript.GetOpenPageNum();
         saveData.itemNameList = LinBoxMngScript.GetItemNameList();
-        saveData.lastPlayDateTime = new SerializedDateTime(TayuBoxMngScript.LastPlayDateTime, (int)WallpaperTimerMngScript.TimerSec);
+        saveData.lastPlayDateTime = new SerializedDateTime(DateTime.Now, (int)WallpaperTimerMngScript.ConstTimerSec);
+        saveData.wallPaperRewardNum = WallpaperTimerMngScript.RewardNum;
         saveData.questDataList = TayuBoxMngScript.GetQuestDataList();
         return saveData;
     }

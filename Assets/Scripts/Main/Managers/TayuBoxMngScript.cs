@@ -16,7 +16,6 @@ public class TayuBoxMngScript : MonoBehaviour {
     DateTime                                lastPlayDateTime = default;
 
     static public int                       QuestStageIndex { get => Inst.questStageIndex; set { Inst.questStageIndex = value; } }
-    static public DateTime                  LastPlayDateTime => Inst.lastPlayDateTime;
 
     private void Awake() => Inst = this;
     void Start() {
@@ -61,7 +60,7 @@ public class TayuBoxMngScript : MonoBehaviour {
             questImages[i].sprite = recipe.recipeSprite;
             switch (LocalizeManager.CurrentLanguageIndex) {
                 case 0:
-                    Debug.LogError("아직 영어 레시피명은 지원되고 있지 않습니다!!!!");
+                    Debug.LogError("???? ???? ?????????? ???????? ???? ????????!!!!");
                     break;
                 case 1:
                     questTexts[i].text = recipe.recipeName;
@@ -101,7 +100,7 @@ public class TayuBoxMngScript : MonoBehaviour {
             questImages[i].sprite = recipe.recipeSprite;
             switch (LocalizeManager.CurrentLanguageIndex) {
                 case 0:
-                    Debug.LogError("아직 영어 레시피명은 지원되고 있지 않습니다!!!!");
+                    Debug.LogError("???? ???? ?????????? ???????? ???? ????????!!!!");
                     break;
                 case 1:
                     questTexts[i].text = recipe.recipeName;
