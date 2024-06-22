@@ -14,11 +14,11 @@ public class WallpaperTimerMngScript : MonoBehaviour {
     [SerializeField] TextMeshProUGUI        timerText;
     [SerializeField] TextMeshProUGUI        rewardNumText;
     [Header("Client Settings")]
-    [SerializeField] const int              startTime = 12; // 19
+    [SerializeField] const int              startTime = 19;
     [SerializeField] const int              endTime = 23;
     [SerializeField] const int              rewardDotoriNum = 1;
     [SerializeField] const int              maxRewardNum = 4;
-    [SerializeField] const int              rewardSeconds = 5; // 1800
+    [SerializeField] const int              rewardSeconds = 1800;
 
     ReactiveProperty<int>                   rewardNum = new ReactiveProperty<int>(0);
     int                                     constRewardNum = 0;
