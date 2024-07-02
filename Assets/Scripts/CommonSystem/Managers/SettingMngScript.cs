@@ -20,5 +20,7 @@ public class SettingMngScript : MonoBehaviour {
         Utils.LoadScene("MainScene");
     }
 
+    public void RestartButton() => Utils.LoadScene("CardGameScene");
+
     static public void SettingButton() => Inst.setting.SetActive(!Inst.setting.activeSelf);
 }

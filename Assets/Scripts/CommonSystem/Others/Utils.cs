@@ -57,7 +57,7 @@ public class Utils : MonoBehaviour {
         if (pastSceneName == "MainScene")
             MainGameMngScript.MainSceneClose();
         else if (pastSceneName == "CardGameScene")
-            ;
+            Debug.Log("Utils.PastSceneClean : Nothing to clean");
         else if (pastSceneName == "NaninovelScene") {
             Engine.GetService<IStateManager>().ResetStateAsync();
             Engine.GetService<ICameraManager>().Camera.enabled = false;
