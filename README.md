@@ -9,7 +9,9 @@
 InstagramとYoutubeに開発日記と共に、スクリーンショット、プレイ動画を定期的に投稿しています。是非、ご覧ください。
 
 [Instagramリンク](https://www.instagram.com/tayus_dbstory/)
+
 [Xリンク](https://x.com/tayus_dbstory)
+
 [Youtubeリンク](https://www.youtube.com/@user-le6it9ys2n)
 
 ## 技術スタック、ツールなど
